@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.W.I === region.ag.I)
+	if (region._.J === region.aj.J)
 	{
-		return 'on line ' + region.W.I;
+		return 'on line ' + region._.J;
 	}
-	return 'on lines ' + region.W.I + ' through ' + region.ag.I;
+	return 'on lines ' + region._.J + ' through ' + region.aj.J;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bf,
-		impl.bK,
-		impl.bF,
+		impl.bm,
+		impl.bN,
+		impl.bJ,
 		function() { return function() {} }
 	);
 });
@@ -2704,9 +2704,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		w: func(record.w),
-		Y: record.Y,
-		U: record.U
+		x: func(record.x),
+		aa: record.aa,
+		Y: record.Y
 	}
 });
 
@@ -2974,11 +2974,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.w;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.Y;
+		var message = !tag ? value : tag < 3 ? value.a : value.x;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.aa;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.U) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.Y) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3928,11 +3928,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bf,
-		impl.bK,
-		impl.bF,
+		impl.bm,
+		impl.bN,
+		impl.bJ,
 		function(sendToApp, initialModel) {
-			var view = impl.Z;
+			var view = impl.ab;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bf,
-		impl.bK,
-		impl.bF,
+		impl.bm,
+		impl.bN,
+		impl.bJ,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.V && impl.V(sendToApp)
-			var view = impl.Z;
+			var divertHrefToApp = impl.Z && impl.Z(sendToApp)
+			var view = impl.ab;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3977,12 +3977,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.a1);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.a8);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.bH) && (_VirtualDom_doc.title = title = doc.bH);
+				(title !== doc.bL) && (_VirtualDom_doc.title = title = doc.bL);
 			});
 		}
 	);
@@ -4038,12 +4038,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bs;
-	var onUrlRequest = impl.bt;
+	var onUrlChange = impl.bx;
+	var onUrlRequest = impl.by;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		V: function(sendToApp)
+		Z: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aD === next.aD
-							&& curr.an === next.an
-							&& curr.az.a === next.az.a
+							&& curr.aH === next.aH
+							&& curr.aq === next.aq
+							&& curr.aD.a === next.aD.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		bf: function(flags)
+		bm: function(flags)
 		{
-			return A3(impl.bf, flags, _Browser_getUrl(), key);
+			return A3(impl.bm, flags, _Browser_getUrl(), key);
 		},
-		Z: impl.Z,
-		bK: impl.bK,
-		bF: impl.bF
+		ab: impl.ab,
+		bN: impl.bN,
+		bJ: impl.bJ
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bc: 'hidden', a3: 'visibilitychange' }
+		? { bj: 'hidden', ba: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bc: 'mozHidden', a3: 'mozvisibilitychange' }
+		? { bj: 'mozHidden', ba: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bc: 'msHidden', a3: 'msvisibilitychange' }
+		? { bj: 'msHidden', ba: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bc: 'webkitHidden', a3: 'webkitvisibilitychange' }
-		: { bc: 'hidden', a3: 'visibilitychange' };
+		? { bj: 'webkitHidden', ba: 'webkitvisibilitychange' }
+		: { bj: 'hidden', ba: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aM: _Browser_getScene(),
-		aU: {
-			aY: _Browser_window.pageXOffset,
-			aZ: _Browser_window.pageYOffset,
-			aX: _Browser_doc.documentElement.clientWidth,
-			bb: _Browser_doc.documentElement.clientHeight
+		aQ: _Browser_getScene(),
+		a$: {
+			a3: _Browser_window.pageXOffset,
+			a4: _Browser_window.pageYOffset,
+			a2: _Browser_doc.documentElement.clientWidth,
+			bi: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		aX: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		bb: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		a2: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		bi: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aM: {
-				aX: node.scrollWidth,
-				bb: node.scrollHeight
+			aQ: {
+				a2: node.scrollWidth,
+				bi: node.scrollHeight
 			},
-			aU: {
-				aY: node.scrollLeft,
-				aZ: node.scrollTop,
-				aX: node.clientWidth,
-				bb: node.clientHeight
+			a$: {
+				a3: node.scrollLeft,
+				a4: node.scrollTop,
+				a2: node.clientWidth,
+				bi: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aM: _Browser_getScene(),
-			aU: {
-				aY: x,
-				aZ: y,
-				aX: _Browser_doc.documentElement.clientWidth,
-				bb: _Browser_doc.documentElement.clientHeight
+			aQ: _Browser_getScene(),
+			a$: {
+				a3: x,
+				a4: y,
+				a2: _Browser_doc.documentElement.clientWidth,
+				bi: _Browser_doc.documentElement.clientHeight
 			},
-			a7: {
-				aY: x + rect.left,
-				aZ: y + rect.top,
-				aX: rect.width,
-				bb: rect.height
+			be: {
+				a3: x + rect.left,
+				a4: y + rect.top,
+				a2: rect.width,
+				bi: rect.height
 			}
 		};
 	});
@@ -4974,25 +4974,25 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.e) {
+		if (!builder.f) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.g),
+				$elm$core$Elm$JsArray$length(builder.h),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.g);
+				builder.h);
 		} else {
-			var treeLen = builder.e * $elm$core$Array$branchFactor;
+			var treeLen = builder.f * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
-			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.h) : builder.h;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.e);
+			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.i) : builder.i;
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.f);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.g) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.h) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.g);
+				builder.h);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -5005,7 +5005,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{h: nodeList, e: (len / $elm$core$Array$branchFactor) | 0, g: tail});
+					{i: nodeList, f: (len / $elm$core$Array$branchFactor) | 0, h: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -5072,7 +5072,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {al: fragment, an: host, ax: path, az: port_, aD: protocol, aE: query};
+		return {ao: fragment, aq: host, aB: path, aD: port_, aH: protocol, aI: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5351,6 +5351,7 @@ var $elm$core$Task$perform = F2(
 			A2($elm$core$Task$map, toMessage, task));
 	});
 var $elm$browser$Browser$element = _Browser_element;
+var $elm$time$Time$Jan = 0;
 var $author$project$Model$PlayerBuilder = 0;
 var $author$project$Model$Reset = {$: 8};
 var $author$project$Positions$SmallForward = 0;
@@ -5359,7 +5360,6 @@ var $elm$core$Basics$always = F2(
 		return a;
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$time$Time$Jan = 0;
 var $justinmimbs$date$Date$RD = $elm$core$Basics$identity;
 var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
@@ -5447,29 +5447,29 @@ var $justinmimbs$date$Date$fromCalendarDate = F3(
 			d);
 	});
 var $author$project$Player$defPlayer = {
-	a$: 'Carlton',
-	a5: A3($justinmimbs$date$Date$fromCalendarDate, 2003, 0, 1),
-	a9: 0,
-	ba: 0,
-	bb: 175,
-	bg: 50,
-	bi: 0,
-	bk: 0,
-	at: 'Box Hill',
-	bm: 0,
-	bo: 50,
-	bv: 'VIC',
-	bw: 'nbl',
-	bx: 50,
-	by: 'Small Forward',
-	bC: 0,
-	bD: 0,
+	a6: 'Carlton',
+	bc: A3($justinmimbs$date$Date$fromCalendarDate, 2003, 0, 1),
+	bg: 0,
+	bh: 0,
+	bi: 175,
+	bn: 50,
+	bp: 0,
+	bq: 0,
+	T: 'Box Hill',
+	br: 0,
+	bt: 50,
+	bA: 'VIC',
+	bB: 'nbl',
+	bC: 50,
+	bD: 'Small Forward',
 	bG: 0,
-	bM: 75,
-	bO: 0
+	bH: 0,
+	bK: 0,
+	bP: 75,
+	bR: 0
 };
 var $author$project$Player$Under19s = 1;
-var $author$project$Player$defPlayerStatus = {bg: 'Healthy', bj: 'Not in leadership group.', bl: 1};
+var $author$project$Player$defPlayerStatus = {a6: '', bn: 'Healthy', av: 'Not in leadership group.', aw: 1, Q: '', aZ: ''};
 var $author$project$Model$GotTime = function (a) {
 	return {$: 10, a: a};
 };
@@ -5525,154 +5525,154 @@ var $author$project$Positions$positionToDefPlayerStats = F2(
 				return _Utils_update(
 					player,
 					{
-						a9: 10,
-						ba: 10,
-						bb: 170,
-						bi: 13,
-						bk: 7,
-						bm: 10,
-						by: $author$project$Positions$positionToString(0),
-						bC: 13,
-						bD: 1,
-						bG: 1,
-						bM: 70,
-						bO: 10
+						bg: 10,
+						bh: 10,
+						bi: 170,
+						bp: 13,
+						bq: 7,
+						br: 10,
+						bD: $author$project$Positions$positionToString(0),
+						bG: 13,
+						bH: 1,
+						bK: 1,
+						bP: 70,
+						bR: 10
 					});
 			case 1:
 				return _Utils_update(
 					player,
 					{
-						a9: 10,
-						ba: 10,
-						bb: 182,
-						bi: 15,
-						bk: 10,
-						bm: 15,
-						by: $author$project$Positions$positionToString(1),
-						bC: 6,
-						bD: 3,
-						bG: 1,
-						bM: 78,
-						bO: 5
+						bg: 10,
+						bh: 10,
+						bi: 182,
+						bp: 15,
+						bq: 10,
+						br: 15,
+						bD: $author$project$Positions$positionToString(1),
+						bG: 6,
+						bH: 3,
+						bK: 1,
+						bP: 78,
+						bR: 5
 					});
 			case 2:
 				return _Utils_update(
 					player,
 					{
-						a9: 7,
-						ba: 5,
-						bb: 192,
-						bi: 15,
-						bk: 12,
-						bm: 18,
-						by: $author$project$Positions$positionToString(2),
-						bC: 5,
-						bD: 7,
-						bG: 3,
-						bM: 85,
-						bO: 3
+						bg: 7,
+						bh: 5,
+						bi: 192,
+						bp: 15,
+						bq: 12,
+						br: 18,
+						bD: $author$project$Positions$positionToString(2),
+						bG: 5,
+						bH: 7,
+						bK: 3,
+						bP: 85,
+						bR: 3
 					});
 			case 3:
 				return _Utils_update(
 					player,
 					{
-						a9: 5,
-						ba: 5,
-						bb: 200,
-						bi: 5,
-						bk: 5,
-						bm: 12,
-						by: $author$project$Positions$positionToString(3),
-						bC: 3,
-						bD: 10,
-						bG: 25,
-						bM: 93,
-						bO: 5
+						bg: 5,
+						bh: 5,
+						bi: 200,
+						bp: 5,
+						bq: 5,
+						br: 12,
+						bD: $author$project$Positions$positionToString(3),
+						bG: 3,
+						bH: 10,
+						bK: 25,
+						bP: 93,
+						bR: 5
 					});
 			case 4:
 				return _Utils_update(
 					player,
 					{
-						a9: 5,
-						ba: 25,
-						bb: 182,
-						bi: 15,
-						bk: 3,
-						bm: 8,
-						by: $author$project$Positions$positionToString(4),
-						bC: 8,
-						bD: 3,
-						bG: 3,
-						bM: 80,
-						bO: 5
+						bg: 5,
+						bh: 25,
+						bi: 182,
+						bp: 15,
+						bq: 3,
+						br: 8,
+						bD: $author$project$Positions$positionToString(4),
+						bG: 8,
+						bH: 3,
+						bK: 3,
+						bP: 80,
+						bR: 5
 					});
 			case 5:
 				return _Utils_update(
 					player,
 					{
-						a9: 3,
-						ba: 15,
-						bb: 178,
-						bi: 15,
-						bk: 5,
-						bm: 10,
-						by: $author$project$Positions$positionToString(5),
-						bC: 20,
-						bD: 3,
-						bG: 1,
-						bM: 75,
-						bO: 3
+						bg: 3,
+						bh: 15,
+						bi: 178,
+						bp: 15,
+						bq: 5,
+						br: 10,
+						bD: $author$project$Positions$positionToString(5),
+						bG: 20,
+						bH: 3,
+						bK: 1,
+						bP: 75,
+						bR: 3
 					});
 			case 6:
 				return _Utils_update(
 					player,
 					{
-						a9: 3,
-						ba: 10,
-						bb: 170,
-						bi: 15,
-						bk: 5,
-						bm: 8,
-						by: $author$project$Positions$positionToString(6),
-						bC: 10,
-						bD: 20,
-						bG: 1,
-						bM: 70,
-						bO: 3
+						bg: 3,
+						bh: 10,
+						bi: 170,
+						bp: 15,
+						bq: 5,
+						br: 8,
+						bD: $author$project$Positions$positionToString(6),
+						bG: 10,
+						bH: 20,
+						bK: 1,
+						bP: 70,
+						bR: 3
 					});
 			case 7:
 				return _Utils_update(
 					player,
 					{
-						a9: 2,
-						ba: 10,
-						bb: 182,
-						bi: 15,
-						bk: 5,
-						bm: 12,
-						by: $author$project$Positions$positionToString(7),
-						bC: 8,
-						bD: 20,
-						bG: 1,
-						bM: 78,
-						bO: 2
+						bg: 2,
+						bh: 10,
+						bi: 182,
+						bp: 15,
+						bq: 5,
+						br: 12,
+						bD: $author$project$Positions$positionToString(7),
+						bG: 8,
+						bH: 20,
+						bK: 1,
+						bP: 78,
+						bR: 2
 					});
 			default:
 				return _Utils_update(
 					player,
 					{
-						a9: 1,
-						ba: 5,
-						bb: 192,
-						bi: 15,
-						bk: 8,
-						bm: 15,
-						by: $author$project$Positions$positionToString(8),
-						bC: 4,
-						bD: 20,
-						bG: 5,
-						bM: 85,
-						bO: 2
+						bg: 1,
+						bh: 5,
+						bi: 192,
+						bp: 15,
+						bq: 8,
+						br: 15,
+						bD: $author$project$Positions$positionToString(8),
+						bG: 4,
+						bH: 20,
+						bK: 5,
+						bP: 85,
+						bR: 2
 					});
 		}
 	});
@@ -5680,17 +5680,18 @@ var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $author$project$Model$init = function (_v0) {
 	return _Utils_Tuple2(
 		{
-			T: A2($author$project$Positions$positionToDefPlayerStats, $author$project$Player$defPlayer, 0),
-			aF: 0,
-			aG: 0,
-			aH: 0,
-			bA: _List_Nil,
-			bB: 0,
-			X: $author$project$Player$defPlayerStatus,
-			bI: $elm$time$Time$millisToPosix(0),
-			bJ: '',
-			Z: 0,
-			bP: $elm$time$Time$utc
+			R: A3($justinmimbs$date$Date$fromCalendarDate, 2021, 0, 1),
+			d: A2($author$project$Positions$positionToDefPlayerStats, $author$project$Player$defPlayer, 0),
+			aJ: 0,
+			aK: 0,
+			aL: 0,
+			bF: _List_Nil,
+			aS: 0,
+			K: $author$project$Player$defPlayerStatus,
+			aX: $elm$time$Time$millisToPosix(0),
+			bM: '',
+			ab: 0,
+			bS: $elm$time$Time$utc
 		},
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
@@ -5708,6 +5709,7 @@ var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $author$project$Model$Draft = 1;
+var $elm$time$Time$Nov = 10;
 var $author$project$Model$Rand1000Int = function (a) {
 	return {$: 7, a: a};
 };
@@ -5774,7 +5776,7 @@ var $elm$parser$Parser$Advanced$AddRight = F2(
 	});
 var $elm$parser$Parser$Advanced$DeadEnd = F4(
 	function (row, col, problem, contextStack) {
-		return {ae: col, a4: contextStack, aA: problem, aL: row};
+		return {ah: col, bb: contextStack, aE: problem, aP: row};
 	});
 var $elm$parser$Parser$Advanced$Empty = {$: 0};
 var $elm$parser$Parser$Advanced$fromState = F2(
@@ -5782,7 +5784,7 @@ var $elm$parser$Parser$Advanced$fromState = F2(
 		return A2(
 			$elm$parser$Parser$Advanced$AddRight,
 			$elm$parser$Parser$Advanced$Empty,
-			A4($elm$parser$Parser$Advanced$DeadEnd, s.aL, s.ae, x, s.c));
+			A4($elm$parser$Parser$Advanced$DeadEnd, s.aP, s.ah, x, s.c));
 	});
 var $elm$parser$Parser$Advanced$isSubChar = _Parser_isSubChar;
 var $elm$core$Basics$negate = function (n) {
@@ -5799,11 +5801,11 @@ var $elm$parser$Parser$Advanced$chompIf = F2(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{ae: 1, c: s.c, d: s.d, b: s.b + 1, aL: s.aL + 1, a: s.a}) : A3(
+				{ah: 1, c: s.c, e: s.e, b: s.b + 1, aP: s.aP + 1, a: s.a}) : A3(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{ae: s.ae + 1, c: s.c, d: s.d, b: newOffset, aL: s.aL, a: s.a}));
+				{ah: s.ah + 1, c: s.c, e: s.e, b: newOffset, aP: s.aP, a: s.a}));
 		};
 	});
 var $elm$parser$Parser$chompIf = function (isGood) {
@@ -5815,7 +5817,7 @@ var $elm$core$Basics$composeR = F3(
 			f(x));
 	});
 var $justinmimbs$date$Date$deadEndToString = function (_v0) {
-	var problem = _v0.aA;
+	var problem = _v0.aE;
 	if (problem.$ === 12) {
 		var message = problem.a;
 		return message;
@@ -6108,7 +6110,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(str);
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.b, s.aL, s.ae, s.a);
+		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.b, s.aP, s.ah, s.a);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -6119,7 +6121,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			progress,
 			0,
-			{ae: newCol, c: s.c, d: s.d, b: newOffset, aL: newRow, a: s.a});
+			{ah: newCol, c: s.c, e: s.e, b: newOffset, aP: newRow, a: s.a});
 	};
 };
 var $elm$parser$Parser$token = function (str) {
@@ -6230,7 +6232,6 @@ var $elm$time$Time$Jul = 6;
 var $elm$time$Time$Jun = 5;
 var $elm$time$Time$Mar = 2;
 var $elm$time$Time$May = 4;
-var $elm$time$Time$Nov = 10;
 var $elm$time$Time$Oct = 9;
 var $elm$time$Time$Sep = 8;
 var $justinmimbs$date$Date$numberToMonth = function (mn) {
@@ -6402,10 +6403,10 @@ var $justinmimbs$date$Date$parser = A2(
 		$justinmimbs$date$Date$dayOfYear));
 var $elm$parser$Parser$DeadEnd = F3(
 	function (row, col, problem) {
-		return {ae: col, aA: problem, aL: row};
+		return {ah: col, aE: problem, aP: row};
 	});
 var $elm$parser$Parser$problemToDeadEnd = function (p) {
-	return A3($elm$parser$Parser$DeadEnd, p.aL, p.ae, p.aA);
+	return A3($elm$parser$Parser$DeadEnd, p.aP, p.ah, p.aE);
 };
 var $elm$parser$Parser$Advanced$bagToList = F2(
 	function (bag, list) {
@@ -6437,7 +6438,7 @@ var $elm$parser$Parser$Advanced$run = F2(
 	function (_v0, src) {
 		var parse = _v0;
 		var _v1 = parse(
-			{ae: 1, c: _List_Nil, d: 1, b: 0, aL: 1, a: src});
+			{ah: 1, c: _List_Nil, e: 1, b: 0, aP: 1, a: src});
 		if (!_v1.$) {
 			var value = _v1.b;
 			return $elm$core$Result$Ok(value);
@@ -6492,7 +6493,115 @@ var $justinmimbs$date$Date$fromIsoString = A2(
 				$elm$core$Basics$composeR,
 				$elm$core$Maybe$map($justinmimbs$date$Date$deadEndToString),
 				$elm$core$Maybe$withDefault('')))));
+var $elm$time$Time$flooredDiv = F2(
+	function (numerator, denominator) {
+		return $elm$core$Basics$floor(numerator / denominator);
+	});
+var $elm$time$Time$posixToMillis = function (_v0) {
+	var millis = _v0;
+	return millis;
+};
+var $elm$time$Time$toAdjustedMinutesHelp = F3(
+	function (defaultOffset, posixMinutes, eras) {
+		toAdjustedMinutesHelp:
+		while (true) {
+			if (!eras.b) {
+				return posixMinutes + defaultOffset;
+			} else {
+				var era = eras.a;
+				var olderEras = eras.b;
+				if (_Utils_cmp(era._, posixMinutes) < 0) {
+					return posixMinutes + era.b;
+				} else {
+					var $temp$defaultOffset = defaultOffset,
+						$temp$posixMinutes = posixMinutes,
+						$temp$eras = olderEras;
+					defaultOffset = $temp$defaultOffset;
+					posixMinutes = $temp$posixMinutes;
+					eras = $temp$eras;
+					continue toAdjustedMinutesHelp;
+				}
+			}
+		}
+	});
+var $elm$time$Time$toAdjustedMinutes = F2(
+	function (_v0, time) {
+		var defaultOffset = _v0.a;
+		var eras = _v0.b;
+		return A3(
+			$elm$time$Time$toAdjustedMinutesHelp,
+			defaultOffset,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				60000),
+			eras);
+	});
 var $elm$core$Basics$ge = _Utils_ge;
+var $elm$time$Time$toCivil = function (minutes) {
+	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
+	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
+	var dayOfEra = rawDay - (era * 146097);
+	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
+	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
+	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
+	var month = mp + ((mp < 10) ? 3 : (-9));
+	var year = yearOfEra + (era * 400);
+	return {
+		ai: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		ay: month,
+		a5: year + ((month <= 2) ? 1 : 0)
+	};
+};
+var $elm$time$Time$toDay = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).ai;
+	});
+var $elm$time$Time$toMonth = F2(
+	function (zone, time) {
+		var _v0 = $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).ay;
+		switch (_v0) {
+			case 1:
+				return 0;
+			case 2:
+				return 1;
+			case 3:
+				return 2;
+			case 4:
+				return 3;
+			case 5:
+				return 4;
+			case 6:
+				return 5;
+			case 7:
+				return 6;
+			case 8:
+				return 7;
+			case 9:
+				return 8;
+			case 10:
+				return 9;
+			case 11:
+				return 10;
+			default:
+				return 11;
+		}
+	});
+var $elm$time$Time$toYear = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a5;
+	});
+var $justinmimbs$date$Date$fromPosix = F2(
+	function (zone, posix) {
+		return A3(
+			$justinmimbs$date$Date$fromCalendarDate,
+			A2($elm$time$Time$toYear, zone, posix),
+			A2($elm$time$Time$toMonth, zone, posix),
+			A2($elm$time$Time$toDay, zone, posix));
+	});
 var $author$project$Model$GotZone = function (a) {
 	return {$: 11, a: a};
 };
@@ -6540,10 +6649,6 @@ var $elm$random$Random$initialSeed = function (x) {
 	var state2 = (state1 + x) >>> 0;
 	return $elm$random$Random$next(
 		A2($elm$random$Random$Seed, state2, incr));
-};
-var $elm$time$Time$posixToMillis = function (_v0) {
-	var millis = _v0;
-	return millis;
 };
 var $elm$random$Random$init = A2(
 	$elm$core$Task$andThen,
@@ -6842,12 +6947,12 @@ var $elm_community$random_extra$Random$List$shuffle = function (list) {
 		},
 		$elm$random$Random$independentSeed);
 };
-var $author$project$Draft$randomiseLocalTeams = function (model) {
+var $author$project$StateDraft$randomiseLocalTeams = function (model) {
 	return A2(
 		$elm$random$Random$generate,
 		$author$project$Model$ShuffledLocalTeams,
 		$elm_community$random_extra$Random$List$shuffle(
-			$author$project$LocalTeams$originToLocalTeams(model.T.bv)));
+			$author$project$LocalTeams$originToLocalTeams(model.d.bA)));
 };
 var $elm$core$List$takeReverse = F3(
 	function (n, list, kept) {
@@ -6984,6 +7089,29 @@ var $elm$core$Result$withDefault = F2(
 			return def;
 		}
 	});
+var $justinmimbs$date$Date$divWithRemainder = F2(
+	function (a, b) {
+		return _Utils_Tuple2(
+			A2($justinmimbs$date$Date$floorDiv, a, b),
+			A2($elm$core$Basics$modBy, b, a));
+	});
+var $justinmimbs$date$Date$year = function (_v0) {
+	var rd = _v0;
+	var _v1 = A2($justinmimbs$date$Date$divWithRemainder, rd, 146097);
+	var n400 = _v1.a;
+	var r400 = _v1.b;
+	var _v2 = A2($justinmimbs$date$Date$divWithRemainder, r400, 36524);
+	var n100 = _v2.a;
+	var r100 = _v2.b;
+	var _v3 = A2($justinmimbs$date$Date$divWithRemainder, r100, 1461);
+	var n4 = _v3.a;
+	var r4 = _v3.b;
+	var _v4 = A2($justinmimbs$date$Date$divWithRemainder, r4, 365);
+	var n1 = _v4.a;
+	var r1 = _v4.b;
+	var n = (!r1) ? 0 : 1;
+	return ((((n400 * 400) + (n100 * 100)) + (n4 * 4)) + n1) + n;
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -6994,44 +7122,58 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aF: _int}),
+						{aJ: _int}),
 					$elm$core$Platform$Cmd$none);
 			case 6:
 				var _int = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aG: _int}),
+						{aK: _int}),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var _int = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aG: _int}),
+						{aK: _int}),
 					$elm$core$Platform$Cmd$none);
 			case 3:
 				return _Utils_Tuple2(
 					model,
-					$author$project$Draft$randomiseLocalTeams(model));
+					$author$project$StateDraft$randomiseLocalTeams(model));
 			case 4:
 				var shuffle = msg.a;
-				var count = model.bB + 1;
-				var cmd = (count >= 20) ? ((_Utils_eq(
-					model.T.at,
-					A2(
-						$elm$core$Maybe$withDefault,
-						'',
-						$elm$core$List$head(
-							$elm$core$List$reverse(
-								A2(
-									$elm$core$List$take,
-									2,
-									A2($elm$core$List$take, 3, shuffle)))))) || (model.aF >= 5)) ? A2($author$project$Main$delay, 1000, $author$project$Model$ShuffleLocalTeams) : $elm$core$Platform$Cmd$none) : ((count >= 10) ? A2($author$project$Main$delay, 100 * (count - 10), $author$project$Model$ShuffleLocalTeams) : A2($author$project$Main$delay, 100, $author$project$Model$ShuffleLocalTeams));
+				var t = A2(
+					$elm$core$Maybe$withDefault,
+					'',
+					$elm$core$List$head(
+						$elm$core$List$reverse(
+							A2(
+								$elm$core$List$take,
+								2,
+								A2($elm$core$List$take, 3, shuffle)))));
+				var s = model.K;
+				var count = model.aS + 1;
+				var _v1 = (count >= 20) ? (((!_Utils_eq(t, model.d.T)) && (model.aJ >= 4)) ? _Utils_Tuple2(
+					model.K.Q,
+					A2($author$project$Main$delay, 1000, $author$project$Model$ShuffleLocalTeams)) : (_Utils_eq(t, model.d.T) ? _Utils_Tuple2(t, $elm$core$Platform$Cmd$none) : _Utils_Tuple2(t, $elm$core$Platform$Cmd$none))) : ((count >= 10) ? _Utils_Tuple2(
+					model.K.Q,
+					A2($author$project$Main$delay, 100 * (count - 10), $author$project$Model$ShuffleLocalTeams)) : _Utils_Tuple2(
+					model.K.Q,
+					A2($author$project$Main$delay, 100, $author$project$Model$ShuffleLocalTeams)));
+				var team = _v1.a;
+				var cmd = _v1.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{bA: shuffle, bB: count}),
+						{
+							bF: shuffle,
+							aS: count,
+							K: _Utils_update(
+								s,
+								{Q: team})
+						}),
 					$elm$core$Platform$Cmd$batch(
 						_List_fromArray(
 							[
@@ -7045,42 +7187,53 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{bI: t}),
+						{aX: t}),
 					$author$project$Main$getZone);
 			case 11:
 				var z = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{bP: z}),
+						{
+							R: A2($justinmimbs$date$Date$fromPosix, z, model.aX),
+							bS: z
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 8:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							T: A2(
+							d: A2(
 								$author$project$Positions$positionToDefPlayerStats,
-								model.T,
-								$author$project$Positions$positionFromString(model.T.by))
+								model.d,
+								$author$project$Positions$positionFromString(model.d.bD))
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 9:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{bJ: 'show', Z: 1}),
-					$author$project$Draft$randomiseLocalTeams(model));
+						{
+							R: A3(
+								$justinmimbs$date$Date$fromCalendarDate,
+								$justinmimbs$date$Date$year(model.R),
+								10,
+								1),
+							bM: 'show',
+							ab: 1
+						}),
+					$author$project$StateDraft$randomiseLocalTeams(model));
 			case 2:
 				var perk = msg.a;
-				var p = model.T;
+				var p = model.d;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							T: _Utils_update(
+							d: _Utils_update(
 								p,
-								{bw: perk})
+								{bB: perk})
 						}),
 					$elm$core$Platform$Cmd$none);
 			default:
@@ -7090,16 +7243,16 @@ var $author$project$Main$update = F2(
 					$elm$core$Maybe$withDefault,
 					0,
 					$elm$core$String$toInt(v));
-				var p = model.T;
+				var p = model.d;
 				switch (stat) {
 					case 0:
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bC: val})
+										{bG: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 1:
@@ -7107,9 +7260,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bm: val})
+										{br: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 2:
@@ -7117,9 +7270,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bi: val})
+										{bp: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 3:
@@ -7127,9 +7280,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{ba: val})
+										{bh: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 4:
@@ -7137,9 +7290,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bG: val})
+										{bK: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 5:
@@ -7147,9 +7300,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bk: val})
+										{bq: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 6:
@@ -7157,9 +7310,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bD: val})
+										{bH: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 7:
@@ -7167,9 +7320,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bO: val})
+										{bR: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 8:
@@ -7177,9 +7330,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{a9: val})
+										{bg: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 9:
@@ -7187,10 +7340,10 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
 										{
-											a5: A2(
+											bc: A2(
 												$elm$core$Result$withDefault,
 												A3($justinmimbs$date$Date$fromCalendarDate, 2003, 0, 1),
 												$justinmimbs$date$Date$fromIsoString(v))
@@ -7202,9 +7355,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: A2(
+									d: A2(
 										$author$project$Positions$positionToDefPlayerStats,
-										model.T,
+										model.d,
 										$author$project$Positions$positionFromString(v))
 								}),
 							$elm$core$Platform$Cmd$none);
@@ -7213,9 +7366,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bb: val})
+										{bi: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 12:
@@ -7223,9 +7376,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bM: val})
+										{bP: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 13:
@@ -7233,9 +7386,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bx: val})
+										{bC: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 14:
@@ -7243,9 +7396,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bo: val})
+										{bt: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 15:
@@ -7253,9 +7406,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bg: val})
+										{bn: val})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 16:
@@ -7263,9 +7416,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{bv: v})
+										{bA: v})
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 17:
@@ -7273,9 +7426,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{at: v})
+										{T: v})
 								}),
 							$elm$core$Platform$Cmd$none);
 					default:
@@ -7283,9 +7436,9 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									T: _Utils_update(
+									d: _Utils_update(
 										p,
-										{a$: v})
+										{a6: v})
 								}),
 							$elm$core$Platform$Cmd$none);
 				}
@@ -7369,45 +7522,22 @@ var $justinmimbs$date$Date$toCalendarDateHelp = F3(
 				d = $temp$d;
 				continue toCalendarDateHelp;
 			} else {
-				return {af: d, au: m, a_: y};
+				return {ai: d, ay: m, a5: y};
 			}
 		}
 	});
-var $justinmimbs$date$Date$divWithRemainder = F2(
-	function (a, b) {
-		return _Utils_Tuple2(
-			A2($justinmimbs$date$Date$floorDiv, a, b),
-			A2($elm$core$Basics$modBy, b, a));
-	});
-var $justinmimbs$date$Date$year = function (_v0) {
-	var rd = _v0;
-	var _v1 = A2($justinmimbs$date$Date$divWithRemainder, rd, 146097);
-	var n400 = _v1.a;
-	var r400 = _v1.b;
-	var _v2 = A2($justinmimbs$date$Date$divWithRemainder, r400, 36524);
-	var n100 = _v2.a;
-	var r100 = _v2.b;
-	var _v3 = A2($justinmimbs$date$Date$divWithRemainder, r100, 1461);
-	var n4 = _v3.a;
-	var r4 = _v3.b;
-	var _v4 = A2($justinmimbs$date$Date$divWithRemainder, r4, 365);
-	var n1 = _v4.a;
-	var r1 = _v4.b;
-	var n = (!r1) ? 0 : 1;
-	return ((((n400 * 400) + (n100 * 100)) + (n4 * 4)) + n1) + n;
-};
 var $justinmimbs$date$Date$toOrdinalDate = function (_v0) {
 	var rd = _v0;
 	var y = $justinmimbs$date$Date$year(rd);
 	return {
-		S: rd - $justinmimbs$date$Date$daysBeforeYear(y),
-		a_: y
+		X: rd - $justinmimbs$date$Date$daysBeforeYear(y),
+		a5: y
 	};
 };
 var $justinmimbs$date$Date$toCalendarDate = function (_v0) {
 	var rd = _v0;
 	var date = $justinmimbs$date$Date$toOrdinalDate(rd);
-	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.a_, 0, date.S);
+	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.a5, 0, date.X);
 };
 var $justinmimbs$date$Date$add = F3(
 	function (unit, n, _v0) {
@@ -7417,13 +7547,13 @@ var $justinmimbs$date$Date$add = F3(
 				return A3($justinmimbs$date$Date$add, 1, 12 * n, rd);
 			case 1:
 				var date = $justinmimbs$date$Date$toCalendarDate(rd);
-				var wholeMonths = ((12 * (date.a_ - 1)) + ($justinmimbs$date$Date$monthToNumber(date.au) - 1)) + n;
+				var wholeMonths = ((12 * (date.a5 - 1)) + ($justinmimbs$date$Date$monthToNumber(date.ay) - 1)) + n;
 				var m = $justinmimbs$date$Date$numberToMonth(
 					A2($elm$core$Basics$modBy, 12, wholeMonths) + 1);
 				var y = A2($justinmimbs$date$Date$floorDiv, wholeMonths, 12) + 1;
 				return ($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A2(
 					$elm$core$Basics$min,
-					date.af,
+					date.ai,
 					A2($justinmimbs$date$Date$daysInMonth, y, m));
 			case 2:
 				return rd + (7 * n);
@@ -7513,110 +7643,6 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			$elm$json$Json$Encode$bool(bool));
 	});
 var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
-var $elm$time$Time$flooredDiv = F2(
-	function (numerator, denominator) {
-		return $elm$core$Basics$floor(numerator / denominator);
-	});
-var $elm$time$Time$toAdjustedMinutesHelp = F3(
-	function (defaultOffset, posixMinutes, eras) {
-		toAdjustedMinutesHelp:
-		while (true) {
-			if (!eras.b) {
-				return posixMinutes + defaultOffset;
-			} else {
-				var era = eras.a;
-				var olderEras = eras.b;
-				if (_Utils_cmp(era.W, posixMinutes) < 0) {
-					return posixMinutes + era.b;
-				} else {
-					var $temp$defaultOffset = defaultOffset,
-						$temp$posixMinutes = posixMinutes,
-						$temp$eras = olderEras;
-					defaultOffset = $temp$defaultOffset;
-					posixMinutes = $temp$posixMinutes;
-					eras = $temp$eras;
-					continue toAdjustedMinutesHelp;
-				}
-			}
-		}
-	});
-var $elm$time$Time$toAdjustedMinutes = F2(
-	function (_v0, time) {
-		var defaultOffset = _v0.a;
-		var eras = _v0.b;
-		return A3(
-			$elm$time$Time$toAdjustedMinutesHelp,
-			defaultOffset,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				60000),
-			eras);
-	});
-var $elm$time$Time$toCivil = function (minutes) {
-	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
-	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
-	var dayOfEra = rawDay - (era * 146097);
-	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
-	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
-	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
-	var month = mp + ((mp < 10) ? 3 : (-9));
-	var year = yearOfEra + (era * 400);
-	return {
-		af: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		au: month,
-		a_: year + ((month <= 2) ? 1 : 0)
-	};
-};
-var $elm$time$Time$toDay = F2(
-	function (zone, time) {
-		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).af;
-	});
-var $elm$time$Time$toMonth = F2(
-	function (zone, time) {
-		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).au;
-		switch (_v0) {
-			case 1:
-				return 0;
-			case 2:
-				return 1;
-			case 3:
-				return 2;
-			case 4:
-				return 3;
-			case 5:
-				return 4;
-			case 6:
-				return 5;
-			case 7:
-				return 6;
-			case 8:
-				return 7;
-			case 9:
-				return 8;
-			case 10:
-				return 9;
-			case 11:
-				return 10;
-			default:
-				return 11;
-		}
-	});
-var $elm$time$Time$toYear = F2(
-	function (zone, time) {
-		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a_;
-	});
-var $justinmimbs$date$Date$fromPosix = F2(
-	function (zone, posix) {
-		return A3(
-			$justinmimbs$date$Date$fromCalendarDate,
-			A2($elm$time$Time$toYear, zone, posix),
-			A2($elm$time$Time$toMonth, zone, posix),
-			A2($elm$time$Time$toDay, zone, posix));
-	});
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$h6 = _VirtualDom_node('h6');
@@ -7687,10 +7713,10 @@ var $author$project$PlayersLike$playerLike = function (p) {
 			function (_v1) {
 				var h = _v1.a;
 				var w = _v1.b;
-				return ((_Utils_cmp(h, p.bb + 5) < 1) && (_Utils_cmp(h, p.bb - 5) > -1)) && ((_Utils_cmp(w, p.bM + 5) < 1) && (_Utils_cmp(w, p.bM - 5) > -1));
+				return ((_Utils_cmp(h, p.bi + 5) < 1) && (_Utils_cmp(h, p.bi - 5) > -1)) && ((_Utils_cmp(w, p.bP + 5) < 1) && (_Utils_cmp(w, p.bP - 5) > -1));
 			},
 			function () {
-				var _v2 = $author$project$Positions$positionFromString(p.by);
+				var _v2 = $author$project$Positions$positionFromString(p.bD);
 				switch (_v2) {
 					case 0:
 						return _List_fromArray(
@@ -7986,20 +8012,20 @@ var $justinmimbs$date$Date$day = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toCalendarDate,
 	function ($) {
-		return $.af;
+		return $.ai;
 	});
 var $justinmimbs$date$Date$month = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toCalendarDate,
 	function ($) {
-		return $.au;
+		return $.ay;
 	});
 var $justinmimbs$date$Date$monthNumber = A2($elm$core$Basics$composeR, $justinmimbs$date$Date$month, $justinmimbs$date$Date$monthToNumber);
 var $justinmimbs$date$Date$ordinalDay = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toOrdinalDate,
 	function ($) {
-		return $.S;
+		return $.X;
 	});
 var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
@@ -8085,22 +8111,22 @@ var $justinmimbs$date$Date$toWeekDate = function (_v0) {
 	var wy = $justinmimbs$date$Date$year(rd + (4 - wdn));
 	var week1Day1 = $justinmimbs$date$Date$daysBeforeWeekYear(wy) + 1;
 	return {
-		aV: 1 + (((rd - week1Day1) / 7) | 0),
-		aW: wy,
-		bL: $justinmimbs$date$Date$numberToWeekday(wdn)
+		a0: 1 + (((rd - week1Day1) / 7) | 0),
+		a1: wy,
+		bO: $justinmimbs$date$Date$numberToWeekday(wdn)
 	};
 };
 var $justinmimbs$date$Date$weekNumber = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toWeekDate,
 	function ($) {
-		return $.aV;
+		return $.a0;
 	});
 var $justinmimbs$date$Date$weekYear = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toWeekDate,
 	function ($) {
-		return $.aW;
+		return $.a1;
 	});
 var $justinmimbs$date$Date$weekday = A2($elm$core$Basics$composeR, $justinmimbs$date$Date$weekdayNumber, $justinmimbs$date$Date$numberToWeekday);
 var $justinmimbs$date$Date$ordinalSuffix = function (n) {
@@ -8195,16 +8221,16 @@ var $justinmimbs$date$Date$formatField = F4(
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$monthNumber(date)));
 					case 3:
-						return language.N(
+						return language.P(
 							$justinmimbs$date$Date$month(date));
 					case 4:
-						return language.Q(
+						return language.V(
 							$justinmimbs$date$Date$month(date));
 					case 5:
 						return A2(
 							$elm$core$String$left,
 							1,
-							language.N(
+							language.P(
 								$justinmimbs$date$Date$month(date)));
 					default:
 						return '';
@@ -8237,7 +8263,7 @@ var $justinmimbs$date$Date$formatField = F4(
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$day(date)));
 					case 3:
-						return language.O(
+						return language.S(
 							$justinmimbs$date$Date$day(date));
 					default:
 						return '';
@@ -8267,28 +8293,28 @@ var $justinmimbs$date$Date$formatField = F4(
 			case 'E':
 				switch (length) {
 					case 1:
-						return language.D(
+						return language.E(
 							$justinmimbs$date$Date$weekday(date));
 					case 2:
-						return language.D(
+						return language.E(
 							$justinmimbs$date$Date$weekday(date));
 					case 3:
-						return language.D(
+						return language.E(
 							$justinmimbs$date$Date$weekday(date));
 					case 4:
-						return language._(
+						return language.ac(
 							$justinmimbs$date$Date$weekday(date));
 					case 5:
 						return A2(
 							$elm$core$String$left,
 							1,
-							language.D(
+							language.E(
 								$justinmimbs$date$Date$weekday(date)));
 					case 6:
 						return A2(
 							$elm$core$String$left,
 							2,
-							language.D(
+							language.E(
 								$justinmimbs$date$Date$weekday(date)));
 					default:
 						return '';
@@ -8350,7 +8376,7 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 					$elm$parser$Parser$Advanced$Good,
 					_Utils_cmp(s0.b, offset) < 0,
 					0,
-					{ae: col, c: s0.c, d: s0.d, b: offset, aL: row, a: s0.a});
+					{ah: col, c: s0.c, e: s0.e, b: offset, aP: row, a: s0.a});
 			} else {
 				if (_Utils_eq(newOffset, -2)) {
 					var $temp$isGood = isGood,
@@ -8382,7 +8408,7 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 	});
 var $elm$parser$Parser$Advanced$chompWhile = function (isGood) {
 	return function (s) {
-		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.b, s.aL, s.ae, s);
+		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.b, s.aP, s.ah, s);
 	};
 };
 var $elm$parser$Parser$chompWhile = $elm$parser$Parser$Advanced$chompWhile;
@@ -8599,14 +8625,14 @@ var $justinmimbs$date$Date$weekdayToName = function (wd) {
 	}
 };
 var $justinmimbs$date$Date$language_en = {
-	O: $justinmimbs$date$Date$withOrdinalSuffix,
-	Q: $justinmimbs$date$Date$monthToName,
-	N: A2(
+	S: $justinmimbs$date$Date$withOrdinalSuffix,
+	V: $justinmimbs$date$Date$monthToName,
+	P: A2(
 		$elm$core$Basics$composeR,
 		$justinmimbs$date$Date$monthToName,
 		$elm$core$String$left(3)),
-	_: $justinmimbs$date$Date$weekdayToName,
-	D: A2(
+	ac: $justinmimbs$date$Date$weekdayToName,
+	E: A2(
 		$elm$core$Basics$composeR,
 		$justinmimbs$date$Date$weekdayToName,
 		$elm$core$String$left(3))
@@ -8617,14 +8643,14 @@ var $justinmimbs$date$Date$format = function (pattern) {
 var $justinmimbs$date$Date$toIsoString = $justinmimbs$date$Date$format('yyyy-MM-dd');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
 var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
-	var sum = (((((((model.T.bC + model.T.bm) + model.T.bi) + model.T.ba) + model.T.bG) + model.T.bk) + model.T.bD) + model.T.bO) + model.T.a9;
+	var sum = (((((((model.d.bG + model.d.br) + model.d.bp) + model.d.bh) + model.d.bK) + model.d.bq) + model.d.bH) + model.d.bR) + model.d.bg;
 	var ability = {
-		ad: (model.T.bw === 'cm') ? 'is-primary' : '',
-		aj: (model.T.bw === 'ff') ? 'is-primary' : '',
-		as: (model.T.bw === 'lgv') ? 'is-primary' : '',
-		av: (model.T.bw === 'nbl') ? 'is-primary' : '',
-		aO: (model.T.bw === 'sog') ? 'is-primary' : '',
-		aT: (model.T.bw === 'utl') ? 'is-primary' : ''
+		ag: (model.d.bB === 'cm') ? 'is-primary' : '',
+		am: (model.d.bB === 'ff') ? 'is-primary' : '',
+		ax: (model.d.bB === 'lgv') ? 'is-primary' : '',
+		az: (model.d.bB === 'nbl') ? 'is-primary' : '',
+		aT: (model.d.bB === 'sog') ? 'is-primary' : '',
+		a_: (model.d.bB === 'utl') ? 'is-primary' : ''
 	};
 	return A2(
 		$elm$html$Html$div,
@@ -8714,16 +8740,16 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																				$justinmimbs$date$Date$add,
 																				0,
 																				-30,
-																				A2($justinmimbs$date$Date$fromPosix, model.bP, model.bI)))),
+																				A2($justinmimbs$date$Date$fromPosix, model.bS, model.aX)))),
 																		$elm$html$Html$Attributes$max(
 																		$justinmimbs$date$Date$toIsoString(
 																			A3(
 																				$justinmimbs$date$Date$add,
 																				0,
 																				-17,
-																				A2($justinmimbs$date$Date$fromPosix, model.bP, model.bI)))),
+																				A2($justinmimbs$date$Date$fromPosix, model.bS, model.aX)))),
 																		$elm$html$Html$Attributes$value(
-																		$justinmimbs$date$Date$toIsoString(model.T.a5)),
+																		$justinmimbs$date$Date$toIsoString(model.d.bc)),
 																		$elm$html$Html$Events$onInput(
 																		$author$project$Model$ChangePlayerStat(9))
 																	]),
@@ -8771,7 +8797,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.T.by),
+																				$elm$html$Html$Attributes$value(model.d.bD),
 																				$elm$html$Html$Events$onInput(
 																				$author$project$Model$ChangePlayerStat(10))
 																			]),
@@ -8930,7 +8956,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.T.bv),
+																				$elm$html$Html$Attributes$value(model.d.bA),
 																				$elm$html$Html$Events$onInput(
 																				$author$project$Model$ChangePlayerStat(16))
 																			]),
@@ -9351,11 +9377,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.T.at),
+																				$elm$html$Html$Attributes$value(model.d.T),
 																				$elm$html$Html$Events$onInput(
 																				$author$project$Model$ChangePlayerStat(17))
 																			]),
-																		$author$project$LocalTeams$originToLocalTeamsHtml(model.T.bv))
+																		$author$project$LocalTeams$originToLocalTeamsHtml(model.d.bA))
 																	]))
 															]))
 													])),
@@ -9400,7 +9426,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.T.a$),
+																				$elm$html$Html$Attributes$value(model.d.a6),
 																				$elm$html$Html$Events$onInput(
 																				$author$project$Model$ChangePlayerStat(18))
 																			]),
@@ -9622,14 +9648,14 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																	_List_fromArray(
 																		[
 																			$elm$html$Html$Attributes$value(
-																			$elm$core$String$fromInt(model.T.bb)),
+																			$elm$core$String$fromInt(model.d.bi)),
 																			$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																			$elm$html$Html$Attributes$type_('range'),
 																			$elm$html$Html$Events$onInput(
 																			$author$project$Model$ChangePlayerStat(11))
 																		]),
 																	$author$project$Positions$positionToHeightMinMax(
-																		$author$project$Positions$positionFromString(model.T.by))),
+																		$author$project$Positions$positionFromString(model.d.bD))),
 																_List_Nil)
 															])),
 														A2(
@@ -9641,7 +9667,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bb) + 'cm')
+																$elm$core$String$fromInt(model.d.bi) + 'cm')
 															]))
 													])),
 												A2(
@@ -9676,14 +9702,14 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																	_List_fromArray(
 																		[
 																			$elm$html$Html$Attributes$value(
-																			$elm$core$String$fromInt(model.T.bM)),
+																			$elm$core$String$fromInt(model.d.bP)),
 																			$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																			$elm$html$Html$Attributes$type_('range'),
 																			$elm$html$Html$Events$onInput(
 																			$author$project$Model$ChangePlayerStat(12))
 																		]),
 																	$author$project$Positions$positionToWeightMinMax(
-																		$author$project$Positions$positionFromString(model.T.by))),
+																		$author$project$Positions$positionFromString(model.d.bD))),
 																_List_Nil)
 															])),
 														A2(
@@ -9695,7 +9721,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bM) + 'kg')
+																$elm$core$String$fromInt(model.d.bP) + 'kg')
 															]))
 													])),
 												A2(
@@ -9729,7 +9755,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.T.bx)),
+																		$elm$core$String$fromInt(model.d.bC)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
@@ -9790,7 +9816,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.T.bo)),
+																		$elm$core$String$fromInt(model.d.bt)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
@@ -9851,7 +9877,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.T.bg)),
+																		$elm$core$String$fromInt(model.d.bn)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
@@ -9964,7 +9990,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bC, 0)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bG, 0)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -9975,7 +10001,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bC))
+																$elm$core$String$fromInt(model.d.bG))
 															]))
 													])),
 												A2(
@@ -10004,7 +10030,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bm, 1)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.br, 1)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10015,7 +10041,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bm))
+																$elm$core$String$fromInt(model.d.br))
 															]))
 													])),
 												A2(
@@ -10044,7 +10070,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bi, 2)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bp, 2)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10055,7 +10081,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bi))
+																$elm$core$String$fromInt(model.d.bp))
 															]))
 													])),
 												A2(
@@ -10084,7 +10110,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.ba, 3)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bh, 3)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10095,7 +10121,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.ba))
+																$elm$core$String$fromInt(model.d.bh))
 															]))
 													])),
 												A2(
@@ -10124,7 +10150,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bG, 4)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bK, 4)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10135,7 +10161,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bG))
+																$elm$core$String$fromInt(model.d.bK))
 															]))
 													])),
 												A2(
@@ -10164,7 +10190,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bk, 5)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bq, 5)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10175,7 +10201,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bk))
+																$elm$core$String$fromInt(model.d.bq))
 															]))
 													])),
 												A2(
@@ -10204,7 +10230,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bD, 6)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bH, 6)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10215,7 +10241,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bD))
+																$elm$core$String$fromInt(model.d.bH))
 															]))
 													])),
 												A2(
@@ -10244,7 +10270,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.bO, 7)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bR, 7)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10255,7 +10281,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.bO))
+																$elm$core$String$fromInt(model.d.bR))
 															]))
 													])),
 												A2(
@@ -10284,7 +10310,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.T.a9, 8)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bg, 8)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10295,7 +10321,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.T.a9))
+																$elm$core$String$fromInt(model.d.bg))
 															]))
 													])),
 												A2(
@@ -10412,7 +10438,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																]))
 														]));
 											},
-											$author$project$PlayersLike$playerLike(model.T))),
+											$author$project$PlayersLike$playerLike(model.d))),
 										A2($elm$html$Html$br, _List_Nil, _List_Nil),
 										A2(
 										$elm$html$Html$h3,
@@ -10437,7 +10463,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.av),
+														$elm$html$Html$Attributes$class(ability.az),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('nbl'))
 													]),
@@ -10479,7 +10505,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.aj),
+														$elm$html$Html$Attributes$class(ability.am),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('ff'))
 													]),
@@ -10530,7 +10556,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.aT),
+														$elm$html$Html$Attributes$class(ability.a_),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('utl'))
 													]),
@@ -10572,7 +10598,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.as),
+														$elm$html$Html$Attributes$class(ability.ax),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('lgv'))
 													]),
@@ -10623,7 +10649,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.aO),
+														$elm$html$Html$Attributes$class(ability.aT),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('sog'))
 													]),
@@ -10665,7 +10691,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.ad),
+														$elm$html$Html$Attributes$class(ability.ag),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('cm'))
 													]),
@@ -10709,11 +10735,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 			]));
 };
 var $author$project$Player$Juniors = 0;
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $author$project$Player$StateRep = 2;
 var $author$project$Player$levelToString = F2(
 	function (l, _v0) {
-		var origin = _v0.bv;
-		var local_team = _v0.at;
+		var origin = _v0.bA;
+		var local_team = _v0.T;
 		switch (l) {
 			case 0:
 				return local_team + ' Under 18s';
@@ -10739,7 +10765,17 @@ var $author$project$Player$levelToString = F2(
 				return 'AFL';
 		}
 	});
-var $author$project$Draft$viewPlayerDraft = function (model) {
+var $author$project$StateDraft$viewPlayerDraft = function (model) {
+	var _v0 = (model.K.Q !== '') ? _Utils_Tuple3(
+		$elm$html$Html$Attributes$class('show'),
+		A2($author$project$Player$levelToString, 2, model.d),
+		model.K.Q) : _Utils_Tuple3(
+		$elm$html$Html$Attributes$class(''),
+		'Under 18s Comp',
+		A2($author$project$Player$levelToString, 0, model.d));
+	var cls = _v0.a;
+	var cl = _v0.b;
+	var ct = _v0.c;
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -10780,7 +10816,7 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Current League: ')
+										$elm$html$Html$text('Current Date: ')
 									])),
 								A2(
 								$elm$html$Html$p,
@@ -10791,7 +10827,33 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text(
-										A2($author$project$Player$levelToString, model.X.bl, model.T))
+										$justinmimbs$date$Date$toIsoString(model.R))
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h4,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('title is-4')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Current League: ')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('has-text-centered')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(cl)
 									]))
 							])),
 						A2(
@@ -10817,8 +10879,7 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(
-										A2($author$project$Player$levelToString, 0, model.T))
+										$elm$html$Html$text(ct)
 									]))
 							])),
 						A2(
@@ -10844,7 +10905,7 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.X.bg)
+										$elm$html$Html$text(model.K.bn)
 									]))
 							])),
 						A2(
@@ -10870,34 +10931,7 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.X.bj)
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$h4,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('title is-4')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Spin: ')
-									])),
-								A2(
-								$elm$html$Html$p,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('has-text-centered')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$elm$core$String$fromInt(model.bB))
+										$elm$html$Html$text(model.K.av)
 									]))
 							])),
 						A2($elm$html$Html$div, _List_Nil, _List_Nil)
@@ -10984,7 +11018,7 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 																	]))
 															]));
 												}),
-											A2($elm$core$List$take, 3, model.bA)))
+											A2($elm$core$List$take, 3, model.bF)))
 									]))
 							]))
 					])),
@@ -10992,7 +11026,8 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$id('confettis')
+						$elm$html$Html$Attributes$class('confettis'),
+						cls
 					]),
 				_List_fromArray(
 					[
@@ -11000,63 +11035,144 @@ var $author$project$Draft$viewPlayerDraft = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('confetti')
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('confetti'),
+								cls
 							]),
 						_List_Nil)
 					]))
@@ -11069,16 +11185,16 @@ var $author$project$Main$view = function (model) {
 		_List_fromArray(
 			[
 				function () {
-				var _v0 = model.Z;
+				var _v0 = model.ab;
 				if (!_v0) {
 					return $author$project$PlayerBuilder$viewPlayerBuilder(model);
 				} else {
-					return $author$project$Draft$viewPlayerDraft(model);
+					return $author$project$StateDraft$viewPlayerDraft(model);
 				}
 			}()
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
-	{bf: $author$project$Model$init, bF: $author$project$Main$subscriptions, bK: $author$project$Main$update, Z: $author$project$Main$view});
+	{bm: $author$project$Model$init, bJ: $author$project$Main$subscriptions, bN: $author$project$Main$update, ab: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));

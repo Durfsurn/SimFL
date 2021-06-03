@@ -30,6 +30,7 @@ init _ =
       , rand_1_10 = 0
       , rand_1_100 = 0
       , rand_1_1000 = 0
+      , current_date = Date.fromCalendarDate 2021 Time.Jan 1
       }
     , Cmd.batch [ Task.perform (always Reset) (Task.succeed ()), getTime ]
     )
@@ -47,6 +48,7 @@ type alias Model =
     , rand_1_10 : Int
     , rand_1_100 : Int
     , rand_1_1000 : Int
+    , current_date : Date
     }
 
 

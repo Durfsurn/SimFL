@@ -33,6 +33,9 @@ defPlayerStatus =
     { level = Under19s
     , injury = "Healthy"
     , leadership_group = "Not in leadership group."
+    , under19s_team = ""
+    , state_team = ""
+    , afl_team = ""
     }
 
 
@@ -40,6 +43,9 @@ type alias PlayerStatus =
     { level : Level
     , injury : String
     , leadership_group : String
+    , under19s_team : String
+    , state_team : String
+    , afl_team : String
     }
 
 

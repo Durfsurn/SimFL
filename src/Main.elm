@@ -2,7 +2,6 @@ module Main exposing (..)
 
 import Browser
 import Date exposing (..)
-import Draft exposing (randomiseLocalTeams, viewPlayerDraft)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -13,6 +12,7 @@ import PlayerBuilder exposing (viewPlayerBuilder)
 import Positions exposing (..)
 import Process
 import Random
+import StateDraft exposing (randomiseLocalTeams, viewPlayerDraft)
 import Task
 import Time
 
@@ -68,28 +68,37 @@ update msg model =
 
         ShuffledLocalTeams shuffle ->
             let
+                s =
+                    model.status
+
+                t =
+                    List.take 3 shuffle |> List.take 2 |> List.reverse |> List.head |> Maybe.withDefault ""
+
                 count =
                     model.shuffle_count + 1
 
-                cmd =
+                ( team, cmd ) =
                     if count >= 20 then
                         if
-                            (List.take 3 shuffle |> List.take 2 |> List.reverse |> List.head |> Maybe.withDefault "" |> (==) model.player.local_team)
-                                || model.rand_1_10
-                                >= 5
+                            t
+                                /= model.player.local_team
+                                && (model.rand_1_10 >= 4)
                         then
-                            delay 1000 ShuffleLocalTeams
+                            ( model.status.state_team, delay 1000 ShuffleLocalTeams )
+
+                        else if t == model.player.local_team then
+                            ( t, Cmd.none )
 
                         else
-                            Cmd.none
+                            ( t, Cmd.none )
 
                     else if count >= 10 then
-                        delay (toFloat <| 100 * (count - 10)) ShuffleLocalTeams
+                        ( model.status.state_team, delay (toFloat <| 100 * (count - 10)) ShuffleLocalTeams )
 
                     else
-                        delay 100 ShuffleLocalTeams
+                        ( model.status.state_team, delay 100 ShuffleLocalTeams )
             in
-            ( { model | shuffle = shuffle, shuffle_count = count }
+            ( { model | shuffle = shuffle, shuffle_count = count, status = { s | state_team = team } }
             , Cmd.batch
                 [ cmd
                 , randomInt Rand10Int 1 10
@@ -102,7 +111,7 @@ update msg model =
             ( { model | today = t }, getZone )
 
         GotZone z ->
-            ( { model | zone = z }, Cmd.none )
+            ( { model | zone = z, current_date = Date.fromPosix z model.today }, Cmd.none )
 
         Reset ->
             ( { model
@@ -113,7 +122,13 @@ update msg model =
             )
 
         SaveStats ->
-            ( { model | view = Draft, transition = "show" }, Draft.randomiseLocalTeams model )
+            ( { model
+                | view = Draft
+                , transition = "show"
+                , current_date = Date.fromCalendarDate (Date.year model.current_date) Time.Nov 1
+              }
+            , randomiseLocalTeams model
+            )
 
         ChangePlayerPerk perk ->
             let
