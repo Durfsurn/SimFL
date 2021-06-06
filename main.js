@@ -77,7 +77,7 @@ function A9(fun, a, b, c, d, e, f, g, h, i) {
   return fun.a === 9 ? fun.f(a, b, c, d, e, f, g, h, i) : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
 }
 
-
+console.warn('Compiled in DEV mode. Follow the advice at https://elm-lang.org/0.19.1/optimize for better performance and smaller assets.');
 
 
 // EQUALITY
@@ -113,7 +113,7 @@ function _Utils_eqHelp(x, y, depth, stack)
 		return true;
 	}
 
-	/**_UNUSED/
+	/**/
 	if (x.$ === 'Set_elm_builtin')
 	{
 		x = $elm$core$Set$toList(x);
@@ -126,7 +126,7 @@ function _Utils_eqHelp(x, y, depth, stack)
 	}
 	//*/
 
-	/**/
+	/**_UNUSED/
 	if (x.$ < 0)
 	{
 		x = $elm$core$Dict$toList(x);
@@ -161,7 +161,7 @@ function _Utils_cmp(x, y, ord)
 		return x === y ? /*EQ*/ 0 : x < y ? /*LT*/ -1 : /*GT*/ 1;
 	}
 
-	/**_UNUSED/
+	/**/
 	if (x instanceof String)
 	{
 		var a = x.valueOf();
@@ -170,10 +170,10 @@ function _Utils_cmp(x, y, ord)
 	}
 	//*/
 
-	/**/
+	/**_UNUSED/
 	if (typeof x.$ === 'undefined')
 	//*/
-	/**_UNUSED/
+	/**/
 	if (x.$[0] === '#')
 	//*/
 	{
@@ -203,17 +203,17 @@ var _Utils_compare = F2(function(x, y)
 
 // COMMON VALUES
 
-var _Utils_Tuple0 = 0;
-var _Utils_Tuple0_UNUSED = { $: '#0' };
+var _Utils_Tuple0_UNUSED = 0;
+var _Utils_Tuple0 = { $: '#0' };
 
-function _Utils_Tuple2(a, b) { return { a: a, b: b }; }
-function _Utils_Tuple2_UNUSED(a, b) { return { $: '#2', a: a, b: b }; }
+function _Utils_Tuple2_UNUSED(a, b) { return { a: a, b: b }; }
+function _Utils_Tuple2(a, b) { return { $: '#2', a: a, b: b }; }
 
-function _Utils_Tuple3(a, b, c) { return { a: a, b: b, c: c }; }
-function _Utils_Tuple3_UNUSED(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
+function _Utils_Tuple3_UNUSED(a, b, c) { return { a: a, b: b, c: c }; }
+function _Utils_Tuple3(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
 
-function _Utils_chr(c) { return c; }
-function _Utils_chr_UNUSED(c) { return new String(c); }
+function _Utils_chr_UNUSED(c) { return c; }
+function _Utils_chr(c) { return new String(c); }
 
 
 // RECORDS
@@ -264,11 +264,11 @@ function _Utils_ap(xs, ys)
 
 
 
-var _List_Nil = { $: 0 };
-var _List_Nil_UNUSED = { $: '[]' };
+var _List_Nil_UNUSED = { $: 0 };
+var _List_Nil = { $: '[]' };
 
-function _List_Cons(hd, tl) { return { $: 1, a: hd, b: tl }; }
-function _List_Cons_UNUSED(hd, tl) { return { $: '::', a: hd, b: tl }; }
+function _List_Cons_UNUSED(hd, tl) { return { $: 1, a: hd, b: tl }; }
+function _List_Cons(hd, tl) { return { $: '::', a: hd, b: tl }; }
 
 
 var _List_cons = F2(_List_Cons);
@@ -499,12 +499,12 @@ var _JsArray_appendN = F3(function(n, dest, source)
 
 // LOG
 
-var _Debug_log = F2(function(tag, value)
+var _Debug_log_UNUSED = F2(function(tag, value)
 {
 	return value;
 });
 
-var _Debug_log_UNUSED = F2(function(tag, value)
+var _Debug_log = F2(function(tag, value)
 {
 	console.log(tag + ': ' + _Debug_toString(value));
 	return value;
@@ -530,12 +530,12 @@ function _Debug_todoCase(moduleName, region, value)
 
 // TO STRING
 
-function _Debug_toString(value)
+function _Debug_toString_UNUSED(value)
 {
 	return '<internals>';
 }
 
-function _Debug_toString_UNUSED(value)
+function _Debug_toString(value)
 {
 	return _Debug_toAnsiString(false, value);
 }
@@ -720,13 +720,13 @@ function _Debug_toHexDigit(n)
 // CRASH
 
 
-function _Debug_crash(identifier)
+function _Debug_crash_UNUSED(identifier)
 {
 	throw new Error('https://github.com/elm/core/blob/1.0.0/hints/' + identifier + '.md');
 }
 
 
-function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
+function _Debug_crash(identifier, fact1, fact2, fact3, fact4)
 {
 	switch(identifier)
 	{
@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region._.J === region.aj.J)
+	if (region.start.line === region.end.line)
 	{
-		return 'on line ' + region._.J;
+		return 'on line ' + region.start.line;
 	}
-	return 'on lines ' + region._.J + ' through ' + region.aj.J;
+	return 'on lines ' + region.start.line + ' through ' + region.end.line;
 }
 
 
@@ -1212,7 +1212,7 @@ function _Char_toLocaleLower(char)
 
 
 
-/**_UNUSED/
+/**/
 function _Json_errorToString(error)
 {
 	return $elm$json$Json$Decode$errorToString(error);
@@ -1616,11 +1616,11 @@ var _Json_encode = F2(function(indentLevel, value)
 	return JSON.stringify(_Json_unwrap(value), null, indentLevel) + '';
 });
 
-function _Json_wrap_UNUSED(value) { return { $: 0, a: value }; }
-function _Json_unwrap_UNUSED(value) { return value.a; }
+function _Json_wrap(value) { return { $: 0, a: value }; }
+function _Json_unwrap(value) { return value.a; }
 
-function _Json_wrap(value) { return value; }
-function _Json_unwrap(value) { return value; }
+function _Json_wrap_UNUSED(value) { return value; }
+function _Json_unwrap_UNUSED(value) { return value; }
 
 function _Json_emptyArray() { return []; }
 function _Json_emptyObject() { return {}; }
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bm,
-		impl.bN,
-		impl.bJ,
+		impl.init,
+		impl.update,
+		impl.subscriptions,
 		function() { return function() {} }
 	);
 });
@@ -1872,7 +1872,7 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 function _Platform_initialize(flagDecoder, args, init, update, subscriptions, stepperBuilder)
 {
 	var result = A2(_Json_run, flagDecoder, _Json_wrap(args ? args['flags'] : undefined));
-	$elm$core$Result$isOk(result) || _Debug_crash(2 /**_UNUSED/, _Json_errorToString(result.a) /**/);
+	$elm$core$Result$isOk(result) || _Debug_crash(2 /**/, _Json_errorToString(result.a) /**/);
 	var managers = {};
 	var initPair = init(result.a);
 	var model = initPair.a;
@@ -2316,7 +2316,7 @@ function _Platform_setupIncomingPort(name, sendToApp)
 //
 
 
-function _Platform_export(exports)
+function _Platform_export_UNUSED(exports)
 {
 	scope['Elm']
 		? _Platform_mergeExportsProd(scope['Elm'], exports)
@@ -2337,7 +2337,7 @@ function _Platform_mergeExportsProd(obj, exports)
 }
 
 
-function _Platform_export_UNUSED(exports)
+function _Platform_export(exports)
 {
 	scope['Elm']
 		? _Platform_mergeExportsDebug('Elm', scope['Elm'], exports)
@@ -2377,10 +2377,10 @@ var _VirtualDom_init = F4(function(virtualNode, flagDecoder, debugMetadata, args
 {
 	// NOTE: this function needs _Platform_export available to work
 
-	/**/
+	/**_UNUSED/
 	var node = args['node'];
 	//*/
-	/**_UNUSED/
+	/**/
 	var node = args && args['node'] ? args['node'] : _Debug_crash(0);
 	//*/
 
@@ -2635,24 +2635,24 @@ function _VirtualDom_noInnerHtmlOrFormAction(key)
 	return key == 'innerHTML' || key == 'formAction' ? 'data-' + key : key;
 }
 
-function _VirtualDom_noJavaScriptUri(value)
+function _VirtualDom_noJavaScriptUri_UNUSED(value)
 {
 	return /^javascript:/i.test(value.replace(/\s/g,'')) ? '' : value;
 }
 
-function _VirtualDom_noJavaScriptUri_UNUSED(value)
+function _VirtualDom_noJavaScriptUri(value)
 {
 	return /^javascript:/i.test(value.replace(/\s/g,''))
 		? 'javascript:alert("This is an XSS vector. Please use ports or web components instead.")'
 		: value;
 }
 
-function _VirtualDom_noJavaScriptOrHtmlUri(value)
+function _VirtualDom_noJavaScriptOrHtmlUri_UNUSED(value)
 {
 	return /^\s*(javascript:|data:text\/html)/i.test(value) ? '' : value;
 }
 
-function _VirtualDom_noJavaScriptOrHtmlUri_UNUSED(value)
+function _VirtualDom_noJavaScriptOrHtmlUri(value)
 {
 	return /^\s*(javascript:|data:text\/html)/i.test(value)
 		? 'javascript:alert("This is an XSS vector. Please use ports or web components instead.")'
@@ -2704,9 +2704,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		x: func(record.x),
-		aa: record.aa,
-		Y: record.Y
+		message: func(record.message),
+		stopPropagation: record.stopPropagation,
+		preventDefault: record.preventDefault
 	}
 });
 
@@ -2974,11 +2974,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.x;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.aa;
+		var message = !tag ? value : tag < 3 ? value.a : value.message;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.stopPropagation;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.Y) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.preventDefault) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3928,15 +3928,15 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bm,
-		impl.bN,
-		impl.bJ,
+		impl.init,
+		impl.update,
+		impl.subscriptions,
 		function(sendToApp, initialModel) {
-			var view = impl.ab;
-			/**/
+			var view = impl.view;
+			/**_UNUSED/
 			var domNode = args['node'];
 			//*/
-			/**_UNUSED/
+			/**/
 			var domNode = args && args['node'] ? args['node'] : _Debug_crash(0);
 			//*/
 			var currNode = _VirtualDom_virtualize(domNode);
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bm,
-		impl.bN,
-		impl.bJ,
+		impl.init,
+		impl.update,
+		impl.subscriptions,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.Z && impl.Z(sendToApp)
-			var view = impl.ab;
+			var divertHrefToApp = impl.setup && impl.setup(sendToApp)
+			var view = impl.view;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3977,12 +3977,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.a8);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.body);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.bL) && (_VirtualDom_doc.title = title = doc.bL);
+				(title !== doc.title) && (_VirtualDom_doc.title = title = doc.title);
 			});
 		}
 	);
@@ -4038,12 +4038,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bx;
-	var onUrlRequest = impl.by;
+	var onUrlChange = impl.onUrlChange;
+	var onUrlRequest = impl.onUrlRequest;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		Z: function(sendToApp)
+		setup: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aH === next.aH
-							&& curr.aq === next.aq
-							&& curr.aD.a === next.aD.a
+							&& curr.protocol === next.protocol
+							&& curr.host === next.host
+							&& curr.port_.a === next.port_.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		bm: function(flags)
+		init: function(flags)
 		{
-			return A3(impl.bm, flags, _Browser_getUrl(), key);
+			return A3(impl.init, flags, _Browser_getUrl(), key);
 		},
-		ab: impl.ab,
-		bN: impl.bN,
-		bJ: impl.bJ
+		view: impl.view,
+		update: impl.update,
+		subscriptions: impl.subscriptions
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bj: 'hidden', ba: 'visibilitychange' }
+		? { hidden: 'hidden', change: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bj: 'mozHidden', ba: 'mozvisibilitychange' }
+		? { hidden: 'mozHidden', change: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bj: 'msHidden', ba: 'msvisibilitychange' }
+		? { hidden: 'msHidden', change: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bj: 'webkitHidden', ba: 'webkitvisibilitychange' }
-		: { bj: 'hidden', ba: 'visibilitychange' };
+		? { hidden: 'webkitHidden', change: 'webkitvisibilitychange' }
+		: { hidden: 'hidden', change: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aQ: _Browser_getScene(),
-		a$: {
-			a3: _Browser_window.pageXOffset,
-			a4: _Browser_window.pageYOffset,
-			a2: _Browser_doc.documentElement.clientWidth,
-			bi: _Browser_doc.documentElement.clientHeight
+		scene: _Browser_getScene(),
+		viewport: {
+			x: _Browser_window.pageXOffset,
+			y: _Browser_window.pageYOffset,
+			width: _Browser_doc.documentElement.clientWidth,
+			height: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		a2: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		bi: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		width: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		height: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aQ: {
-				a2: node.scrollWidth,
-				bi: node.scrollHeight
+			scene: {
+				width: node.scrollWidth,
+				height: node.scrollHeight
 			},
-			a$: {
-				a3: node.scrollLeft,
-				a4: node.scrollTop,
-				a2: node.clientWidth,
-				bi: node.clientHeight
+			viewport: {
+				x: node.scrollLeft,
+				y: node.scrollTop,
+				width: node.clientWidth,
+				height: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aQ: _Browser_getScene(),
-			a$: {
-				a3: x,
-				a4: y,
-				a2: _Browser_doc.documentElement.clientWidth,
-				bi: _Browser_doc.documentElement.clientHeight
+			scene: _Browser_getScene(),
+			viewport: {
+				x: x,
+				y: y,
+				width: _Browser_doc.documentElement.clientWidth,
+				height: _Browser_doc.documentElement.clientHeight
 			},
-			be: {
-				a3: x + rect.left,
-				a4: y + rect.top,
-				a2: rect.width,
-				bi: rect.height
+			element: {
+				x: x + rect.left,
+				y: y + rect.top,
+				width: rect.width,
+				height: rect.height
 			}
 		};
 	});
@@ -4568,15 +4568,15 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $elm$core$Basics$EQ = 1;
-var $elm$core$Basics$GT = 2;
-var $elm$core$Basics$LT = 0;
+var $elm$core$Basics$EQ = {$: 'EQ'};
+var $elm$core$Basics$GT = {$: 'GT'};
+var $elm$core$Basics$LT = {$: 'LT'};
 var $elm$core$List$cons = _List_cons;
 var $elm$core$Dict$foldr = F3(
 	function (func, acc, t) {
 		foldr:
 		while (true) {
-			if (t.$ === -2) {
+			if (t.$ === 'RBEmpty_elm_builtin') {
 				return acc;
 			} else {
 				var key = t.b;
@@ -4621,7 +4621,7 @@ var $elm$core$Dict$keys = function (dict) {
 		dict);
 };
 var $elm$core$Set$toList = function (_v0) {
-	var dict = _v0;
+	var dict = _v0.a;
 	return $elm$core$Dict$keys(dict);
 };
 var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
@@ -4631,7 +4631,7 @@ var $elm$core$Array$foldr = F3(
 		var tail = _v0.d;
 		var helper = F2(
 			function (node, acc) {
-				if (!node.$) {
+				if (node.$ === 'SubTree') {
 					var subTree = node.a;
 					return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
 				} else {
@@ -4649,32 +4649,32 @@ var $elm$core$Array$toList = function (array) {
 	return A3($elm$core$Array$foldr, $elm$core$List$cons, _List_Nil, array);
 };
 var $elm$core$Result$Err = function (a) {
-	return {$: 1, a: a};
+	return {$: 'Err', a: a};
 };
 var $elm$json$Json$Decode$Failure = F2(
 	function (a, b) {
-		return {$: 3, a: a, b: b};
+		return {$: 'Failure', a: a, b: b};
 	});
 var $elm$json$Json$Decode$Field = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'Field', a: a, b: b};
 	});
 var $elm$json$Json$Decode$Index = F2(
 	function (a, b) {
-		return {$: 1, a: a, b: b};
+		return {$: 'Index', a: a, b: b};
 	});
 var $elm$core$Result$Ok = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Ok', a: a};
 };
 var $elm$json$Json$Decode$OneOf = function (a) {
-	return {$: 2, a: a};
+	return {$: 'OneOf', a: a};
 };
-var $elm$core$Basics$False = 1;
+var $elm$core$Basics$False = {$: 'False'};
 var $elm$core$Basics$add = _Basics_add;
 var $elm$core$Maybe$Just = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Just', a: a};
 };
-var $elm$core$Maybe$Nothing = {$: 1};
+var $elm$core$Maybe$Nothing = {$: 'Nothing'};
 var $elm$core$String$all = _String_all;
 var $elm$core$Basics$and = _Basics_and;
 var $elm$core$Basics$append = _Utils_append;
@@ -4799,12 +4799,12 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 		errorToStringHelp:
 		while (true) {
 			switch (error.$) {
-				case 0:
+				case 'Field':
 					var f = error.a;
 					var err = error.b;
 					var isSimple = function () {
 						var _v1 = $elm$core$String$uncons(f);
-						if (_v1.$ === 1) {
+						if (_v1.$ === 'Nothing') {
 							return false;
 						} else {
 							var _v2 = _v1.a;
@@ -4819,7 +4819,7 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 					error = $temp$error;
 					context = $temp$context;
 					continue errorToStringHelp;
-				case 1:
+				case 'Index':
 					var i = error.a;
 					var err = error.b;
 					var indexName = '[' + ($elm$core$String$fromInt(i) + ']');
@@ -4828,7 +4828,7 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 					error = $temp$error;
 					context = $temp$context;
 					continue errorToStringHelp;
-				case 2:
+				case 'OneOf':
 					var errors = error.a;
 					if (!errors.b) {
 						return 'Ran into a Json.Decode.oneOf with no possibilities' + function () {
@@ -4892,7 +4892,7 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 var $elm$core$Array$branchFactor = 32;
 var $elm$core$Array$Array_elm_builtin = F4(
 	function (a, b, c, d) {
-		return {$: 0, a: a, b: b, c: c, d: d};
+		return {$: 'Array_elm_builtin', a: a, b: b, c: c, d: d};
 	});
 var $elm$core$Elm$JsArray$empty = _JsArray_empty;
 var $elm$core$Basics$ceiling = _Basics_ceiling;
@@ -4907,7 +4907,7 @@ var $elm$core$Array$shiftStep = $elm$core$Basics$ceiling(
 var $elm$core$Array$empty = A4($elm$core$Array$Array_elm_builtin, 0, $elm$core$Array$shiftStep, $elm$core$Elm$JsArray$empty, $elm$core$Elm$JsArray$empty);
 var $elm$core$Elm$JsArray$initialize = _JsArray_initialize;
 var $elm$core$Array$Leaf = function (a) {
-	return {$: 1, a: a};
+	return {$: 'Leaf', a: a};
 };
 var $elm$core$Basics$apL = F2(
 	function (f, x) {
@@ -4927,7 +4927,7 @@ var $elm$core$Basics$max = F2(
 	});
 var $elm$core$Basics$mul = _Basics_mul;
 var $elm$core$Array$SubTree = function (a) {
-	return {$: 0, a: a};
+	return {$: 'SubTree', a: a};
 };
 var $elm$core$Elm$JsArray$initializeFromList = _JsArray_initializeFromList;
 var $elm$core$Array$compressNodes = F2(
@@ -4974,25 +4974,25 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.f) {
+		if (!builder.nodeListSize) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.h),
+				$elm$core$Elm$JsArray$length(builder.tail),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.h);
+				builder.tail);
 		} else {
-			var treeLen = builder.f * $elm$core$Array$branchFactor;
+			var treeLen = builder.nodeListSize * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
-			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.i) : builder.i;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.f);
+			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.nodeList) : builder.nodeList;
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.nodeListSize);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.h) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.tail) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.h);
+				builder.tail);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -5005,7 +5005,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{i: nodeList, f: (len / $elm$core$Array$branchFactor) | 0, h: tail});
+					{nodeList: nodeList, nodeListSize: (len / $elm$core$Array$branchFactor) | 0, tail: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -5035,9 +5035,9 @@ var $elm$core$Array$initialize = F2(
 			return A5($elm$core$Array$initializeHelp, fn, initialFromIndex, len, _List_Nil, tail);
 		}
 	});
-var $elm$core$Basics$True = 0;
+var $elm$core$Basics$True = {$: 'True'};
 var $elm$core$Result$isOk = function (result) {
-	if (!result.$) {
+	if (result.$ === 'Ok') {
 		return true;
 	} else {
 		return false;
@@ -5048,31 +5048,33 @@ var $elm$json$Json$Decode$map2 = _Json_map2;
 var $elm$json$Json$Decode$succeed = _Json_succeed;
 var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	switch (handler.$) {
-		case 0:
+		case 'Normal':
 			return 0;
-		case 1:
+		case 'MayStopPropagation':
 			return 1;
-		case 2:
+		case 'MayPreventDefault':
 			return 2;
 		default:
 			return 3;
 	}
 };
 var $elm$browser$Browser$External = function (a) {
-	return {$: 1, a: a};
+	return {$: 'External', a: a};
 };
 var $elm$browser$Browser$Internal = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Internal', a: a};
 };
 var $elm$core$Basics$identity = function (x) {
 	return x;
 };
-var $elm$browser$Browser$Dom$NotFound = $elm$core$Basics$identity;
-var $elm$url$Url$Http = 0;
-var $elm$url$Url$Https = 1;
+var $elm$browser$Browser$Dom$NotFound = function (a) {
+	return {$: 'NotFound', a: a};
+};
+var $elm$url$Url$Http = {$: 'Http'};
+var $elm$url$Url$Https = {$: 'Https'};
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {ao: fragment, aq: host, aB: path, aD: port_, aH: protocol, aI: query};
+		return {fragment: fragment, host: host, path: path, port_: port_, protocol: protocol, query: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5108,7 +5110,7 @@ var $elm$url$Url$chompBeforePath = F5(
 					var i = _v0.a;
 					var _v1 = $elm$core$String$toInt(
 						A2($elm$core$String$dropLeft, i + 1, str));
-					if (_v1.$ === 1) {
+					if (_v1.$ === 'Nothing') {
 						return $elm$core$Maybe$Nothing;
 					} else {
 						var port_ = _v1;
@@ -5191,24 +5193,26 @@ var $elm$core$String$startsWith = _String_startsWith;
 var $elm$url$Url$fromString = function (str) {
 	return A2($elm$core$String$startsWith, 'http://', str) ? A2(
 		$elm$url$Url$chompAfterProtocol,
-		0,
+		$elm$url$Url$Http,
 		A2($elm$core$String$dropLeft, 7, str)) : (A2($elm$core$String$startsWith, 'https://', str) ? A2(
 		$elm$url$Url$chompAfterProtocol,
-		1,
+		$elm$url$Url$Https,
 		A2($elm$core$String$dropLeft, 8, str)) : $elm$core$Maybe$Nothing);
 };
 var $elm$core$Basics$never = function (_v0) {
 	never:
 	while (true) {
-		var nvr = _v0;
+		var nvr = _v0.a;
 		var $temp$_v0 = nvr;
 		_v0 = $temp$_v0;
 		continue never;
 	}
 };
-var $elm$core$Task$Perform = $elm$core$Basics$identity;
+var $elm$core$Task$Perform = function (a) {
+	return {$: 'Perform', a: a};
+};
 var $elm$core$Task$succeed = _Scheduler_succeed;
-var $elm$core$Task$init = $elm$core$Task$succeed(0);
+var $elm$core$Task$init = $elm$core$Task$succeed(_Utils_Tuple0);
 var $elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -5314,7 +5318,7 @@ var $elm$core$Task$sequence = function (tasks) {
 var $elm$core$Platform$sendToApp = _Platform_sendToApp;
 var $elm$core$Task$spawnCmd = F2(
 	function (router, _v0) {
-		var task = _v0;
+		var task = _v0.a;
 		return _Scheduler_spawn(
 			A2(
 				$elm$core$Task$andThen,
@@ -5326,7 +5330,7 @@ var $elm$core$Task$onEffects = F3(
 		return A2(
 			$elm$core$Task$map,
 			function (_v0) {
-				return 0;
+				return _Utils_Tuple0;
 			},
 			$elm$core$Task$sequence(
 				A2(
@@ -5336,31 +5340,35 @@ var $elm$core$Task$onEffects = F3(
 	});
 var $elm$core$Task$onSelfMsg = F3(
 	function (_v0, _v1, _v2) {
-		return $elm$core$Task$succeed(0);
+		return $elm$core$Task$succeed(_Utils_Tuple0);
 	});
 var $elm$core$Task$cmdMap = F2(
 	function (tagger, _v0) {
-		var task = _v0;
-		return A2($elm$core$Task$map, tagger, task);
+		var task = _v0.a;
+		return $elm$core$Task$Perform(
+			A2($elm$core$Task$map, tagger, task));
 	});
 _Platform_effectManagers['Task'] = _Platform_createManager($elm$core$Task$init, $elm$core$Task$onEffects, $elm$core$Task$onSelfMsg, $elm$core$Task$cmdMap);
 var $elm$core$Task$command = _Platform_leaf('Task');
 var $elm$core$Task$perform = F2(
 	function (toMessage, task) {
 		return $elm$core$Task$command(
-			A2($elm$core$Task$map, toMessage, task));
+			$elm$core$Task$Perform(
+				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $elm$time$Time$Jan = 0;
-var $author$project$Model$PlayerBuilder = 0;
-var $author$project$Model$Reset = {$: 8};
-var $author$project$Positions$SmallForward = 0;
+var $elm$time$Time$Jan = {$: 'Jan'};
+var $author$project$Model$PlayerBuilder = {$: 'PlayerBuilder'};
+var $author$project$Model$Reset = {$: 'Reset'};
+var $author$project$Positions$SmallForward = {$: 'SmallForward'};
 var $elm$core$Basics$always = F2(
 	function (a, _v0) {
 		return a;
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $justinmimbs$date$Date$RD = $elm$core$Basics$identity;
+var $justinmimbs$date$Date$RD = function (a) {
+	return {$: 'RD', a: a};
+};
 var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
@@ -5373,28 +5381,28 @@ var $justinmimbs$date$Date$isLeapYear = function (y) {
 var $justinmimbs$date$Date$daysBeforeMonth = F2(
 	function (y, m) {
 		var leapDays = $justinmimbs$date$Date$isLeapYear(y) ? 1 : 0;
-		switch (m) {
-			case 0:
+		switch (m.$) {
+			case 'Jan':
 				return 0;
-			case 1:
+			case 'Feb':
 				return 31;
-			case 2:
+			case 'Mar':
 				return 59 + leapDays;
-			case 3:
+			case 'Apr':
 				return 90 + leapDays;
-			case 4:
+			case 'May':
 				return 120 + leapDays;
-			case 5:
+			case 'Jun':
 				return 151 + leapDays;
-			case 6:
+			case 'Jul':
 				return 181 + leapDays;
-			case 7:
+			case 'Aug':
 				return 212 + leapDays;
-			case 8:
+			case 'Sep':
 				return 243 + leapDays;
-			case 9:
+			case 'Oct':
 				return 273 + leapDays;
-			case 10:
+			case 'Nov':
 				return 304 + leapDays;
 			default:
 				return 334 + leapDays;
@@ -5411,28 +5419,28 @@ var $justinmimbs$date$Date$daysBeforeYear = function (y1) {
 };
 var $justinmimbs$date$Date$daysInMonth = F2(
 	function (y, m) {
-		switch (m) {
-			case 0:
+		switch (m.$) {
+			case 'Jan':
 				return 31;
-			case 1:
+			case 'Feb':
 				return $justinmimbs$date$Date$isLeapYear(y) ? 29 : 28;
-			case 2:
+			case 'Mar':
 				return 31;
-			case 3:
+			case 'Apr':
 				return 30;
-			case 4:
+			case 'May':
 				return 31;
-			case 5:
+			case 'Jun':
 				return 30;
-			case 6:
+			case 'Jul':
 				return 31;
-			case 7:
+			case 'Aug':
 				return 31;
-			case 8:
+			case 'Sep':
 				return 30;
-			case 9:
+			case 'Oct':
 				return 31;
-			case 10:
+			case 'Nov':
 				return 30;
 			default:
 				return 31;
@@ -5440,79 +5448,82 @@ var $justinmimbs$date$Date$daysInMonth = F2(
 	});
 var $justinmimbs$date$Date$fromCalendarDate = F3(
 	function (y, m, d) {
-		return ($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A3(
-			$elm$core$Basics$clamp,
-			1,
-			A2($justinmimbs$date$Date$daysInMonth, y, m),
-			d);
+		return $justinmimbs$date$Date$RD(
+			($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A3(
+				$elm$core$Basics$clamp,
+				1,
+				A2($justinmimbs$date$Date$daysInMonth, y, m),
+				d));
 	});
 var $author$project$Player$defPlayer = {
-	a6: 'Carlton',
-	bc: A3($justinmimbs$date$Date$fromCalendarDate, 2003, 0, 1),
-	bg: 0,
-	bh: 0,
-	bi: 175,
-	bn: 50,
-	bp: 0,
-	bq: 0,
-	T: 'Box Hill',
-	br: 0,
-	bt: 50,
-	bA: 'VIC',
-	bB: 'nbl',
-	bC: 50,
-	bD: 'Small Forward',
-	bG: 0,
-	bH: 0,
-	bK: 0,
-	bP: 75,
-	bR: 0
+	afl_team: 'Carlton',
+	dob: A3($justinmimbs$date$Date$fromCalendarDate, 2003, $elm$time$Time$Jan, 1),
+	goal_sense: 0,
+	handballing: 0,
+	height: 175,
+	injury: 50,
+	kicking: 0,
+	leading: 0,
+	local_team: 'Box Hill',
+	marking: 0,
+	mood: 50,
+	origin: 'VIC',
+	perk: 'nbl',
+	personality: 50,
+	position: 'Small Forward',
+	speed: 0,
+	spoiling: 0,
+	tapwork: 0,
+	weight: 75,
+	x_factor: 0
 };
-var $author$project$Player$Under19s = 1;
-var $author$project$Player$defPlayerStatus = {a6: '', bn: 'Healthy', av: 'Not in leadership group.', aw: 1, Q: '', aZ: ''};
+var $author$project$Player$Under19s = {$: 'Under19s'};
+var $author$project$Player$defPlayerStatus = {afl_team: '', injury: 'Healthy', leadership_group: 'Not in leadership group.', level: $author$project$Player$Under19s, state_team: '', under19s_team: ''};
 var $author$project$Model$GotTime = function (a) {
-	return {$: 10, a: a};
+	return {$: 'GotTime', a: a};
 };
 var $elm$time$Time$Name = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Name', a: a};
 };
 var $elm$time$Time$Offset = function (a) {
-	return {$: 1, a: a};
+	return {$: 'Offset', a: a};
 };
 var $elm$time$Time$Zone = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'Zone', a: a, b: b};
 	});
 var $elm$time$Time$customZone = $elm$time$Time$Zone;
-var $elm$time$Time$Posix = $elm$core$Basics$identity;
-var $elm$time$Time$millisToPosix = $elm$core$Basics$identity;
+var $elm$time$Time$Posix = function (a) {
+	return {$: 'Posix', a: a};
+};
+var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
 var $author$project$Model$getTime = A2($elm$core$Task$perform, $author$project$Model$GotTime, $elm$time$Time$now);
-var $author$project$Positions$KeyDefender = 8;
-var $author$project$Positions$KeyForward = 2;
-var $author$project$Positions$MediumDefender = 7;
-var $author$project$Positions$MediumForward = 1;
-var $author$project$Positions$RoverOnballer = 4;
-var $author$project$Positions$Ruckman = 3;
-var $author$project$Positions$SmallDefender = 6;
-var $author$project$Positions$Winger = 5;
+var $author$project$Positions$KeyDefender = {$: 'KeyDefender'};
+var $author$project$Positions$KeyForward = {$: 'KeyForward'};
+var $author$project$Positions$MediumDefender = {$: 'MediumDefender'};
+var $author$project$Positions$MediumForward = {$: 'MediumForward'};
+var $author$project$Positions$RoverOnballer = {$: 'RoverOnballer'};
+var $author$project$Positions$Ruckman = {$: 'Ruckman'};
+var $author$project$Positions$SmallDefender = {$: 'SmallDefender'};
+var $author$project$Positions$Winger = {$: 'Winger'};
 var $author$project$Positions$positionToString = function (p) {
-	switch (p) {
-		case 0:
+	switch (p.$) {
+		case 'SmallForward':
 			return 'Small Forward';
-		case 1:
+		case 'MediumForward':
 			return 'Medium Forward';
-		case 2:
+		case 'KeyForward':
 			return 'Key Forward';
-		case 3:
+		case 'Ruckman':
 			return 'Ruckman';
-		case 4:
+		case 'RoverOnballer':
 			return 'Rover/Onballer';
-		case 5:
+		case 'Winger':
 			return 'Winger';
-		case 6:
+		case 'SmallDefender':
 			return 'Small Defender';
-		case 7:
+		case 'MediumDefender':
 			return 'Medium Defender';
 		default:
 			return 'Key Defender';
@@ -5520,159 +5531,159 @@ var $author$project$Positions$positionToString = function (p) {
 };
 var $author$project$Positions$positionToDefPlayerStats = F2(
 	function (player, pos) {
-		switch (pos) {
-			case 0:
+		switch (pos.$) {
+			case 'SmallForward':
 				return _Utils_update(
 					player,
 					{
-						bg: 10,
-						bh: 10,
-						bi: 170,
-						bp: 13,
-						bq: 7,
-						br: 10,
-						bD: $author$project$Positions$positionToString(0),
-						bG: 13,
-						bH: 1,
-						bK: 1,
-						bP: 70,
-						bR: 10
+						goal_sense: 10,
+						handballing: 10,
+						height: 170,
+						kicking: 13,
+						leading: 7,
+						marking: 10,
+						position: $author$project$Positions$positionToString($author$project$Positions$SmallForward),
+						speed: 13,
+						spoiling: 1,
+						tapwork: 1,
+						weight: 70,
+						x_factor: 10
 					});
-			case 1:
+			case 'MediumForward':
 				return _Utils_update(
 					player,
 					{
-						bg: 10,
-						bh: 10,
-						bi: 182,
-						bp: 15,
-						bq: 10,
-						br: 15,
-						bD: $author$project$Positions$positionToString(1),
-						bG: 6,
-						bH: 3,
-						bK: 1,
-						bP: 78,
-						bR: 5
+						goal_sense: 10,
+						handballing: 10,
+						height: 182,
+						kicking: 15,
+						leading: 10,
+						marking: 15,
+						position: $author$project$Positions$positionToString($author$project$Positions$MediumForward),
+						speed: 6,
+						spoiling: 3,
+						tapwork: 1,
+						weight: 78,
+						x_factor: 5
 					});
-			case 2:
+			case 'KeyForward':
 				return _Utils_update(
 					player,
 					{
-						bg: 7,
-						bh: 5,
-						bi: 192,
-						bp: 15,
-						bq: 12,
-						br: 18,
-						bD: $author$project$Positions$positionToString(2),
-						bG: 5,
-						bH: 7,
-						bK: 3,
-						bP: 85,
-						bR: 3
+						goal_sense: 7,
+						handballing: 5,
+						height: 192,
+						kicking: 15,
+						leading: 12,
+						marking: 18,
+						position: $author$project$Positions$positionToString($author$project$Positions$KeyForward),
+						speed: 5,
+						spoiling: 7,
+						tapwork: 3,
+						weight: 85,
+						x_factor: 3
 					});
-			case 3:
+			case 'Ruckman':
 				return _Utils_update(
 					player,
 					{
-						bg: 5,
-						bh: 5,
-						bi: 200,
-						bp: 5,
-						bq: 5,
-						br: 12,
-						bD: $author$project$Positions$positionToString(3),
-						bG: 3,
-						bH: 10,
-						bK: 25,
-						bP: 93,
-						bR: 5
+						goal_sense: 5,
+						handballing: 5,
+						height: 200,
+						kicking: 5,
+						leading: 5,
+						marking: 12,
+						position: $author$project$Positions$positionToString($author$project$Positions$Ruckman),
+						speed: 3,
+						spoiling: 10,
+						tapwork: 25,
+						weight: 93,
+						x_factor: 5
 					});
-			case 4:
+			case 'RoverOnballer':
 				return _Utils_update(
 					player,
 					{
-						bg: 5,
-						bh: 25,
-						bi: 182,
-						bp: 15,
-						bq: 3,
-						br: 8,
-						bD: $author$project$Positions$positionToString(4),
-						bG: 8,
-						bH: 3,
-						bK: 3,
-						bP: 80,
-						bR: 5
+						goal_sense: 5,
+						handballing: 25,
+						height: 182,
+						kicking: 15,
+						leading: 3,
+						marking: 8,
+						position: $author$project$Positions$positionToString($author$project$Positions$RoverOnballer),
+						speed: 8,
+						spoiling: 3,
+						tapwork: 3,
+						weight: 80,
+						x_factor: 5
 					});
-			case 5:
+			case 'Winger':
 				return _Utils_update(
 					player,
 					{
-						bg: 3,
-						bh: 15,
-						bi: 178,
-						bp: 15,
-						bq: 5,
-						br: 10,
-						bD: $author$project$Positions$positionToString(5),
-						bG: 20,
-						bH: 3,
-						bK: 1,
-						bP: 75,
-						bR: 3
+						goal_sense: 3,
+						handballing: 15,
+						height: 178,
+						kicking: 15,
+						leading: 5,
+						marking: 10,
+						position: $author$project$Positions$positionToString($author$project$Positions$Winger),
+						speed: 20,
+						spoiling: 3,
+						tapwork: 1,
+						weight: 75,
+						x_factor: 3
 					});
-			case 6:
+			case 'SmallDefender':
 				return _Utils_update(
 					player,
 					{
-						bg: 3,
-						bh: 10,
-						bi: 170,
-						bp: 15,
-						bq: 5,
-						br: 8,
-						bD: $author$project$Positions$positionToString(6),
-						bG: 10,
-						bH: 20,
-						bK: 1,
-						bP: 70,
-						bR: 3
+						goal_sense: 3,
+						handballing: 10,
+						height: 170,
+						kicking: 15,
+						leading: 5,
+						marking: 8,
+						position: $author$project$Positions$positionToString($author$project$Positions$SmallDefender),
+						speed: 10,
+						spoiling: 20,
+						tapwork: 1,
+						weight: 70,
+						x_factor: 3
 					});
-			case 7:
+			case 'MediumDefender':
 				return _Utils_update(
 					player,
 					{
-						bg: 2,
-						bh: 10,
-						bi: 182,
-						bp: 15,
-						bq: 5,
-						br: 12,
-						bD: $author$project$Positions$positionToString(7),
-						bG: 8,
-						bH: 20,
-						bK: 1,
-						bP: 78,
-						bR: 2
+						goal_sense: 2,
+						handballing: 10,
+						height: 182,
+						kicking: 15,
+						leading: 5,
+						marking: 12,
+						position: $author$project$Positions$positionToString($author$project$Positions$MediumDefender),
+						speed: 8,
+						spoiling: 20,
+						tapwork: 1,
+						weight: 78,
+						x_factor: 2
 					});
 			default:
 				return _Utils_update(
 					player,
 					{
-						bg: 1,
-						bh: 5,
-						bi: 192,
-						bp: 15,
-						bq: 8,
-						br: 15,
-						bD: $author$project$Positions$positionToString(8),
-						bG: 4,
-						bH: 20,
-						bK: 5,
-						bP: 85,
-						bR: 2
+						goal_sense: 1,
+						handballing: 5,
+						height: 192,
+						kicking: 15,
+						leading: 8,
+						marking: 15,
+						position: $author$project$Positions$positionToString($author$project$Positions$KeyDefender),
+						speed: 4,
+						spoiling: 20,
+						tapwork: 5,
+						weight: 85,
+						x_factor: 2
 					});
 		}
 	});
@@ -5680,18 +5691,18 @@ var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $author$project$Model$init = function (_v0) {
 	return _Utils_Tuple2(
 		{
-			R: A3($justinmimbs$date$Date$fromCalendarDate, 2021, 0, 1),
-			d: A2($author$project$Positions$positionToDefPlayerStats, $author$project$Player$defPlayer, 0),
-			aJ: 0,
-			aK: 0,
-			aL: 0,
-			bF: _List_Nil,
-			aS: 0,
-			K: $author$project$Player$defPlayerStatus,
-			aX: $elm$time$Time$millisToPosix(0),
-			bM: '',
-			ab: 0,
-			bS: $elm$time$Time$utc
+			current_date: A3($justinmimbs$date$Date$fromCalendarDate, 2021, $elm$time$Time$Jan, 1),
+			player: A2($author$project$Positions$positionToDefPlayerStats, $author$project$Player$defPlayer, $author$project$Positions$SmallForward),
+			rand_1_10: 0,
+			rand_1_100: 0,
+			rand_1_1000: 0,
+			shuffle: _List_Nil,
+			shuffle_count: 0,
+			status: $author$project$Player$defPlayerStatus,
+			today: $elm$time$Time$millisToPosix(0),
+			transition: '',
+			view: $author$project$Model$PlayerBuilder,
+			zone: $elm$time$Time$utc
 		},
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
@@ -5699,7 +5710,7 @@ var $author$project$Model$init = function (_v0) {
 					A2(
 					$elm$core$Task$perform,
 					$elm$core$Basics$always($author$project$Model$Reset),
-					$elm$core$Task$succeed(0)),
+					$elm$core$Task$succeed(_Utils_Tuple0)),
 					$author$project$Model$getTime
 				])));
 };
@@ -5708,18 +5719,18 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
-var $author$project$Model$Draft = 1;
-var $elm$time$Time$Nov = 10;
+var $author$project$Model$Draft = {$: 'Draft'};
+var $elm$time$Time$Nov = {$: 'Nov'};
 var $author$project$Model$Rand1000Int = function (a) {
-	return {$: 7, a: a};
+	return {$: 'Rand1000Int', a: a};
 };
 var $author$project$Model$Rand100Int = function (a) {
-	return {$: 6, a: a};
+	return {$: 'Rand100Int', a: a};
 };
 var $author$project$Model$Rand10Int = function (a) {
-	return {$: 5, a: a};
+	return {$: 'Rand10Int', a: a};
 };
-var $author$project$Model$ShuffleLocalTeams = {$: 3};
+var $author$project$Model$ShuffleLocalTeams = {$: 'ShuffleLocalTeams'};
 var $elm$core$Process$sleep = _Process_sleep;
 var $author$project$Main$delay = F2(
 	function (time, msg) {
@@ -5732,59 +5743,62 @@ var $author$project$Main$delay = F2(
 	});
 var $elm$parser$Parser$Advanced$Bad = F2(
 	function (a, b) {
-		return {$: 1, a: a, b: b};
+		return {$: 'Bad', a: a, b: b};
 	});
 var $elm$parser$Parser$Advanced$Good = F3(
 	function (a, b, c) {
-		return {$: 0, a: a, b: b, c: c};
+		return {$: 'Good', a: a, b: b, c: c};
 	});
-var $elm$parser$Parser$Advanced$Parser = $elm$core$Basics$identity;
+var $elm$parser$Parser$Advanced$Parser = function (a) {
+	return {$: 'Parser', a: a};
+};
 var $elm$parser$Parser$Advanced$andThen = F2(
 	function (callback, _v0) {
-		var parseA = _v0;
-		return function (s0) {
-			var _v1 = parseA(s0);
-			if (_v1.$ === 1) {
-				var p = _v1.a;
-				var x = _v1.b;
-				return A2($elm$parser$Parser$Advanced$Bad, p, x);
-			} else {
-				var p1 = _v1.a;
-				var a = _v1.b;
-				var s1 = _v1.c;
-				var _v2 = callback(a);
-				var parseB = _v2;
-				var _v3 = parseB(s1);
-				if (_v3.$ === 1) {
-					var p2 = _v3.a;
-					var x = _v3.b;
-					return A2($elm$parser$Parser$Advanced$Bad, p1 || p2, x);
+		var parseA = _v0.a;
+		return $elm$parser$Parser$Advanced$Parser(
+			function (s0) {
+				var _v1 = parseA(s0);
+				if (_v1.$ === 'Bad') {
+					var p = _v1.a;
+					var x = _v1.b;
+					return A2($elm$parser$Parser$Advanced$Bad, p, x);
 				} else {
-					var p2 = _v3.a;
-					var b = _v3.b;
-					var s2 = _v3.c;
-					return A3($elm$parser$Parser$Advanced$Good, p1 || p2, b, s2);
+					var p1 = _v1.a;
+					var a = _v1.b;
+					var s1 = _v1.c;
+					var _v2 = callback(a);
+					var parseB = _v2.a;
+					var _v3 = parseB(s1);
+					if (_v3.$ === 'Bad') {
+						var p2 = _v3.a;
+						var x = _v3.b;
+						return A2($elm$parser$Parser$Advanced$Bad, p1 || p2, x);
+					} else {
+						var p2 = _v3.a;
+						var b = _v3.b;
+						var s2 = _v3.c;
+						return A3($elm$parser$Parser$Advanced$Good, p1 || p2, b, s2);
+					}
 				}
-			}
-		};
+			});
 	});
 var $elm$parser$Parser$andThen = $elm$parser$Parser$Advanced$andThen;
-var $elm$parser$Parser$UnexpectedChar = {$: 11};
+var $elm$parser$Parser$UnexpectedChar = {$: 'UnexpectedChar'};
 var $elm$parser$Parser$Advanced$AddRight = F2(
 	function (a, b) {
-		return {$: 1, a: a, b: b};
+		return {$: 'AddRight', a: a, b: b};
 	});
 var $elm$parser$Parser$Advanced$DeadEnd = F4(
 	function (row, col, problem, contextStack) {
-		return {ah: col, bb: contextStack, aE: problem, aP: row};
+		return {col: col, contextStack: contextStack, problem: problem, row: row};
 	});
-var $elm$parser$Parser$Advanced$Empty = {$: 0};
+var $elm$parser$Parser$Advanced$Empty = {$: 'Empty'};
 var $elm$parser$Parser$Advanced$fromState = F2(
 	function (s, x) {
 		return A2(
 			$elm$parser$Parser$Advanced$AddRight,
 			$elm$parser$Parser$Advanced$Empty,
-			A4($elm$parser$Parser$Advanced$DeadEnd, s.aP, s.ah, x, s.c));
+			A4($elm$parser$Parser$Advanced$DeadEnd, s.row, s.col, x, s.context));
 	});
 var $elm$parser$Parser$Advanced$isSubChar = _Parser_isSubChar;
 var $elm$core$Basics$negate = function (n) {
@@ -5792,21 +5806,22 @@ var $elm$core$Basics$negate = function (n) {
 };
 var $elm$parser$Parser$Advanced$chompIf = F2(
 	function (isGood, expecting) {
-		return function (s) {
-			var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, s.b, s.a);
-			return _Utils_eq(newOffset, -1) ? A2(
-				$elm$parser$Parser$Advanced$Bad,
-				false,
-				A2($elm$parser$Parser$Advanced$fromState, s, expecting)) : (_Utils_eq(newOffset, -2) ? A3(
-				$elm$parser$Parser$Advanced$Good,
-				true,
-				0,
-				{ah: 1, c: s.c, e: s.e, b: s.b + 1, aP: s.aP + 1, a: s.a}) : A3(
-				$elm$parser$Parser$Advanced$Good,
-				true,
-				0,
-				{ah: s.ah + 1, c: s.c, e: s.e, b: newOffset, aP: s.aP, a: s.a}));
-		};
+		return $elm$parser$Parser$Advanced$Parser(
+			function (s) {
+				var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, s.offset, s.src);
+				return _Utils_eq(newOffset, -1) ? A2(
+					$elm$parser$Parser$Advanced$Bad,
+					false,
+					A2($elm$parser$Parser$Advanced$fromState, s, expecting)) : (_Utils_eq(newOffset, -2) ? A3(
+					$elm$parser$Parser$Advanced$Good,
+					true,
+					_Utils_Tuple0,
+					{col: 1, context: s.context, indent: s.indent, offset: s.offset + 1, row: s.row + 1, src: s.src}) : A3(
+					$elm$parser$Parser$Advanced$Good,
+					true,
+					_Utils_Tuple0,
+					{col: s.col + 1, context: s.context, indent: s.indent, offset: newOffset, row: s.row, src: s.src}));
+			});
 	});
 var $elm$parser$Parser$chompIf = function (isGood) {
 	return A2($elm$parser$Parser$Advanced$chompIf, isGood, $elm$parser$Parser$UnexpectedChar);
@@ -5817,24 +5832,25 @@ var $elm$core$Basics$composeR = F3(
 			f(x));
 	});
 var $justinmimbs$date$Date$deadEndToString = function (_v0) {
-	var problem = _v0.aE;
-	if (problem.$ === 12) {
+	var problem = _v0.problem;
+	if (problem.$ === 'Problem') {
 		var message = problem.a;
 		return message;
 	} else {
 		return 'Expected a date in ISO 8601 format';
 	}
 };
-var $elm$parser$Parser$ExpectingEnd = {$: 10};
+var $elm$parser$Parser$ExpectingEnd = {$: 'ExpectingEnd'};
 var $elm$parser$Parser$Advanced$end = function (x) {
-	return function (s) {
-		return _Utils_eq(
-			$elm$core$String$length(s.a),
-			s.b) ? A3($elm$parser$Parser$Advanced$Good, false, 0, s) : A2(
-			$elm$parser$Parser$Advanced$Bad,
-			false,
-			A2($elm$parser$Parser$Advanced$fromState, s, x));
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return _Utils_eq(
+				$elm$core$String$length(s.src),
+				s.offset) ? A3($elm$parser$Parser$Advanced$Good, false, _Utils_Tuple0, s) : A2(
+				$elm$parser$Parser$Advanced$Bad,
+				false,
+				A2($elm$parser$Parser$Advanced$fromState, s, x));
+		});
 };
 var $elm$parser$Parser$end = $elm$parser$Parser$Advanced$end($elm$parser$Parser$ExpectingEnd);
 var $elm$core$List$head = function (list) {
@@ -5848,35 +5864,36 @@ var $elm$core$List$head = function (list) {
 };
 var $elm$parser$Parser$Advanced$map2 = F3(
 	function (func, _v0, _v1) {
-		var parseA = _v0;
-		var parseB = _v1;
-		return function (s0) {
-			var _v2 = parseA(s0);
-			if (_v2.$ === 1) {
-				var p = _v2.a;
-				var x = _v2.b;
-				return A2($elm$parser$Parser$Advanced$Bad, p, x);
-			} else {
-				var p1 = _v2.a;
-				var a = _v2.b;
-				var s1 = _v2.c;
-				var _v3 = parseB(s1);
-				if (_v3.$ === 1) {
-					var p2 = _v3.a;
-					var x = _v3.b;
-					return A2($elm$parser$Parser$Advanced$Bad, p1 || p2, x);
+		var parseA = _v0.a;
+		var parseB = _v1.a;
+		return $elm$parser$Parser$Advanced$Parser(
+			function (s0) {
+				var _v2 = parseA(s0);
+				if (_v2.$ === 'Bad') {
+					var p = _v2.a;
+					var x = _v2.b;
+					return A2($elm$parser$Parser$Advanced$Bad, p, x);
 				} else {
-					var p2 = _v3.a;
-					var b = _v3.b;
-					var s2 = _v3.c;
-					return A3(
-						$elm$parser$Parser$Advanced$Good,
-						p1 || p2,
-						A2(func, a, b),
-						s2);
+					var p1 = _v2.a;
+					var a = _v2.b;
+					var s1 = _v2.c;
+					var _v3 = parseB(s1);
+					if (_v3.$ === 'Bad') {
+						var p2 = _v3.a;
+						var x = _v3.b;
+						return A2($elm$parser$Parser$Advanced$Bad, p1 || p2, x);
+					} else {
+						var p2 = _v3.a;
+						var b = _v3.b;
+						var s2 = _v3.c;
+						return A3(
+							$elm$parser$Parser$Advanced$Good,
+							p1 || p2,
+							A2(func, a, b),
+							s2);
+					}
 				}
-			}
-		};
+			});
 	});
 var $elm$parser$Parser$Advanced$ignorer = F2(
 	function (keepParser, ignoreParser) {
@@ -5890,7 +5907,7 @@ var $elm$parser$Parser$Advanced$keeper = F2(
 var $elm$parser$Parser$keeper = $elm$parser$Parser$Advanced$keeper;
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
-		if (!maybe.$) {
+		if (maybe.$ === 'Just') {
 			var value = maybe.a;
 			return $elm$core$Maybe$Just(
 				f(value));
@@ -5900,29 +5917,30 @@ var $elm$core$Maybe$map = F2(
 	});
 var $elm$parser$Parser$Advanced$map = F2(
 	function (func, _v0) {
-		var parse = _v0;
-		return function (s0) {
-			var _v1 = parse(s0);
-			if (!_v1.$) {
-				var p = _v1.a;
-				var a = _v1.b;
-				var s1 = _v1.c;
-				return A3(
-					$elm$parser$Parser$Advanced$Good,
-					p,
-					func(a),
-					s1);
-			} else {
-				var p = _v1.a;
-				var x = _v1.b;
-				return A2($elm$parser$Parser$Advanced$Bad, p, x);
-			}
-		};
+		var parse = _v0.a;
+		return $elm$parser$Parser$Advanced$Parser(
+			function (s0) {
+				var _v1 = parse(s0);
+				if (_v1.$ === 'Good') {
+					var p = _v1.a;
+					var a = _v1.b;
+					var s1 = _v1.c;
+					return A3(
+						$elm$parser$Parser$Advanced$Good,
+						p,
+						func(a),
+						s1);
+				} else {
+					var p = _v1.a;
+					var x = _v1.b;
+					return A2($elm$parser$Parser$Advanced$Bad, p, x);
+				}
+			});
 	});
 var $elm$parser$Parser$map = $elm$parser$Parser$Advanced$map;
 var $elm$core$Result$mapError = F2(
 	function (f, result) {
-		if (!result.$) {
+		if (result.$ === 'Ok') {
 			var v = result.a;
 			return $elm$core$Result$Ok(v);
 		} else {
@@ -5933,7 +5951,7 @@ var $elm$core$Result$mapError = F2(
 	});
 var $elm$parser$Parser$Advanced$Append = F2(
 	function (a, b) {
-		return {$: 2, a: a, b: b};
+		return {$: 'Append', a: a, b: b};
 	});
 var $elm$parser$Parser$Advanced$oneOfHelp = F3(
 	function (s0, bag, parsers) {
@@ -5942,10 +5960,10 @@ var $elm$parser$Parser$Advanced$oneOfHelp = F3(
 			if (!parsers.b) {
 				return A2($elm$parser$Parser$Advanced$Bad, false, bag);
 			} else {
-				var parse = parsers.a;
+				var parse = parsers.a.a;
 				var remainingParsers = parsers.b;
 				var _v1 = parse(s0);
-				if (!_v1.$) {
+				if (_v1.$ === 'Good') {
 					var step = _v1;
 					return step;
 				} else {
@@ -5968,71 +5986,75 @@ var $elm$parser$Parser$Advanced$oneOfHelp = F3(
 		}
 	});
 var $elm$parser$Parser$Advanced$oneOf = function (parsers) {
-	return function (s) {
-		return A3($elm$parser$Parser$Advanced$oneOfHelp, s, $elm$parser$Parser$Advanced$Empty, parsers);
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return A3($elm$parser$Parser$Advanced$oneOfHelp, s, $elm$parser$Parser$Advanced$Empty, parsers);
+		});
 };
 var $elm$parser$Parser$oneOf = $elm$parser$Parser$Advanced$oneOf;
 var $justinmimbs$date$Date$MonthAndDay = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'MonthAndDay', a: a, b: b};
 	});
 var $justinmimbs$date$Date$OrdinalDay = function (a) {
-	return {$: 2, a: a};
+	return {$: 'OrdinalDay', a: a};
 };
 var $justinmimbs$date$Date$WeekAndWeekday = F2(
 	function (a, b) {
-		return {$: 1, a: a, b: b};
+		return {$: 'WeekAndWeekday', a: a, b: b};
 	});
 var $elm$parser$Parser$Advanced$backtrackable = function (_v0) {
-	var parse = _v0;
-	return function (s0) {
-		var _v1 = parse(s0);
-		if (_v1.$ === 1) {
-			var x = _v1.b;
-			return A2($elm$parser$Parser$Advanced$Bad, false, x);
-		} else {
-			var a = _v1.b;
-			var s1 = _v1.c;
-			return A3($elm$parser$Parser$Advanced$Good, false, a, s1);
-		}
-	};
+	var parse = _v0.a;
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s0) {
+			var _v1 = parse(s0);
+			if (_v1.$ === 'Bad') {
+				var x = _v1.b;
+				return A2($elm$parser$Parser$Advanced$Bad, false, x);
+			} else {
+				var a = _v1.b;
+				var s1 = _v1.c;
+				return A3($elm$parser$Parser$Advanced$Good, false, a, s1);
+			}
+		});
 };
 var $elm$parser$Parser$backtrackable = $elm$parser$Parser$Advanced$backtrackable;
 var $elm$parser$Parser$Advanced$commit = function (a) {
-	return function (s) {
-		return A3($elm$parser$Parser$Advanced$Good, true, a, s);
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return A3($elm$parser$Parser$Advanced$Good, true, a, s);
+		});
 };
 var $elm$parser$Parser$commit = $elm$parser$Parser$Advanced$commit;
 var $elm$parser$Parser$Advanced$mapChompedString = F2(
 	function (func, _v0) {
-		var parse = _v0;
-		return function (s0) {
-			var _v1 = parse(s0);
-			if (_v1.$ === 1) {
-				var p = _v1.a;
-				var x = _v1.b;
-				return A2($elm$parser$Parser$Advanced$Bad, p, x);
-			} else {
-				var p = _v1.a;
-				var a = _v1.b;
-				var s1 = _v1.c;
-				return A3(
-					$elm$parser$Parser$Advanced$Good,
-					p,
-					A2(
-						func,
-						A3($elm$core$String$slice, s0.b, s1.b, s0.a),
-						a),
-					s1);
-			}
-		};
+		var parse = _v0.a;
+		return $elm$parser$Parser$Advanced$Parser(
+			function (s0) {
+				var _v1 = parse(s0);
+				if (_v1.$ === 'Bad') {
+					var p = _v1.a;
+					var x = _v1.b;
+					return A2($elm$parser$Parser$Advanced$Bad, p, x);
+				} else {
+					var p = _v1.a;
+					var a = _v1.b;
+					var s1 = _v1.c;
+					return A3(
+						$elm$parser$Parser$Advanced$Good,
+						p,
+						A2(
+							func,
+							A3($elm$core$String$slice, s0.offset, s1.offset, s0.src),
+							a),
+						s1);
+				}
+			});
 	});
 var $elm$parser$Parser$mapChompedString = $elm$parser$Parser$Advanced$mapChompedString;
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
-		if (!maybe.$) {
+		if (maybe.$ === 'Just') {
 			var value = maybe.a;
 			return value;
 		} else {
@@ -6050,9 +6072,10 @@ var $justinmimbs$date$Date$int1 = A2(
 		}),
 	$elm$parser$Parser$chompIf($elm$core$Char$isDigit));
 var $elm$parser$Parser$Advanced$succeed = function (a) {
-	return function (s) {
-		return A3($elm$parser$Parser$Advanced$Good, false, a, s);
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return A3($elm$parser$Parser$Advanced$Good, false, a, s);
+		});
 };
 var $elm$parser$Parser$succeed = $elm$parser$Parser$Advanced$succeed;
 var $justinmimbs$date$Date$int2 = A2(
@@ -6068,7 +6091,7 @@ var $justinmimbs$date$Date$int2 = A2(
 		$elm$parser$Parser$ignorer,
 		A2(
 			$elm$parser$Parser$ignorer,
-			$elm$parser$Parser$succeed(0),
+			$elm$parser$Parser$succeed(_Utils_Tuple0),
 			$elm$parser$Parser$chompIf($elm$core$Char$isDigit)),
 		$elm$parser$Parser$chompIf($elm$core$Char$isDigit)));
 var $justinmimbs$date$Date$int3 = A2(
@@ -6086,16 +6109,16 @@ var $justinmimbs$date$Date$int3 = A2(
 			$elm$parser$Parser$ignorer,
 			A2(
 				$elm$parser$Parser$ignorer,
-				$elm$parser$Parser$succeed(0),
+				$elm$parser$Parser$succeed(_Utils_Tuple0),
 				$elm$parser$Parser$chompIf($elm$core$Char$isDigit)),
 			$elm$parser$Parser$chompIf($elm$core$Char$isDigit)),
 		$elm$parser$Parser$chompIf($elm$core$Char$isDigit)));
 var $elm$parser$Parser$Expecting = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Expecting', a: a};
 };
 var $elm$parser$Parser$Advanced$Token = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'Token', a: a, b: b};
 	});
 var $elm$parser$Parser$toToken = function (str) {
 	return A2(
@@ -6109,20 +6132,21 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 	var str = _v0.a;
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(str);
-	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.b, s.aP, s.ah, s.a);
-		var newOffset = _v1.a;
-		var newRow = _v1.b;
-		var newCol = _v1.c;
-		return _Utils_eq(newOffset, -1) ? A2(
-			$elm$parser$Parser$Advanced$Bad,
-			false,
-			A2($elm$parser$Parser$Advanced$fromState, s, expecting)) : A3(
-			$elm$parser$Parser$Advanced$Good,
-			progress,
-			0,
-			{ah: newCol, c: s.c, e: s.e, b: newOffset, aP: newRow, a: s.a});
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.offset, s.row, s.col, s.src);
+			var newOffset = _v1.a;
+			var newRow = _v1.b;
+			var newCol = _v1.c;
+			return _Utils_eq(newOffset, -1) ? A2(
+				$elm$parser$Parser$Advanced$Bad,
+				false,
+				A2($elm$parser$Parser$Advanced$fromState, s, expecting)) : A3(
+				$elm$parser$Parser$Advanced$Good,
+				progress,
+				_Utils_Tuple0,
+				{col: newCol, context: s.context, indent: s.indent, offset: newOffset, row: newRow, src: s.src});
+		});
 };
 var $elm$parser$Parser$token = function (str) {
 	return $elm$parser$Parser$Advanced$token(
@@ -6224,43 +6248,43 @@ var $justinmimbs$date$Date$isBetweenInt = F3(
 	function (a, b, x) {
 		return (_Utils_cmp(a, x) < 1) && (_Utils_cmp(x, b) < 1);
 	});
-var $elm$time$Time$Apr = 3;
-var $elm$time$Time$Aug = 7;
-var $elm$time$Time$Dec = 11;
-var $elm$time$Time$Feb = 1;
-var $elm$time$Time$Jul = 6;
-var $elm$time$Time$Jun = 5;
-var $elm$time$Time$Mar = 2;
-var $elm$time$Time$May = 4;
-var $elm$time$Time$Oct = 9;
-var $elm$time$Time$Sep = 8;
+var $elm$time$Time$Apr = {$: 'Apr'};
+var $elm$time$Time$Aug = {$: 'Aug'};
+var $elm$time$Time$Dec = {$: 'Dec'};
+var $elm$time$Time$Feb = {$: 'Feb'};
+var $elm$time$Time$Jul = {$: 'Jul'};
+var $elm$time$Time$Jun = {$: 'Jun'};
+var $elm$time$Time$Mar = {$: 'Mar'};
+var $elm$time$Time$May = {$: 'May'};
+var $elm$time$Time$Oct = {$: 'Oct'};
+var $elm$time$Time$Sep = {$: 'Sep'};
 var $justinmimbs$date$Date$numberToMonth = function (mn) {
 	var _v0 = A2($elm$core$Basics$max, 1, mn);
 	switch (_v0) {
 		case 1:
-			return 0;
+			return $elm$time$Time$Jan;
 		case 2:
-			return 1;
+			return $elm$time$Time$Feb;
 		case 3:
-			return 2;
+			return $elm$time$Time$Mar;
 		case 4:
-			return 3;
+			return $elm$time$Time$Apr;
 		case 5:
-			return 4;
+			return $elm$time$Time$May;
 		case 6:
-			return 5;
+			return $elm$time$Time$Jun;
 		case 7:
-			return 6;
+			return $elm$time$Time$Jul;
 		case 8:
-			return 7;
+			return $elm$time$Time$Aug;
 		case 9:
-			return 8;
+			return $elm$time$Time$Sep;
 		case 10:
-			return 9;
+			return $elm$time$Time$Oct;
 		case 11:
-			return 10;
+			return $elm$time$Time$Nov;
 		default:
-			return 11;
+			return $elm$time$Time$Dec;
 	}
 };
 var $justinmimbs$date$Date$fromCalendarParts = F3(
@@ -6273,20 +6297,22 @@ var $justinmimbs$date$Date$fromCalendarParts = F3(
 				y,
 				$justinmimbs$date$Date$numberToMonth(mn)),
 			d)) ? $elm$core$Result$Ok(
-			($justinmimbs$date$Date$daysBeforeYear(y) + A2(
-				$justinmimbs$date$Date$daysBeforeMonth,
-				y,
-				$justinmimbs$date$Date$numberToMonth(mn))) + d) : $elm$core$Result$Err(
+			$justinmimbs$date$Date$RD(
+				($justinmimbs$date$Date$daysBeforeYear(y) + A2(
+					$justinmimbs$date$Date$daysBeforeMonth,
+					y,
+					$justinmimbs$date$Date$numberToMonth(mn))) + d)) : $elm$core$Result$Err(
 			'Invalid calendar date (' + ($elm$core$String$fromInt(y) + (', ' + ($elm$core$String$fromInt(mn) + (', ' + ($elm$core$String$fromInt(d) + ')'))))));
 	});
 var $justinmimbs$date$Date$fromOrdinalParts = F2(
 	function (y, od) {
 		return (A3($justinmimbs$date$Date$isBetweenInt, 1, 365, od) || ((od === 366) && $justinmimbs$date$Date$isLeapYear(y))) ? $elm$core$Result$Ok(
-			$justinmimbs$date$Date$daysBeforeYear(y) + od) : $elm$core$Result$Err(
+			$justinmimbs$date$Date$RD(
+				$justinmimbs$date$Date$daysBeforeYear(y) + od)) : $elm$core$Result$Err(
 			'Invalid ordinal date (' + ($elm$core$String$fromInt(y) + (', ' + ($elm$core$String$fromInt(od) + ')'))));
 	});
 var $justinmimbs$date$Date$weekdayNumber = function (_v0) {
-	var rd = _v0;
+	var rd = _v0.a;
 	var _v1 = A2($elm$core$Basics$modBy, 7, rd);
 	if (!_v1) {
 		return 7;
@@ -6297,10 +6323,12 @@ var $justinmimbs$date$Date$weekdayNumber = function (_v0) {
 };
 var $justinmimbs$date$Date$daysBeforeWeekYear = function (y) {
 	var jan4 = $justinmimbs$date$Date$daysBeforeYear(y) + 4;
-	return jan4 - $justinmimbs$date$Date$weekdayNumber(jan4);
+	return jan4 - $justinmimbs$date$Date$weekdayNumber(
+		$justinmimbs$date$Date$RD(jan4));
 };
 var $justinmimbs$date$Date$firstOfYear = function (y) {
-	return $justinmimbs$date$Date$daysBeforeYear(y) + 1;
+	return $justinmimbs$date$Date$RD(
+		$justinmimbs$date$Date$daysBeforeYear(y) + 1);
 };
 var $justinmimbs$date$Date$is53WeekYear = function (y) {
 	var wdnJan1 = $justinmimbs$date$Date$weekdayNumber(
@@ -6310,18 +6338,19 @@ var $justinmimbs$date$Date$is53WeekYear = function (y) {
 var $justinmimbs$date$Date$fromWeekParts = F3(
 	function (wy, wn, wdn) {
 		return (A3($justinmimbs$date$Date$isBetweenInt, 1, 7, wdn) && (A3($justinmimbs$date$Date$isBetweenInt, 1, 52, wn) || ((wn === 53) && $justinmimbs$date$Date$is53WeekYear(wy)))) ? $elm$core$Result$Ok(
-			($justinmimbs$date$Date$daysBeforeWeekYear(wy) + ((wn - 1) * 7)) + wdn) : $elm$core$Result$Err(
+			$justinmimbs$date$Date$RD(
+				($justinmimbs$date$Date$daysBeforeWeekYear(wy) + ((wn - 1) * 7)) + wdn)) : $elm$core$Result$Err(
 			'Invalid week date (' + ($elm$core$String$fromInt(wy) + (', ' + ($elm$core$String$fromInt(wn) + (', ' + ($elm$core$String$fromInt(wdn) + ')'))))));
 	});
 var $justinmimbs$date$Date$fromYearAndDayOfYear = function (_v0) {
 	var y = _v0.a;
 	var doy = _v0.b;
 	switch (doy.$) {
-		case 0:
+		case 'MonthAndDay':
 			var mn = doy.a;
 			var d = doy.b;
 			return A3($justinmimbs$date$Date$fromCalendarParts, y, mn, d);
-		case 1:
+		case 'WeekAndWeekday':
 			var wn = doy.a;
 			var wdn = doy.b;
 			return A3($justinmimbs$date$Date$fromWeekParts, y, wn, wdn);
@@ -6349,15 +6378,17 @@ var $justinmimbs$date$Date$int4 = A2(
 					$elm$parser$Parser$ignorer,
 					A2(
 						$elm$parser$Parser$ignorer,
-						$elm$parser$Parser$succeed(0),
+						$elm$parser$Parser$succeed(_Utils_Tuple0),
 						$elm$parser$Parser$oneOf(
 							_List_fromArray(
 								[
 									$elm$parser$Parser$chompIf(
 									function (c) {
-										return c === '-';
+										return _Utils_eq(
+											c,
+											_Utils_chr('-'));
 									}),
-									$elm$parser$Parser$succeed(0)
+									$elm$parser$Parser$succeed(_Utils_Tuple0)
 								]))),
 					$elm$parser$Parser$chompIf($elm$core$Char$isDigit)),
 				$elm$parser$Parser$chompIf($elm$core$Char$isDigit)),
@@ -6368,22 +6399,23 @@ var $elm$core$Tuple$pair = F2(
 		return _Utils_Tuple2(a, b);
 	});
 var $elm$parser$Parser$Problem = function (a) {
-	return {$: 12, a: a};
+	return {$: 'Problem', a: a};
 };
 var $elm$parser$Parser$Advanced$problem = function (x) {
-	return function (s) {
-		return A2(
-			$elm$parser$Parser$Advanced$Bad,
-			false,
-			A2($elm$parser$Parser$Advanced$fromState, s, x));
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return A2(
+				$elm$parser$Parser$Advanced$Bad,
+				false,
+				A2($elm$parser$Parser$Advanced$fromState, s, x));
+		});
 };
 var $elm$parser$Parser$problem = function (msg) {
 	return $elm$parser$Parser$Advanced$problem(
 		$elm$parser$Parser$Problem(msg));
 };
 var $justinmimbs$date$Date$resultToParser = function (result) {
-	if (!result.$) {
+	if (result.$ === 'Ok') {
 		var x = result.a;
 		return $elm$parser$Parser$succeed(x);
 	} else {
@@ -6403,19 +6435,19 @@ var $justinmimbs$date$Date$parser = A2(
 		$justinmimbs$date$Date$dayOfYear));
 var $elm$parser$Parser$DeadEnd = F3(
 	function (row, col, problem) {
-		return {ah: col, aE: problem, aP: row};
+		return {col: col, problem: problem, row: row};
 	});
 var $elm$parser$Parser$problemToDeadEnd = function (p) {
-	return A3($elm$parser$Parser$DeadEnd, p.aP, p.ah, p.aE);
+	return A3($elm$parser$Parser$DeadEnd, p.row, p.col, p.problem);
 };
 var $elm$parser$Parser$Advanced$bagToList = F2(
 	function (bag, list) {
 		bagToList:
 		while (true) {
 			switch (bag.$) {
-				case 0:
+				case 'Empty':
 					return list;
-				case 1:
+				case 'AddRight':
 					var bag1 = bag.a;
 					var x = bag.b;
 					var $temp$bag = bag1,
@@ -6436,10 +6468,10 @@ var $elm$parser$Parser$Advanced$bagToList = F2(
 	});
 var $elm$parser$Parser$Advanced$run = F2(
 	function (_v0, src) {
-		var parse = _v0;
+		var parse = _v0.a;
 		var _v1 = parse(
-			{ah: 1, c: _List_Nil, e: 1, b: 0, aP: 1, a: src});
-		if (!_v1.$) {
+			{col: 1, context: _List_Nil, indent: 1, offset: 0, row: 1, src: src});
+		if (_v1.$ === 'Good') {
 			var value = _v1.b;
 			return $elm$core$Result$Ok(value);
 		} else {
@@ -6451,7 +6483,7 @@ var $elm$parser$Parser$Advanced$run = F2(
 var $elm$parser$Parser$run = F2(
 	function (parser, source) {
 		var _v0 = A2($elm$parser$Parser$Advanced$run, parser, source);
-		if (!_v0.$) {
+		if (_v0.$ === 'Ok') {
 			var a = _v0.a;
 			return $elm$core$Result$Ok(a);
 		} else {
@@ -6481,7 +6513,8 @@ var $justinmimbs$date$Date$fromIsoString = A2(
 								$elm$core$Basics$always(
 									$elm$core$Result$Err('Expected a date only, not a date and time')),
 								$elm$parser$Parser$chompIf(
-									$elm$core$Basics$eq('T'))),
+									$elm$core$Basics$eq(
+										_Utils_chr('T')))),
 								$elm$parser$Parser$succeed(
 								$elm$core$Result$Err('Expected a date only'))
 							])))))),
@@ -6498,7 +6531,7 @@ var $elm$time$Time$flooredDiv = F2(
 		return $elm$core$Basics$floor(numerator / denominator);
 	});
 var $elm$time$Time$posixToMillis = function (_v0) {
-	var millis = _v0;
+	var millis = _v0.a;
 	return millis;
 };
 var $elm$time$Time$toAdjustedMinutesHelp = F3(
@@ -6510,8 +6543,8 @@ var $elm$time$Time$toAdjustedMinutesHelp = F3(
 			} else {
 				var era = eras.a;
 				var olderEras = eras.b;
-				if (_Utils_cmp(era._, posixMinutes) < 0) {
-					return posixMinutes + era.b;
+				if (_Utils_cmp(era.start, posixMinutes) < 0) {
+					return posixMinutes + era.offset;
 				} else {
 					var $temp$defaultOffset = defaultOffset,
 						$temp$posixMinutes = posixMinutes,
@@ -6548,51 +6581,51 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var month = mp + ((mp < 10) ? 3 : (-9));
 	var year = yearOfEra + (era * 400);
 	return {
-		ai: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		ay: month,
-		a5: year + ((month <= 2) ? 1 : 0)
+		day: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		month: month,
+		year: year + ((month <= 2) ? 1 : 0)
 	};
 };
 var $elm$time$Time$toDay = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).ai;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).day;
 	});
 var $elm$time$Time$toMonth = F2(
 	function (zone, time) {
 		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).ay;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).month;
 		switch (_v0) {
 			case 1:
-				return 0;
+				return $elm$time$Time$Jan;
 			case 2:
-				return 1;
+				return $elm$time$Time$Feb;
 			case 3:
-				return 2;
+				return $elm$time$Time$Mar;
 			case 4:
-				return 3;
+				return $elm$time$Time$Apr;
 			case 5:
-				return 4;
+				return $elm$time$Time$May;
 			case 6:
-				return 5;
+				return $elm$time$Time$Jun;
 			case 7:
-				return 6;
+				return $elm$time$Time$Jul;
 			case 8:
-				return 7;
+				return $elm$time$Time$Aug;
 			case 9:
-				return 8;
+				return $elm$time$Time$Sep;
 			case 10:
-				return 9;
+				return $elm$time$Time$Oct;
 			case 11:
-				return 10;
+				return $elm$time$Time$Nov;
 			default:
-				return 11;
+				return $elm$time$Time$Dec;
 		}
 	});
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a5;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).year;
 	});
 var $justinmimbs$date$Date$fromPosix = F2(
 	function (zone, posix) {
@@ -6603,37 +6636,39 @@ var $justinmimbs$date$Date$fromPosix = F2(
 			A2($elm$time$Time$toDay, zone, posix));
 	});
 var $author$project$Model$GotZone = function (a) {
-	return {$: 11, a: a};
+	return {$: 'GotZone', a: a};
 };
-var $elm$time$Time$here = _Time_here(0);
+var $elm$time$Time$here = _Time_here(_Utils_Tuple0);
 var $author$project$Main$getZone = A2($elm$core$Task$perform, $author$project$Model$GotZone, $elm$time$Time$here);
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Positions$positionFromString = function (s) {
 	switch (s) {
 		case 'Medium Forward':
-			return 1;
+			return $author$project$Positions$MediumForward;
 		case 'Key Forward':
-			return 2;
+			return $author$project$Positions$KeyForward;
 		case 'Ruckman':
-			return 3;
+			return $author$project$Positions$Ruckman;
 		case 'Rover/Onballer':
-			return 4;
+			return $author$project$Positions$RoverOnballer;
 		case 'Winger':
-			return 5;
+			return $author$project$Positions$Winger;
 		case 'Small Defender':
-			return 6;
+			return $author$project$Positions$SmallDefender;
 		case 'Medium Defender':
-			return 7;
+			return $author$project$Positions$MediumDefender;
 		case 'Key Defender':
-			return 8;
+			return $author$project$Positions$KeyDefender;
 		default:
-			return 0;
+			return $author$project$Positions$SmallForward;
 	}
 };
-var $elm$random$Random$Generate = $elm$core$Basics$identity;
+var $elm$random$Random$Generate = function (a) {
+	return {$: 'Generate', a: a};
+};
 var $elm$random$Random$Seed = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'Seed', a: a, b: b};
 	});
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$random$Random$next = function (_v0) {
@@ -6660,7 +6695,7 @@ var $elm$random$Random$init = A2(
 	$elm$time$Time$now);
 var $elm$random$Random$step = F2(
 	function (_v0, seed) {
-		var generator = _v0;
+		var generator = _v0.a;
 		return generator(seed);
 	});
 var $elm$random$Random$onEffects = F3(
@@ -6668,7 +6703,7 @@ var $elm$random$Random$onEffects = F3(
 		if (!commands.b) {
 			return $elm$core$Task$succeed(seed);
 		} else {
-			var generator = commands.a;
+			var generator = commands.a.a;
 			var rest = commands.b;
 			var _v1 = A2($elm$random$Random$step, generator, seed);
 			var value = _v1.a;
@@ -6685,30 +6720,35 @@ var $elm$random$Random$onSelfMsg = F3(
 	function (_v0, _v1, seed) {
 		return $elm$core$Task$succeed(seed);
 	});
-var $elm$random$Random$Generator = $elm$core$Basics$identity;
+var $elm$random$Random$Generator = function (a) {
+	return {$: 'Generator', a: a};
+};
 var $elm$random$Random$map = F2(
 	function (func, _v0) {
-		var genA = _v0;
-		return function (seed0) {
-			var _v1 = genA(seed0);
-			var a = _v1.a;
-			var seed1 = _v1.b;
-			return _Utils_Tuple2(
-				func(a),
-				seed1);
-		};
+		var genA = _v0.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v1 = genA(seed0);
+				var a = _v1.a;
+				var seed1 = _v1.b;
+				return _Utils_Tuple2(
+					func(a),
+					seed1);
+			});
 	});
 var $elm$random$Random$cmdMap = F2(
 	function (func, _v0) {
-		var generator = _v0;
-		return A2($elm$random$Random$map, func, generator);
+		var generator = _v0.a;
+		return $elm$random$Random$Generate(
+			A2($elm$random$Random$map, func, generator));
 	});
 _Platform_effectManagers['Random'] = _Platform_createManager($elm$random$Random$init, $elm$random$Random$onEffects, $elm$random$Random$onSelfMsg, $elm$random$Random$cmdMap);
 var $elm$random$Random$command = _Platform_leaf('Random');
 var $elm$random$Random$generate = F2(
 	function (tagger, generator) {
 		return $elm$random$Random$command(
-			A2($elm$random$Random$map, tagger, generator));
+			$elm$random$Random$Generate(
+				A2($elm$random$Random$map, tagger, generator)));
 	});
 var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$xor = _Bitwise_xor;
@@ -6719,34 +6759,35 @@ var $elm$random$Random$peel = function (_v0) {
 };
 var $elm$random$Random$int = F2(
 	function (a, b) {
-		return function (seed0) {
-			var _v0 = (_Utils_cmp(a, b) < 0) ? _Utils_Tuple2(a, b) : _Utils_Tuple2(b, a);
-			var lo = _v0.a;
-			var hi = _v0.b;
-			var range = (hi - lo) + 1;
-			if (!((range - 1) & range)) {
-				return _Utils_Tuple2(
-					(((range - 1) & $elm$random$Random$peel(seed0)) >>> 0) + lo,
-					$elm$random$Random$next(seed0));
-			} else {
-				var threshhold = (((-range) >>> 0) % range) >>> 0;
-				var accountForBias = function (seed) {
-					accountForBias:
-					while (true) {
-						var x = $elm$random$Random$peel(seed);
-						var seedN = $elm$random$Random$next(seed);
-						if (_Utils_cmp(x, threshhold) < 0) {
-							var $temp$seed = seedN;
-							seed = $temp$seed;
-							continue accountForBias;
-						} else {
-							return _Utils_Tuple2((x % range) + lo, seedN);
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v0 = (_Utils_cmp(a, b) < 0) ? _Utils_Tuple2(a, b) : _Utils_Tuple2(b, a);
+				var lo = _v0.a;
+				var hi = _v0.b;
+				var range = (hi - lo) + 1;
+				if (!((range - 1) & range)) {
+					return _Utils_Tuple2(
+						(((range - 1) & $elm$random$Random$peel(seed0)) >>> 0) + lo,
+						$elm$random$Random$next(seed0));
+				} else {
+					var threshhold = (((-range) >>> 0) % range) >>> 0;
+					var accountForBias = function (seed) {
+						accountForBias:
+						while (true) {
+							var x = $elm$random$Random$peel(seed);
+							var seedN = $elm$random$Random$next(seed);
+							if (_Utils_cmp(x, threshhold) < 0) {
+								var $temp$seed = seedN;
+								seed = $temp$seed;
+								continue accountForBias;
+							} else {
+								return _Utils_Tuple2((x % range) + lo, seedN);
+							}
 						}
-					}
-				};
-				return accountForBias(seed0);
-			}
-		};
+					};
+					return accountForBias(seed0);
+				}
+			});
 	});
 var $author$project$Main$randomInt = F3(
 	function (msg, i1, i2) {
@@ -6756,7 +6797,7 @@ var $author$project$Main$randomInt = F3(
 			A2($elm$random$Random$int, i1, i2));
 	});
 var $author$project$Model$ShuffledLocalTeams = function (a) {
-	return {$: 4, a: a};
+	return {$: 'ShuffledLocalTeams', a: a};
 };
 var $author$project$LocalTeams$originToLocalTeams = function (origin) {
 	switch (origin) {
@@ -6880,37 +6921,39 @@ var $elm$random$Random$minInt = -2147483648;
 var $elm_community$random_extra$Random$List$anyInt = A2($elm$random$Random$int, $elm$random$Random$minInt, $elm$random$Random$maxInt);
 var $elm$random$Random$map3 = F4(
 	function (func, _v0, _v1, _v2) {
-		var genA = _v0;
-		var genB = _v1;
-		var genC = _v2;
-		return function (seed0) {
-			var _v3 = genA(seed0);
-			var a = _v3.a;
-			var seed1 = _v3.b;
-			var _v4 = genB(seed1);
-			var b = _v4.a;
-			var seed2 = _v4.b;
-			var _v5 = genC(seed2);
-			var c = _v5.a;
-			var seed3 = _v5.b;
-			return _Utils_Tuple2(
-				A3(func, a, b, c),
-				seed3);
-		};
+		var genA = _v0.a;
+		var genB = _v1.a;
+		var genC = _v2.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v3 = genA(seed0);
+				var a = _v3.a;
+				var seed1 = _v3.b;
+				var _v4 = genB(seed1);
+				var b = _v4.a;
+				var seed2 = _v4.b;
+				var _v5 = genC(seed2);
+				var c = _v5.a;
+				var seed3 = _v5.b;
+				return _Utils_Tuple2(
+					A3(func, a, b, c),
+					seed3);
+			});
 	});
 var $elm$core$Bitwise$or = _Bitwise_or;
-var $elm$random$Random$independentSeed = function (seed0) {
-	var makeIndependentSeed = F3(
-		function (state, b, c) {
-			return $elm$random$Random$next(
-				A2($elm$random$Random$Seed, state, (1 | (b ^ c)) >>> 0));
-		});
-	var gen = A2($elm$random$Random$int, 0, 4294967295);
-	return A2(
-		$elm$random$Random$step,
-		A4($elm$random$Random$map3, makeIndependentSeed, gen, gen, gen),
-		seed0);
-};
+var $elm$random$Random$independentSeed = $elm$random$Random$Generator(
+	function (seed0) {
+		var makeIndependentSeed = F3(
+			function (state, b, c) {
+				return $elm$random$Random$next(
+					A2($elm$random$Random$Seed, state, (1 | (b ^ c)) >>> 0));
+			});
+		var gen = A2($elm$random$Random$int, 0, 4294967295);
+		return A2(
+			$elm$random$Random$step,
+			A4($elm$random$Random$map3, makeIndependentSeed, gen, gen, gen),
+			seed0);
+	});
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
@@ -6952,7 +6995,7 @@ var $author$project$StateDraft$randomiseLocalTeams = function (model) {
 		$elm$random$Random$generate,
 		$author$project$Model$ShuffledLocalTeams,
 		$elm_community$random_extra$Random$List$shuffle(
-			$author$project$LocalTeams$originToLocalTeams(model.d.bA)));
+			$author$project$LocalTeams$originToLocalTeams(model.player.origin)));
 };
 var $elm$core$List$takeReverse = F3(
 	function (n, list, kept) {
@@ -7082,7 +7125,7 @@ var $elm$core$List$take = F2(
 	});
 var $elm$core$Result$withDefault = F2(
 	function (def, result) {
-		if (!result.$) {
+		if (result.$ === 'Ok') {
 			var a = result.a;
 			return a;
 		} else {
@@ -7096,7 +7139,7 @@ var $justinmimbs$date$Date$divWithRemainder = F2(
 			A2($elm$core$Basics$modBy, b, a));
 	});
 var $justinmimbs$date$Date$year = function (_v0) {
-	var rd = _v0;
+	var rd = _v0.a;
 	var _v1 = A2($justinmimbs$date$Date$divWithRemainder, rd, 146097);
 	var n400 = _v1.a;
 	var r400 = _v1.b;
@@ -7115,34 +7158,34 @@ var $justinmimbs$date$Date$year = function (_v0) {
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
-			case 0:
+			case 'NoOp':
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			case 5:
+			case 'Rand10Int':
 				var _int = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aJ: _int}),
+						{rand_1_10: _int}),
 					$elm$core$Platform$Cmd$none);
-			case 6:
+			case 'Rand100Int':
 				var _int = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aK: _int}),
+						{rand_1_100: _int}),
 					$elm$core$Platform$Cmd$none);
-			case 7:
+			case 'Rand1000Int':
 				var _int = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aK: _int}),
+						{rand_1_100: _int}),
 					$elm$core$Platform$Cmd$none);
-			case 3:
+			case 'ShuffleLocalTeams':
 				return _Utils_Tuple2(
 					model,
 					$author$project$StateDraft$randomiseLocalTeams(model));
-			case 4:
+			case 'ShuffledLocalTeams':
 				var shuffle = msg.a;
 				var t = A2(
 					$elm$core$Maybe$withDefault,
@@ -7153,14 +7196,14 @@ var $author$project$Main$update = F2(
 								$elm$core$List$take,
 								2,
 								A2($elm$core$List$take, 3, shuffle)))));
-				var s = model.K;
-				var count = model.aS + 1;
-				var _v1 = (count >= 20) ? (((!_Utils_eq(t, model.d.T)) && (model.aJ >= 4)) ? _Utils_Tuple2(
-					model.K.Q,
-					A2($author$project$Main$delay, 1000, $author$project$Model$ShuffleLocalTeams)) : (_Utils_eq(t, model.d.T) ? _Utils_Tuple2(t, $elm$core$Platform$Cmd$none) : _Utils_Tuple2(t, $elm$core$Platform$Cmd$none))) : ((count >= 10) ? _Utils_Tuple2(
-					model.K.Q,
+				var s = model.status;
+				var count = model.shuffle_count + 1;
+				var _v1 = (count >= 20) ? (((!_Utils_eq(t, model.player.local_team)) && (model.rand_1_10 >= 4)) ? _Utils_Tuple2(
+					model.status.state_team,
+					A2($author$project$Main$delay, 1000, $author$project$Model$ShuffleLocalTeams)) : (_Utils_eq(t, model.player.local_team) ? _Utils_Tuple2(t, $elm$core$Platform$Cmd$none) : _Utils_Tuple2(t, $elm$core$Platform$Cmd$none))) : ((count >= 10) ? _Utils_Tuple2(
+					model.status.state_team,
 					A2($author$project$Main$delay, 100 * (count - 10), $author$project$Model$ShuffleLocalTeams)) : _Utils_Tuple2(
-					model.K.Q,
+					model.status.state_team,
 					A2($author$project$Main$delay, 100, $author$project$Model$ShuffleLocalTeams)));
 				var team = _v1.a;
 				var cmd = _v1.b;
@@ -7168,11 +7211,11 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							bF: shuffle,
-							aS: count,
-							K: _Utils_update(
+							shuffle: shuffle,
+							shuffle_count: count,
+							status: _Utils_update(
 								s,
-								{Q: team})
+								{state_team: team})
 						}),
 					$elm$core$Platform$Cmd$batch(
 						_List_fromArray(
@@ -7182,58 +7225,58 @@ var $author$project$Main$update = F2(
 								A3($author$project$Main$randomInt, $author$project$Model$Rand100Int, 1, 100),
 								A3($author$project$Main$randomInt, $author$project$Model$Rand1000Int, 1, 1000)
 							])));
-			case 10:
+			case 'GotTime':
 				var t = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aX: t}),
+						{today: t}),
 					$author$project$Main$getZone);
-			case 11:
+			case 'GotZone':
 				var z = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							R: A2($justinmimbs$date$Date$fromPosix, z, model.aX),
-							bS: z
+							current_date: A2($justinmimbs$date$Date$fromPosix, z, model.today),
+							zone: z
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 8:
+			case 'Reset':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							d: A2(
+							player: A2(
 								$author$project$Positions$positionToDefPlayerStats,
-								model.d,
-								$author$project$Positions$positionFromString(model.d.bD))
+								model.player,
+								$author$project$Positions$positionFromString(model.player.position))
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 9:
+			case 'SaveStats':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							R: A3(
+							current_date: A3(
 								$justinmimbs$date$Date$fromCalendarDate,
-								$justinmimbs$date$Date$year(model.R),
-								10,
+								$justinmimbs$date$Date$year(model.current_date),
+								$elm$time$Time$Nov,
 								1),
-							bM: 'show',
-							ab: 1
+							transition: 'show',
+							view: $author$project$Model$Draft
 						}),
 					$author$project$StateDraft$randomiseLocalTeams(model));
-			case 2:
+			case 'ChangePlayerPerk':
 				var perk = msg.a;
-				var p = model.d;
+				var p = model.player;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							d: _Utils_update(
+							player: _Utils_update(
 								p,
-								{bB: perk})
+								{perk: perk})
 						}),
 					$elm$core$Platform$Cmd$none);
 			default:
@@ -7243,192 +7286,192 @@ var $author$project$Main$update = F2(
 					$elm$core$Maybe$withDefault,
 					0,
 					$elm$core$String$toInt(v));
-				var p = model.d;
-				switch (stat) {
-					case 0:
+				var p = model.player;
+				switch (stat.$) {
+					case 'Speed':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bG: val})
+										{speed: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 1:
+					case 'Marking':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{br: val})
+										{marking: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 2:
+					case 'Kicking':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bp: val})
+										{kicking: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 3:
+					case 'Handballing':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bh: val})
+										{handballing: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 4:
+					case 'Tapwork':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bK: val})
+										{tapwork: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 5:
+					case 'Leading':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bq: val})
+										{leading: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 6:
+					case 'Spoiling':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bH: val})
+										{spoiling: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 7:
+					case 'XFactor':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bR: val})
+										{x_factor: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 8:
+					case 'GoalSense':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bg: val})
+										{goal_sense: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 9:
+					case 'DOB':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
 										{
-											bc: A2(
+											dob: A2(
 												$elm$core$Result$withDefault,
-												A3($justinmimbs$date$Date$fromCalendarDate, 2003, 0, 1),
+												A3($justinmimbs$date$Date$fromCalendarDate, 2003, $elm$time$Time$Jan, 1),
 												$justinmimbs$date$Date$fromIsoString(v))
 										})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 10:
+					case 'Position':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: A2(
+									player: A2(
 										$author$project$Positions$positionToDefPlayerStats,
-										model.d,
+										model.player,
 										$author$project$Positions$positionFromString(v))
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 11:
+					case 'Height':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bi: val})
+										{height: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 12:
+					case 'Weight':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bP: val})
+										{weight: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 13:
+					case 'Personality':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bC: val})
+										{personality: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 14:
+					case 'Mood':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bt: val})
+										{mood: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 15:
+					case 'Injury':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bn: val})
+										{injury: val})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 16:
+					case 'Origin':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{bA: v})
+										{origin: v})
 								}),
 							$elm$core$Platform$Cmd$none);
-					case 17:
+					case 'LocalTeam':
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{T: v})
+										{local_team: v})
 								}),
 							$elm$core$Platform$Cmd$none);
 					default:
@@ -7436,72 +7479,72 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									d: _Utils_update(
+									player: _Utils_update(
 										p,
-										{a6: v})
+										{afl_team: v})
 								}),
 							$elm$core$Platform$Cmd$none);
 				}
 		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Player$AFLTeam = 18;
+var $author$project$Player$AFLTeam = {$: 'AFLTeam'};
 var $author$project$Model$ChangePlayerPerk = function (a) {
-	return {$: 2, a: a};
+	return {$: 'ChangePlayerPerk', a: a};
 };
 var $author$project$Model$ChangePlayerStat = F2(
 	function (a, b) {
-		return {$: 1, a: a, b: b};
+		return {$: 'ChangePlayerStat', a: a, b: b};
 	});
-var $author$project$Player$DOB = 9;
-var $author$project$Player$GoalSense = 8;
-var $author$project$Player$Handballing = 3;
-var $author$project$Player$Height = 11;
-var $author$project$Player$Injury = 15;
-var $author$project$Player$Kicking = 2;
-var $author$project$Player$Leading = 5;
-var $author$project$Player$LocalTeam = 17;
-var $author$project$Player$Marking = 1;
-var $author$project$Player$Mood = 14;
-var $author$project$Player$Origin = 16;
-var $author$project$Player$Personality = 13;
-var $author$project$Player$Position = 10;
-var $author$project$Model$SaveStats = {$: 9};
-var $author$project$Player$Speed = 0;
-var $author$project$Player$Spoiling = 6;
-var $author$project$Player$Tapwork = 4;
-var $author$project$Player$Weight = 12;
-var $author$project$Player$XFactor = 7;
-var $justinmimbs$date$Date$Years = 0;
+var $author$project$Player$DOB = {$: 'DOB'};
+var $author$project$Player$GoalSense = {$: 'GoalSense'};
+var $author$project$Player$Handballing = {$: 'Handballing'};
+var $author$project$Player$Height = {$: 'Height'};
+var $author$project$Player$Injury = {$: 'Injury'};
+var $author$project$Player$Kicking = {$: 'Kicking'};
+var $author$project$Player$Leading = {$: 'Leading'};
+var $author$project$Player$LocalTeam = {$: 'LocalTeam'};
+var $author$project$Player$Marking = {$: 'Marking'};
+var $author$project$Player$Mood = {$: 'Mood'};
+var $author$project$Player$Origin = {$: 'Origin'};
+var $author$project$Player$Personality = {$: 'Personality'};
+var $author$project$Player$Position = {$: 'Position'};
+var $author$project$Model$SaveStats = {$: 'SaveStats'};
+var $author$project$Player$Speed = {$: 'Speed'};
+var $author$project$Player$Spoiling = {$: 'Spoiling'};
+var $author$project$Player$Tapwork = {$: 'Tapwork'};
+var $author$project$Player$Weight = {$: 'Weight'};
+var $author$project$Player$XFactor = {$: 'XFactor'};
+var $justinmimbs$date$Date$Years = {$: 'Years'};
 var $elm$html$Html$a = _VirtualDom_node('a');
-var $justinmimbs$date$Date$Months = 1;
+var $justinmimbs$date$Date$Months = {$: 'Months'};
 var $elm$core$Basics$min = F2(
 	function (x, y) {
 		return (_Utils_cmp(x, y) < 0) ? x : y;
 	});
 var $justinmimbs$date$Date$monthToNumber = function (m) {
-	switch (m) {
-		case 0:
+	switch (m.$) {
+		case 'Jan':
 			return 1;
-		case 1:
+		case 'Feb':
 			return 2;
-		case 2:
+		case 'Mar':
 			return 3;
-		case 3:
+		case 'Apr':
 			return 4;
-		case 4:
+		case 'May':
 			return 5;
-		case 5:
+		case 'Jun':
 			return 6;
-		case 6:
+		case 'Jul':
 			return 7;
-		case 7:
+		case 'Aug':
 			return 8;
-		case 8:
+		case 'Sep':
 			return 9;
-		case 9:
+		case 'Oct':
 			return 10;
-		case 10:
+		case 'Nov':
 			return 11;
 		default:
 			return 12;
@@ -7522,43 +7565,51 @@ var $justinmimbs$date$Date$toCalendarDateHelp = F3(
 				d = $temp$d;
 				continue toCalendarDateHelp;
 			} else {
-				return {ai: d, ay: m, a5: y};
+				return {day: d, month: m, year: y};
 			}
 		}
 	});
 var $justinmimbs$date$Date$toOrdinalDate = function (_v0) {
-	var rd = _v0;
-	var y = $justinmimbs$date$Date$year(rd);
+	var rd = _v0.a;
+	var y = $justinmimbs$date$Date$year(
+		$justinmimbs$date$Date$RD(rd));
 	return {
-		X: rd - $justinmimbs$date$Date$daysBeforeYear(y),
-		a5: y
+		ordinalDay: rd - $justinmimbs$date$Date$daysBeforeYear(y),
+		year: y
 	};
 };
 var $justinmimbs$date$Date$toCalendarDate = function (_v0) {
-	var rd = _v0;
-	var date = $justinmimbs$date$Date$toOrdinalDate(rd);
-	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.a5, 0, date.X);
+	var rd = _v0.a;
+	var date = $justinmimbs$date$Date$toOrdinalDate(
+		$justinmimbs$date$Date$RD(rd));
+	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.year, $elm$time$Time$Jan, date.ordinalDay);
 };
 var $justinmimbs$date$Date$add = F3(
 	function (unit, n, _v0) {
-		var rd = _v0;
-		switch (unit) {
-			case 0:
-				return A3($justinmimbs$date$Date$add, 1, 12 * n, rd);
-			case 1:
-				var date = $justinmimbs$date$Date$toCalendarDate(rd);
-				var wholeMonths = ((12 * (date.a5 - 1)) + ($justinmimbs$date$Date$monthToNumber(date.ay) - 1)) + n;
+		var rd = _v0.a;
+		switch (unit.$) {
+			case 'Years':
+				return A3(
+					$justinmimbs$date$Date$add,
+					$justinmimbs$date$Date$Months,
+					12 * n,
+					$justinmimbs$date$Date$RD(rd));
+			case 'Months':
+				var date = $justinmimbs$date$Date$toCalendarDate(
+					$justinmimbs$date$Date$RD(rd));
+				var wholeMonths = ((12 * (date.year - 1)) + ($justinmimbs$date$Date$monthToNumber(date.month) - 1)) + n;
 				var m = $justinmimbs$date$Date$numberToMonth(
 					A2($elm$core$Basics$modBy, 12, wholeMonths) + 1);
 				var y = A2($justinmimbs$date$Date$floorDiv, wholeMonths, 12) + 1;
-				return ($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A2(
-					$elm$core$Basics$min,
-					date.ai,
-					A2($justinmimbs$date$Date$daysInMonth, y, m));
-			case 2:
-				return rd + (7 * n);
+				return $justinmimbs$date$Date$RD(
+					($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A2(
+						$elm$core$Basics$min,
+						date.day,
+						A2($justinmimbs$date$Date$daysInMonth, y, m)));
+			case 'Weeks':
+				return $justinmimbs$date$Date$RD(rd + (7 * n));
 			default:
-				return rd + n;
+				return $justinmimbs$date$Date$RD(rd + n);
 		}
 	});
 var $elm$html$Html$br = _VirtualDom_node('br');
@@ -7585,7 +7636,7 @@ var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
 var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 1, a: a};
+	return {$: 'MayStopPropagation', a: a};
 };
 var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$stopPropagationOn = F2(
@@ -7654,7 +7705,7 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 0, a: a};
+	return {$: 'Normal', a: a};
 };
 var $elm$html$Html$Events$on = F2(
 	function (event, decoder) {
@@ -7713,12 +7764,12 @@ var $author$project$PlayersLike$playerLike = function (p) {
 			function (_v1) {
 				var h = _v1.a;
 				var w = _v1.b;
-				return ((_Utils_cmp(h, p.bi + 5) < 1) && (_Utils_cmp(h, p.bi - 5) > -1)) && ((_Utils_cmp(w, p.bP + 5) < 1) && (_Utils_cmp(w, p.bP - 5) > -1));
+				return ((_Utils_cmp(h, p.height + 5) < 1) && (_Utils_cmp(h, p.height - 5) > -1)) && ((_Utils_cmp(w, p.weight + 5) < 1) && (_Utils_cmp(w, p.weight - 5) > -1));
 			},
 			function () {
-				var _v2 = $author$project$Positions$positionFromString(p.bD);
-				switch (_v2) {
-					case 0:
+				var _v2 = $author$project$Positions$positionFromString(p.position);
+				switch (_v2.$) {
+					case 'SmallForward':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(174, 80, 'Jeff Farmer'),
@@ -7738,7 +7789,7 @@ var $author$project$PlayersLike$playerLike = function (p) {
 								_Utils_Tuple3(170, 67, 'Kysaiah Pickett'),
 								_Utils_Tuple3(171, 77, 'Anthony McDonald-Tipungwuti')
 							]);
-					case 1:
+					case 'MediumForward':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(182, 87, 'Brad Johnson'),
@@ -7756,7 +7807,7 @@ var $author$project$PlayersLike$playerLike = function (p) {
 								_Utils_Tuple3(183, 80, 'Geoff Blethyn'),
 								_Utils_Tuple3(182, 84, 'Alex Jesaulenko')
 							]);
-					case 2:
+					case 'KeyForward':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(188, 92, 'Peter Hudson'),
@@ -7788,7 +7839,7 @@ var $author$project$PlayersLike$playerLike = function (p) {
 								_Utils_Tuple3(194, 96, 'Warren Tredrea'),
 								_Utils_Tuple3(192, 99, 'Matthew Pavlich')
 							]);
-					case 3:
+					case 'Ruckman':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(189, 94, 'Sam Newman'),
@@ -7815,7 +7866,7 @@ var $author$project$PlayersLike$playerLike = function (p) {
 								_Utils_Tuple3(201, 110, 'Nic Naitanui'),
 								_Utils_Tuple3(208, 108, 'Max Gawn')
 							]);
-					case 4:
+					case 'RoverOnballer':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(179, 73, 'Haydn Bunton Sr'),
@@ -7865,14 +7916,14 @@ var $author$project$PlayersLike$playerLike = function (p) {
 								_Utils_Tuple3(185, 86, 'Trent Cotchin'),
 								_Utils_Tuple3(189, 95, 'Josh P Kennedy')
 							]);
-					case 5:
+					case 'Winger':
 						return _List_Nil;
-					case 6:
+					case 'SmallDefender':
 						return _List_fromArray(
 							[
 								_Utils_Tuple3(168, 72, 'Caleb Daniel')
 							]);
-					case 7:
+					case 'MediumDefender':
 						return _List_Nil;
 					default:
 						return _List_Nil;
@@ -7880,50 +7931,50 @@ var $author$project$PlayersLike$playerLike = function (p) {
 			}()));
 };
 var $author$project$Positions$positionToHeightMinMax = function (p) {
-	switch (p) {
-		case 0:
+	switch (p.$) {
+		case 'SmallForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('165'),
 					$elm$html$Html$Attributes$max('175')
 				]);
-		case 1:
+		case 'MediumForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('175'),
 					$elm$html$Html$Attributes$max('190')
 				]);
-		case 2:
+		case 'KeyForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('180'),
 					$elm$html$Html$Attributes$max('205')
 				]);
-		case 3:
+		case 'Ruckman':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('185'),
 					$elm$html$Html$Attributes$max('215')
 				]);
-		case 4:
+		case 'RoverOnballer':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('165'),
 					$elm$html$Html$Attributes$max('200')
 				]);
-		case 5:
+		case 'Winger':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('170'),
 					$elm$html$Html$Attributes$max('200')
 				]);
-		case 6:
+		case 'SmallDefender':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('165'),
 					$elm$html$Html$Attributes$max('175')
 				]);
-		case 7:
+		case 'MediumDefender':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('175'),
@@ -7938,50 +7989,50 @@ var $author$project$Positions$positionToHeightMinMax = function (p) {
 	}
 };
 var $author$project$Positions$positionToWeightMinMax = function (p) {
-	switch (p) {
-		case 0:
+	switch (p.$) {
+		case 'SmallForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('70'),
 					$elm$html$Html$Attributes$max('85')
 				]);
-		case 1:
+		case 'MediumForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('80'),
 					$elm$html$Html$Attributes$max('95')
 				]);
-		case 2:
+		case 'KeyForward':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('75'),
 					$elm$html$Html$Attributes$max('125')
 				]);
-		case 3:
+		case 'Ruckman':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('75'),
 					$elm$html$Html$Attributes$max('125')
 				]);
-		case 4:
+		case 'RoverOnballer':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('70'),
 					$elm$html$Html$Attributes$max('90')
 				]);
-		case 5:
+		case 'Winger':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('70'),
 					$elm$html$Html$Attributes$max('90')
 				]);
-		case 6:
+		case 'SmallDefender':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('70'),
 					$elm$html$Html$Attributes$max('85')
 				]);
-		case 7:
+		case 'MediumDefender':
 			return _List_fromArray(
 				[
 					$elm$html$Html$Attributes$min('80'),
@@ -8012,20 +8063,20 @@ var $justinmimbs$date$Date$day = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toCalendarDate,
 	function ($) {
-		return $.ai;
+		return $.day;
 	});
 var $justinmimbs$date$Date$month = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toCalendarDate,
 	function ($) {
-		return $.ay;
+		return $.month;
 	});
 var $justinmimbs$date$Date$monthNumber = A2($elm$core$Basics$composeR, $justinmimbs$date$Date$month, $justinmimbs$date$Date$monthToNumber);
 var $justinmimbs$date$Date$ordinalDay = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toOrdinalDate,
 	function ($) {
-		return $.X;
+		return $.ordinalDay;
 	});
 var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
@@ -8063,7 +8114,7 @@ var $justinmimbs$date$Date$padSignedInt = F2(
 			A3(
 				$elm$core$String$padLeft,
 				length,
-				'0',
+				_Utils_chr('0'),
 				$elm$core$String$fromInt(
 					$elm$core$Basics$abs(_int))));
 	});
@@ -8079,54 +8130,56 @@ var $elm$core$String$right = F2(
 			$elm$core$String$length(string),
 			string);
 	});
-var $elm$time$Time$Fri = 4;
-var $elm$time$Time$Mon = 0;
-var $elm$time$Time$Sat = 5;
-var $elm$time$Time$Sun = 6;
-var $elm$time$Time$Thu = 3;
-var $elm$time$Time$Tue = 1;
-var $elm$time$Time$Wed = 2;
+var $elm$time$Time$Fri = {$: 'Fri'};
+var $elm$time$Time$Mon = {$: 'Mon'};
+var $elm$time$Time$Sat = {$: 'Sat'};
+var $elm$time$Time$Sun = {$: 'Sun'};
+var $elm$time$Time$Thu = {$: 'Thu'};
+var $elm$time$Time$Tue = {$: 'Tue'};
+var $elm$time$Time$Wed = {$: 'Wed'};
 var $justinmimbs$date$Date$numberToWeekday = function (wdn) {
 	var _v0 = A2($elm$core$Basics$max, 1, wdn);
 	switch (_v0) {
 		case 1:
-			return 0;
+			return $elm$time$Time$Mon;
 		case 2:
-			return 1;
+			return $elm$time$Time$Tue;
 		case 3:
-			return 2;
+			return $elm$time$Time$Wed;
 		case 4:
-			return 3;
+			return $elm$time$Time$Thu;
 		case 5:
-			return 4;
+			return $elm$time$Time$Fri;
 		case 6:
-			return 5;
+			return $elm$time$Time$Sat;
 		default:
-			return 6;
+			return $elm$time$Time$Sun;
 	}
 };
 var $justinmimbs$date$Date$toWeekDate = function (_v0) {
-	var rd = _v0;
-	var wdn = $justinmimbs$date$Date$weekdayNumber(rd);
-	var wy = $justinmimbs$date$Date$year(rd + (4 - wdn));
+	var rd = _v0.a;
+	var wdn = $justinmimbs$date$Date$weekdayNumber(
+		$justinmimbs$date$Date$RD(rd));
+	var wy = $justinmimbs$date$Date$year(
+		$justinmimbs$date$Date$RD(rd + (4 - wdn)));
 	var week1Day1 = $justinmimbs$date$Date$daysBeforeWeekYear(wy) + 1;
 	return {
-		a0: 1 + (((rd - week1Day1) / 7) | 0),
-		a1: wy,
-		bO: $justinmimbs$date$Date$numberToWeekday(wdn)
+		weekNumber: 1 + (((rd - week1Day1) / 7) | 0),
+		weekYear: wy,
+		weekday: $justinmimbs$date$Date$numberToWeekday(wdn)
 	};
 };
 var $justinmimbs$date$Date$weekNumber = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toWeekDate,
 	function ($) {
-		return $.a0;
+		return $.weekNumber;
 	});
 var $justinmimbs$date$Date$weekYear = A2(
 	$elm$core$Basics$composeR,
 	$justinmimbs$date$Date$toWeekDate,
 	function ($) {
-		return $.a1;
+		return $.weekYear;
 	});
 var $justinmimbs$date$Date$weekday = A2($elm$core$Basics$composeR, $justinmimbs$date$Date$weekdayNumber, $justinmimbs$date$Date$numberToWeekday);
 var $justinmimbs$date$Date$ordinalSuffix = function (n) {
@@ -8153,7 +8206,7 @@ var $justinmimbs$date$Date$withOrdinalSuffix = function (n) {
 };
 var $justinmimbs$date$Date$formatField = F4(
 	function (language, _char, length, date) {
-		switch (_char) {
+		switch (_char.valueOf()) {
 			case 'y':
 				if (length === 2) {
 					return A2(
@@ -8162,7 +8215,7 @@ var $justinmimbs$date$Date$formatField = F4(
 						A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$year(date))));
 				} else {
@@ -8179,7 +8232,7 @@ var $justinmimbs$date$Date$formatField = F4(
 						A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$weekYear(date))));
 				} else {
@@ -8217,20 +8270,20 @@ var $justinmimbs$date$Date$formatField = F4(
 						return A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$monthNumber(date)));
 					case 3:
-						return language.P(
+						return language.monthNameShort(
 							$justinmimbs$date$Date$month(date));
 					case 4:
-						return language.V(
+						return language.monthName(
 							$justinmimbs$date$Date$month(date));
 					case 5:
 						return A2(
 							$elm$core$String$left,
 							1,
-							language.P(
+							language.monthNameShort(
 								$justinmimbs$date$Date$month(date)));
 					default:
 						return '';
@@ -8244,7 +8297,7 @@ var $justinmimbs$date$Date$formatField = F4(
 						return A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$weekNumber(date)));
 					default:
@@ -8259,11 +8312,11 @@ var $justinmimbs$date$Date$formatField = F4(
 						return A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$day(date)));
 					case 3:
-						return language.S(
+						return language.dayWithSuffix(
 							$justinmimbs$date$Date$day(date));
 					default:
 						return '';
@@ -8277,14 +8330,14 @@ var $justinmimbs$date$Date$formatField = F4(
 						return A3(
 							$elm$core$String$padLeft,
 							2,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$ordinalDay(date)));
 					case 3:
 						return A3(
 							$elm$core$String$padLeft,
 							3,
-							'0',
+							_Utils_chr('0'),
 							$elm$core$String$fromInt(
 								$justinmimbs$date$Date$ordinalDay(date)));
 					default:
@@ -8293,28 +8346,28 @@ var $justinmimbs$date$Date$formatField = F4(
 			case 'E':
 				switch (length) {
 					case 1:
-						return language.E(
+						return language.weekdayNameShort(
 							$justinmimbs$date$Date$weekday(date));
 					case 2:
-						return language.E(
+						return language.weekdayNameShort(
 							$justinmimbs$date$Date$weekday(date));
 					case 3:
-						return language.E(
+						return language.weekdayNameShort(
 							$justinmimbs$date$Date$weekday(date));
 					case 4:
-						return language.ac(
+						return language.weekdayName(
 							$justinmimbs$date$Date$weekday(date));
 					case 5:
 						return A2(
 							$elm$core$String$left,
 							1,
-							language.E(
+							language.weekdayNameShort(
 								$justinmimbs$date$Date$weekday(date)));
 					case 6:
 						return A2(
 							$elm$core$String$left,
 							2,
-							language.E(
+							language.weekdayNameShort(
 								$justinmimbs$date$Date$weekday(date)));
 					default:
 						return '';
@@ -8328,7 +8381,12 @@ var $justinmimbs$date$Date$formatField = F4(
 						return $elm$core$String$fromInt(
 							$justinmimbs$date$Date$weekdayNumber(date));
 					default:
-						return A4($justinmimbs$date$Date$formatField, language, 'E', length, date);
+						return A4(
+							$justinmimbs$date$Date$formatField,
+							language,
+							_Utils_chr('E'),
+							length,
+							date);
 				}
 			default:
 				return '';
@@ -8340,7 +8398,7 @@ var $justinmimbs$date$Date$formatWithTokens = F3(
 			$elm$core$List$foldl,
 			F2(
 				function (token, formatted) {
-					if (!token.$) {
+					if (token.$ === 'Field') {
 						var _char = token.a;
 						var length = token.b;
 						return _Utils_ap(
@@ -8355,7 +8413,7 @@ var $justinmimbs$date$Date$formatWithTokens = F3(
 			tokens);
 	});
 var $justinmimbs$date$Pattern$Literal = function (a) {
-	return {$: 1, a: a};
+	return {$: 'Literal', a: a};
 };
 var $justinmimbs$date$Pattern$escapedQuote = A2(
 	$elm$parser$Parser$ignorer,
@@ -8364,19 +8422,19 @@ var $justinmimbs$date$Pattern$escapedQuote = A2(
 	$elm$parser$Parser$token('\'\''));
 var $justinmimbs$date$Pattern$Field = F2(
 	function (a, b) {
-		return {$: 0, a: a, b: b};
+		return {$: 'Field', a: a, b: b};
 	});
 var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 	function (isGood, offset, row, col, s0) {
 		chompWhileHelp:
 		while (true) {
-			var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, offset, s0.a);
+			var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, offset, s0.src);
 			if (_Utils_eq(newOffset, -1)) {
 				return A3(
 					$elm$parser$Parser$Advanced$Good,
-					_Utils_cmp(s0.b, offset) < 0,
-					0,
-					{ah: col, c: s0.c, e: s0.e, b: offset, aP: row, a: s0.a});
+					_Utils_cmp(s0.offset, offset) < 0,
+					_Utils_Tuple0,
+					{col: col, context: s0.context, indent: s0.indent, offset: offset, row: row, src: s0.src});
 			} else {
 				if (_Utils_eq(newOffset, -2)) {
 					var $temp$isGood = isGood,
@@ -8407,14 +8465,16 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 		}
 	});
 var $elm$parser$Parser$Advanced$chompWhile = function (isGood) {
-	return function (s) {
-		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.b, s.aP, s.ah, s);
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.offset, s.row, s.col, s);
+		});
 };
 var $elm$parser$Parser$chompWhile = $elm$parser$Parser$Advanced$chompWhile;
-var $elm$parser$Parser$Advanced$getOffset = function (s) {
-	return A3($elm$parser$Parser$Advanced$Good, false, s.b, s);
-};
+var $elm$parser$Parser$Advanced$getOffset = $elm$parser$Parser$Advanced$Parser(
+	function (s) {
+		return A3($elm$parser$Parser$Advanced$Good, false, s.offset, s);
+	});
 var $elm$parser$Parser$getOffset = $elm$parser$Parser$Advanced$getOffset;
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
@@ -8457,7 +8517,7 @@ var $justinmimbs$date$Pattern$finalize = A2(
 	F2(
 		function (token, tokens) {
 			var _v0 = _Utils_Tuple2(token, tokens);
-			if (((_v0.a.$ === 1) && _v0.b.b) && (_v0.b.a.$ === 1)) {
+			if (((_v0.a.$ === 'Literal') && _v0.b.b) && (_v0.b.a.$ === 'Literal')) {
 				var x = _v0.a.a;
 				var _v1 = _v0.b;
 				var y = _v1.a.a;
@@ -8473,15 +8533,18 @@ var $justinmimbs$date$Pattern$finalize = A2(
 		}),
 	_List_Nil);
 var $elm$parser$Parser$Advanced$lazy = function (thunk) {
-	return function (s) {
-		var _v0 = thunk(0);
-		var parse = _v0;
-		return parse(s);
-	};
+	return $elm$parser$Parser$Advanced$Parser(
+		function (s) {
+			var _v0 = thunk(_Utils_Tuple0);
+			var parse = _v0.a;
+			return parse(s);
+		});
 };
 var $elm$parser$Parser$lazy = $elm$parser$Parser$Advanced$lazy;
 var $justinmimbs$date$Pattern$isLiteralChar = function (_char) {
-	return (_char !== '\'') && (!$elm$core$Char$isAlpha(_char));
+	return (!_Utils_eq(
+		_char,
+		_Utils_chr('\''))) && (!$elm$core$Char$isAlpha(_char));
 };
 var $justinmimbs$date$Pattern$literal = A2(
 	$elm$parser$Parser$map,
@@ -8491,7 +8554,7 @@ var $justinmimbs$date$Pattern$literal = A2(
 			$elm$parser$Parser$ignorer,
 			A2(
 				$elm$parser$Parser$ignorer,
-				$elm$parser$Parser$succeed(0),
+				$elm$parser$Parser$succeed(_Utils_Tuple0),
 				$elm$parser$Parser$chompIf($justinmimbs$date$Pattern$isLiteralChar)),
 			$elm$parser$Parser$chompWhile($justinmimbs$date$Pattern$isLiteralChar))));
 var $justinmimbs$date$Pattern$quotedHelp = function (result) {
@@ -8509,11 +8572,13 @@ var $justinmimbs$date$Pattern$quotedHelp = function (result) {
 						$elm$parser$Parser$ignorer,
 						A2(
 							$elm$parser$Parser$ignorer,
-							$elm$parser$Parser$succeed(0),
+							$elm$parser$Parser$succeed(_Utils_Tuple0),
 							$elm$parser$Parser$chompIf(
-								$elm$core$Basics$neq('\''))),
+								$elm$core$Basics$neq(
+									_Utils_chr('\'')))),
 						$elm$parser$Parser$chompWhile(
-							$elm$core$Basics$neq('\''))))),
+							$elm$core$Basics$neq(
+								_Utils_chr('\'')))))),
 				A2(
 				$elm$parser$Parser$andThen,
 				function (_v0) {
@@ -8529,7 +8594,8 @@ var $justinmimbs$date$Pattern$quoted = A2(
 		$elm$parser$Parser$ignorer,
 		$elm$parser$Parser$succeed($justinmimbs$date$Pattern$Literal),
 		$elm$parser$Parser$chompIf(
-			$elm$core$Basics$eq('\''))),
+			$elm$core$Basics$eq(
+				_Utils_chr('\'')))),
 	A2(
 		$elm$parser$Parser$ignorer,
 		$justinmimbs$date$Pattern$quotedHelp(''),
@@ -8537,7 +8603,8 @@ var $justinmimbs$date$Pattern$quoted = A2(
 			_List_fromArray(
 				[
 					$elm$parser$Parser$chompIf(
-					$elm$core$Basics$eq('\'')),
+					$elm$core$Basics$eq(
+						_Utils_chr('\''))),
 					$elm$parser$Parser$end
 				]))));
 var $justinmimbs$date$Pattern$patternHelp = function (tokens) {
@@ -8579,60 +8646,60 @@ var $justinmimbs$date$Date$formatWithLanguage = F2(
 		return A2($justinmimbs$date$Date$formatWithTokens, language, tokens);
 	});
 var $justinmimbs$date$Date$monthToName = function (m) {
-	switch (m) {
-		case 0:
+	switch (m.$) {
+		case 'Jan':
 			return 'January';
-		case 1:
+		case 'Feb':
 			return 'February';
-		case 2:
+		case 'Mar':
 			return 'March';
-		case 3:
+		case 'Apr':
 			return 'April';
-		case 4:
+		case 'May':
 			return 'May';
-		case 5:
+		case 'Jun':
 			return 'June';
-		case 6:
+		case 'Jul':
 			return 'July';
-		case 7:
+		case 'Aug':
 			return 'August';
-		case 8:
+		case 'Sep':
 			return 'September';
-		case 9:
+		case 'Oct':
 			return 'October';
-		case 10:
+		case 'Nov':
 			return 'November';
 		default:
 			return 'December';
 	}
 };
 var $justinmimbs$date$Date$weekdayToName = function (wd) {
-	switch (wd) {
-		case 0:
+	switch (wd.$) {
+		case 'Mon':
 			return 'Monday';
-		case 1:
+		case 'Tue':
 			return 'Tuesday';
-		case 2:
+		case 'Wed':
 			return 'Wednesday';
-		case 3:
+		case 'Thu':
 			return 'Thursday';
-		case 4:
+		case 'Fri':
 			return 'Friday';
-		case 5:
+		case 'Sat':
 			return 'Saturday';
 		default:
 			return 'Sunday';
 	}
 };
 var $justinmimbs$date$Date$language_en = {
-	S: $justinmimbs$date$Date$withOrdinalSuffix,
-	V: $justinmimbs$date$Date$monthToName,
-	P: A2(
+	dayWithSuffix: $justinmimbs$date$Date$withOrdinalSuffix,
+	monthName: $justinmimbs$date$Date$monthToName,
+	monthNameShort: A2(
 		$elm$core$Basics$composeR,
 		$justinmimbs$date$Date$monthToName,
 		$elm$core$String$left(3)),
-	ac: $justinmimbs$date$Date$weekdayToName,
-	E: A2(
+	weekdayName: $justinmimbs$date$Date$weekdayToName,
+	weekdayNameShort: A2(
 		$elm$core$Basics$composeR,
 		$justinmimbs$date$Date$weekdayToName,
 		$elm$core$String$left(3))
@@ -8643,14 +8710,14 @@ var $justinmimbs$date$Date$format = function (pattern) {
 var $justinmimbs$date$Date$toIsoString = $justinmimbs$date$Date$format('yyyy-MM-dd');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
 var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
-	var sum = (((((((model.d.bG + model.d.br) + model.d.bp) + model.d.bh) + model.d.bK) + model.d.bq) + model.d.bH) + model.d.bR) + model.d.bg;
+	var sum = (((((((model.player.speed + model.player.marking) + model.player.kicking) + model.player.handballing) + model.player.tapwork) + model.player.leading) + model.player.spoiling) + model.player.x_factor) + model.player.goal_sense;
 	var ability = {
-		ag: (model.d.bB === 'cm') ? 'is-primary' : '',
-		am: (model.d.bB === 'ff') ? 'is-primary' : '',
-		ax: (model.d.bB === 'lgv') ? 'is-primary' : '',
-		az: (model.d.bB === 'nbl') ? 'is-primary' : '',
-		aT: (model.d.bB === 'sog') ? 'is-primary' : '',
-		a_: (model.d.bB === 'utl') ? 'is-primary' : ''
+		cm: (model.player.perk === 'cm') ? 'is-primary' : '',
+		ff: (model.player.perk === 'ff') ? 'is-primary' : '',
+		lgv: (model.player.perk === 'lgv') ? 'is-primary' : '',
+		nbl: (model.player.perk === 'nbl') ? 'is-primary' : '',
+		sog: (model.player.perk === 'sog') ? 'is-primary' : '',
+		utl: (model.player.perk === 'utl') ? 'is-primary' : ''
 	};
 	return A2(
 		$elm$html$Html$div,
@@ -8738,20 +8805,20 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$justinmimbs$date$Date$toIsoString(
 																			A3(
 																				$justinmimbs$date$Date$add,
-																				0,
+																				$justinmimbs$date$Date$Years,
 																				-30,
-																				A2($justinmimbs$date$Date$fromPosix, model.bS, model.aX)))),
+																				A2($justinmimbs$date$Date$fromPosix, model.zone, model.today)))),
 																		$elm$html$Html$Attributes$max(
 																		$justinmimbs$date$Date$toIsoString(
 																			A3(
 																				$justinmimbs$date$Date$add,
-																				0,
+																				$justinmimbs$date$Date$Years,
 																				-17,
-																				A2($justinmimbs$date$Date$fromPosix, model.bS, model.aX)))),
+																				A2($justinmimbs$date$Date$fromPosix, model.zone, model.today)))),
 																		$elm$html$Html$Attributes$value(
-																		$justinmimbs$date$Date$toIsoString(model.d.bc)),
+																		$justinmimbs$date$Date$toIsoString(model.player.dob)),
 																		$elm$html$Html$Events$onInput(
-																		$author$project$Model$ChangePlayerStat(9))
+																		$author$project$Model$ChangePlayerStat($author$project$Player$DOB))
 																	]),
 																_List_Nil)
 															]))
@@ -8797,9 +8864,9 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.d.bD),
+																				$elm$html$Html$Attributes$value(model.player.position),
 																				$elm$html$Html$Events$onInput(
-																				$author$project$Model$ChangePlayerStat(10))
+																				$author$project$Model$ChangePlayerStat($author$project$Player$Position))
 																			]),
 																		_List_fromArray(
 																			[
@@ -8808,108 +8875,108 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(0))
+																						$author$project$Positions$positionToString($author$project$Positions$SmallForward))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(0))
+																						$author$project$Positions$positionToString($author$project$Positions$SmallForward))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(1))
+																						$author$project$Positions$positionToString($author$project$Positions$MediumForward))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(1))
+																						$author$project$Positions$positionToString($author$project$Positions$MediumForward))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(2))
+																						$author$project$Positions$positionToString($author$project$Positions$KeyForward))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(2))
+																						$author$project$Positions$positionToString($author$project$Positions$KeyForward))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(3))
+																						$author$project$Positions$positionToString($author$project$Positions$Ruckman))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(3))
+																						$author$project$Positions$positionToString($author$project$Positions$Ruckman))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(4))
+																						$author$project$Positions$positionToString($author$project$Positions$RoverOnballer))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(4))
+																						$author$project$Positions$positionToString($author$project$Positions$RoverOnballer))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(5))
+																						$author$project$Positions$positionToString($author$project$Positions$Winger))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(5))
+																						$author$project$Positions$positionToString($author$project$Positions$Winger))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(6))
+																						$author$project$Positions$positionToString($author$project$Positions$SmallDefender))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(6))
+																						$author$project$Positions$positionToString($author$project$Positions$SmallDefender))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(7))
+																						$author$project$Positions$positionToString($author$project$Positions$MediumDefender))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(7))
+																						$author$project$Positions$positionToString($author$project$Positions$MediumDefender))
 																					])),
 																				A2(
 																				$elm$html$Html$option,
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$Attributes$value(
-																						$author$project$Positions$positionToString(8))
+																						$author$project$Positions$positionToString($author$project$Positions$KeyDefender))
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text(
-																						$author$project$Positions$positionToString(8))
+																						$author$project$Positions$positionToString($author$project$Positions$KeyDefender))
 																					]))
 																			]))
 																	]))
@@ -8956,9 +9023,9 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.d.bA),
+																				$elm$html$Html$Attributes$value(model.player.origin),
 																				$elm$html$Html$Events$onInput(
-																				$author$project$Model$ChangePlayerStat(16))
+																				$author$project$Model$ChangePlayerStat($author$project$Player$Origin))
 																			]),
 																		_List_fromArray(
 																			[
@@ -9377,11 +9444,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.d.T),
+																				$elm$html$Html$Attributes$value(model.player.local_team),
 																				$elm$html$Html$Events$onInput(
-																				$author$project$Model$ChangePlayerStat(17))
+																				$author$project$Model$ChangePlayerStat($author$project$Player$LocalTeam))
 																			]),
-																		$author$project$LocalTeams$originToLocalTeamsHtml(model.d.bA))
+																		$author$project$LocalTeams$originToLocalTeamsHtml(model.player.origin))
 																	]))
 															]))
 													])),
@@ -9426,9 +9493,9 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																		$elm$html$Html$select,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$Attributes$value(model.d.a6),
+																				$elm$html$Html$Attributes$value(model.player.afl_team),
 																				$elm$html$Html$Events$onInput(
-																				$author$project$Model$ChangePlayerStat(18))
+																				$author$project$Model$ChangePlayerStat($author$project$Player$AFLTeam))
 																			]),
 																		_List_fromArray(
 																			[
@@ -9648,14 +9715,14 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																	_List_fromArray(
 																		[
 																			$elm$html$Html$Attributes$value(
-																			$elm$core$String$fromInt(model.d.bi)),
+																			$elm$core$String$fromInt(model.player.height)),
 																			$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																			$elm$html$Html$Attributes$type_('range'),
 																			$elm$html$Html$Events$onInput(
-																			$author$project$Model$ChangePlayerStat(11))
+																			$author$project$Model$ChangePlayerStat($author$project$Player$Height))
 																		]),
 																	$author$project$Positions$positionToHeightMinMax(
-																		$author$project$Positions$positionFromString(model.d.bD))),
+																		$author$project$Positions$positionFromString(model.player.position))),
 																_List_Nil)
 															])),
 														A2(
@@ -9667,7 +9734,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bi) + 'cm')
+																$elm$core$String$fromInt(model.player.height) + 'cm')
 															]))
 													])),
 												A2(
@@ -9702,14 +9769,14 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																	_List_fromArray(
 																		[
 																			$elm$html$Html$Attributes$value(
-																			$elm$core$String$fromInt(model.d.bP)),
+																			$elm$core$String$fromInt(model.player.weight)),
 																			$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																			$elm$html$Html$Attributes$type_('range'),
 																			$elm$html$Html$Events$onInput(
-																			$author$project$Model$ChangePlayerStat(12))
+																			$author$project$Model$ChangePlayerStat($author$project$Player$Weight))
 																		]),
 																	$author$project$Positions$positionToWeightMinMax(
-																		$author$project$Positions$positionFromString(model.d.bD))),
+																		$author$project$Positions$positionFromString(model.player.position))),
 																_List_Nil)
 															])),
 														A2(
@@ -9721,7 +9788,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bP) + 'kg')
+																$elm$core$String$fromInt(model.player.weight) + 'kg')
 															]))
 													])),
 												A2(
@@ -9755,11 +9822,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.d.bC)),
+																		$elm$core$String$fromInt(model.player.personality)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
-																		$author$project$Model$ChangePlayerStat(13)),
+																		$author$project$Model$ChangePlayerStat($author$project$Player$Personality)),
 																		$elm$html$Html$Attributes$min('1'),
 																		$elm$html$Html$Attributes$max('100')
 																	]),
@@ -9816,11 +9883,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.d.bt)),
+																		$elm$core$String$fromInt(model.player.mood)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
-																		$author$project$Model$ChangePlayerStat(14)),
+																		$author$project$Model$ChangePlayerStat($author$project$Player$Mood)),
 																		$elm$html$Html$Attributes$min('1'),
 																		$elm$html$Html$Attributes$max('100')
 																	]),
@@ -9877,11 +9944,11 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$Attributes$value(
-																		$elm$core$String$fromInt(model.d.bn)),
+																		$elm$core$String$fromInt(model.player.injury)),
 																		$elm$html$Html$Attributes$class('slider is-fullwidth'),
 																		$elm$html$Html$Attributes$type_('range'),
 																		$elm$html$Html$Events$onInput(
-																		$author$project$Model$ChangePlayerStat(15)),
+																		$author$project$Model$ChangePlayerStat($author$project$Player$Injury)),
 																		$elm$html$Html$Attributes$min('1'),
 																		$elm$html$Html$Attributes$max('100')
 																	]),
@@ -9990,7 +10057,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bG, 0)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.speed, $author$project$Player$Speed)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10001,7 +10068,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bG))
+																$elm$core$String$fromInt(model.player.speed))
 															]))
 													])),
 												A2(
@@ -10030,7 +10097,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.br, 1)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.marking, $author$project$Player$Marking)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10041,7 +10108,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.br))
+																$elm$core$String$fromInt(model.player.marking))
 															]))
 													])),
 												A2(
@@ -10070,7 +10137,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bp, 2)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.kicking, $author$project$Player$Kicking)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10081,7 +10148,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bp))
+																$elm$core$String$fromInt(model.player.kicking))
 															]))
 													])),
 												A2(
@@ -10110,7 +10177,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bh, 3)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.handballing, $author$project$Player$Handballing)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10121,7 +10188,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bh))
+																$elm$core$String$fromInt(model.player.handballing))
 															]))
 													])),
 												A2(
@@ -10150,7 +10217,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bK, 4)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.tapwork, $author$project$Player$Tapwork)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10161,7 +10228,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bK))
+																$elm$core$String$fromInt(model.player.tapwork))
 															]))
 													])),
 												A2(
@@ -10190,7 +10257,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bq, 5)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.leading, $author$project$Player$Leading)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10201,7 +10268,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bq))
+																$elm$core$String$fromInt(model.player.leading))
 															]))
 													])),
 												A2(
@@ -10230,7 +10297,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bH, 6)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.spoiling, $author$project$Player$Spoiling)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10241,7 +10308,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bH))
+																$elm$core$String$fromInt(model.player.spoiling))
 															]))
 													])),
 												A2(
@@ -10270,7 +10337,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bR, 7)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.x_factor, $author$project$Player$XFactor)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10281,7 +10348,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bR))
+																$elm$core$String$fromInt(model.player.x_factor))
 															]))
 													])),
 												A2(
@@ -10310,7 +10377,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																A2($author$project$PlayerBuilder$createPlayerStatInput, model.d.bg, 8)
+																A2($author$project$PlayerBuilder$createPlayerStatInput, model.player.goal_sense, $author$project$Player$GoalSense)
 															])),
 														A2(
 														$elm$html$Html$td,
@@ -10321,7 +10388,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text(
-																$elm$core$String$fromInt(model.d.bg))
+																$elm$core$String$fromInt(model.player.goal_sense))
 															]))
 													])),
 												A2(
@@ -10438,7 +10505,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 																]))
 														]));
 											},
-											$author$project$PlayersLike$playerLike(model.d))),
+											$author$project$PlayersLike$playerLike(model.player))),
 										A2($elm$html$Html$br, _List_Nil, _List_Nil),
 										A2(
 										$elm$html$Html$h3,
@@ -10463,7 +10530,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.az),
+														$elm$html$Html$Attributes$class(ability.nbl),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('nbl'))
 													]),
@@ -10505,7 +10572,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.am),
+														$elm$html$Html$Attributes$class(ability.ff),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('ff'))
 													]),
@@ -10556,7 +10623,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.a_),
+														$elm$html$Html$Attributes$class(ability.utl),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('utl'))
 													]),
@@ -10598,7 +10665,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.ax),
+														$elm$html$Html$Attributes$class(ability.lgv),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('lgv'))
 													]),
@@ -10649,7 +10716,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.aT),
+														$elm$html$Html$Attributes$class(ability.sog),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('sog'))
 													]),
@@ -10691,7 +10758,7 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('tile is-child perk-border box'),
-														$elm$html$Html$Attributes$class(ability.ag),
+														$elm$html$Html$Attributes$class(ability.cm),
 														$elm$html$Html$Events$onClick(
 														$author$project$Model$ChangePlayerPerk('cm'))
 													]),
@@ -10734,16 +10801,16 @@ var $author$project$PlayerBuilder$viewPlayerBuilder = function (model) {
 					]))
 			]));
 };
-var $author$project$Player$Juniors = 0;
-var $author$project$Player$StateRep = 2;
+var $author$project$Player$Juniors = {$: 'Juniors'};
+var $author$project$Player$StateRep = {$: 'StateRep'};
 var $author$project$Player$levelToString = F2(
 	function (l, _v0) {
-		var origin = _v0.bA;
-		var local_team = _v0.T;
-		switch (l) {
-			case 0:
+		var origin = _v0.origin;
+		var local_team = _v0.local_team;
+		switch (l.$) {
+			case 'Juniors':
 				return local_team + ' Under 18s';
-			case 1:
+			case 'Under19s':
 				switch (origin) {
 					case 'SA':
 						return 'SAFL Reserves';
@@ -10752,7 +10819,7 @@ var $author$project$Player$levelToString = F2(
 					default:
 						return 'VFL Reserves';
 				}
-			case 2:
+			case 'StateRep':
 				switch (origin) {
 					case 'SA':
 						return 'SAFL';
@@ -10766,13 +10833,13 @@ var $author$project$Player$levelToString = F2(
 		}
 	});
 var $author$project$StateDraft$viewPlayerDraft = function (model) {
-	var _v0 = (model.K.Q !== '') ? _Utils_Tuple3(
+	var _v0 = (model.status.state_team !== '') ? _Utils_Tuple3(
 		$elm$html$Html$Attributes$class('show'),
-		A2($author$project$Player$levelToString, 2, model.d),
-		model.K.Q) : _Utils_Tuple3(
+		A2($author$project$Player$levelToString, $author$project$Player$StateRep, model.player),
+		model.status.state_team) : _Utils_Tuple3(
 		$elm$html$Html$Attributes$class(''),
 		'Under 18s Comp',
-		A2($author$project$Player$levelToString, 0, model.d));
+		A2($author$project$Player$levelToString, $author$project$Player$Juniors, model.player));
 	var cls = _v0.a;
 	var cl = _v0.b;
 	var ct = _v0.c;
@@ -10827,7 +10894,7 @@ var $author$project$StateDraft$viewPlayerDraft = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text(
-										$justinmimbs$date$Date$toIsoString(model.R))
+										$justinmimbs$date$Date$toIsoString(model.current_date))
 									]))
 							])),
 						A2(
@@ -10905,7 +10972,7 @@ var $author$project$StateDraft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.K.bn)
+										$elm$html$Html$text(model.status.injury)
 									]))
 							])),
 						A2(
@@ -10931,7 +10998,7 @@ var $author$project$StateDraft$viewPlayerDraft = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.K.av)
+										$elm$html$Html$text(model.status.leadership_group)
 									]))
 							])),
 						A2($elm$html$Html$div, _List_Nil, _List_Nil)
@@ -11018,8 +11085,30 @@ var $author$project$StateDraft$viewPlayerDraft = function (model) {
 																	]))
 															]));
 												}),
-											A2($elm$core$List$take, 3, model.bF)))
+											A2($elm$core$List$take, 3, model.shuffle)))
 									]))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('has-text-centered')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('button is-large is-primary'),
+								$elm$html$Html$Attributes$disabled(!(model.status.state_team !== ''))
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								'Proceed to VFL Season ' + $elm$core$String$fromInt(
+									$justinmimbs$date$Date$year(model.current_date)))
 							]))
 					])),
 				A2(
@@ -11185,8 +11274,8 @@ var $author$project$Main$view = function (model) {
 		_List_fromArray(
 			[
 				function () {
-				var _v0 = model.ab;
-				if (!_v0) {
+				var _v0 = model.view;
+				if (_v0.$ === 'PlayerBuilder') {
 					return $author$project$PlayerBuilder$viewPlayerBuilder(model);
 				} else {
 					return $author$project$StateDraft$viewPlayerDraft(model);
@@ -11195,6 +11284,6 @@ var $author$project$Main$view = function (model) {
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
-	{bm: $author$project$Model$init, bJ: $author$project$Main$subscriptions, bN: $author$project$Main$update, ab: $author$project$Main$view});
+	{init: $author$project$Model$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

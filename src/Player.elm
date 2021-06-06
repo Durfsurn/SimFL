@@ -1,4 +1,4 @@
-module Player exposing (Level(..), Player, PlayerStat(..), PlayerStatus, defPlayer, defPlayerStatus, levelToString)
+module Player exposing (Level(..), Player, PlayerStat(..), PlayerStatus, defPlayer, defPlayerStatus, levelToString, originToStateLeague)
 
 import Date exposing (Date)
 import Time
@@ -56,6 +56,19 @@ type Level
     | AFL
 
 
+originToStateLeague : Player -> String
+originToStateLeague { origin } =
+    case origin of
+        "SA" ->
+            "SANFL"
+
+        "WA" ->
+            "WAFL"
+
+        _ ->
+            "VFL"
+
+
 levelToString : Level -> Player -> String
 levelToString l { origin, local_team } =
     case l of
@@ -65,7 +78,7 @@ levelToString l { origin, local_team } =
         Under19s ->
             case origin of
                 "SA" ->
-                    "SAFL Reserves"
+                    "SANFL Reserves"
 
                 "WA" ->
                     "WAFL Reserves"

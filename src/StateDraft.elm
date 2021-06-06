@@ -128,6 +128,14 @@ viewPlayerDraft model =
                     ]
                 ]
             ]
+        , div [ class "has-text-centered" ]
+            [ button
+                [ class "button is-large is-primary"
+                , disabled <| not (model.status.state_team /= "")
+                , onClick StartStateSeason
+                ]
+                [ text <| "Proceed to " ++ originToStateLeague model.player ++ " Season " ++ (String.fromInt <| Date.year model.current_date) ]
+            ]
         , div [ class "confettis", cls ]
             [ div [ class "confetti", cls ] []
             , div [ class "confetti", cls ] []

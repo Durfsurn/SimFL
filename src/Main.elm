@@ -124,7 +124,14 @@ update msg model =
         SaveStats ->
             ( { model
                 | view = Draft
-                , transition = "show"
+                , current_date = Date.fromCalendarDate (Date.year model.current_date) Time.Nov 1
+              }
+            , randomiseLocalTeams model
+            )
+
+        StartStateSeason ->
+            ( { model
+                | view = StateSeason
                 , current_date = Date.fromCalendarDate (Date.year model.current_date) Time.Nov 1
               }
             , randomiseLocalTeams model
@@ -213,4 +220,7 @@ view model =
 
             Draft ->
                 viewPlayerDraft model
+
+            StateSeason ->
+                viewStateSeason model
         ]

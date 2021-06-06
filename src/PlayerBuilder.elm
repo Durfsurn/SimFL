@@ -15,15 +15,15 @@ viewPlayerBuilder : Model.Model -> Html Msg
 viewPlayerBuilder model =
     let
         sum =
-            model.player.speed
-                + model.player.marking
-                + model.player.kicking
-                + model.player.handballing
-                + model.player.tapwork
-                + model.player.leading
-                + model.player.spoiling
-                + model.player.x_factor
-                + model.player.goal_sense
+            List.sum [model.player.speed
+                , model.player.marking
+                , model.player.kicking
+                , model.player.handballing
+                , model.player.tapwork
+                , model.player.leading
+                , model.player.spoiling
+                , model.player.x_factor
+                , model.player.goal_sense]
 
         ability =
             { nbl =

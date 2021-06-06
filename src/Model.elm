@@ -24,7 +24,6 @@ init _ =
       , today = Time.millisToPosix 0
       , zone = Time.utc
       , view = PlayerBuilder
-      , transition = ""
       , shuffle = []
       , shuffle_count = 0
       , rand_1_10 = 0
@@ -42,7 +41,6 @@ type alias Model =
     , today : Time.Posix
     , zone : Time.Zone
     , view : View
-    , transition : String
     , shuffle : List String
     , shuffle_count : Int
     , rand_1_10 : Int
@@ -55,6 +53,7 @@ type alias Model =
 type View
     = PlayerBuilder
     | Draft
+    | StateSeason
 
 
 type Msg
@@ -70,3 +69,4 @@ type Msg
     | SaveStats
     | GotTime Time.Posix
     | GotZone Time.Zone
+    | StartStateSeason
